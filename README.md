@@ -1,13 +1,35 @@
-# Impact Calculator
+# Onchain Impact Dashboard
 
-The problem this project seeks to solve: in RPGF Round 3 there was over 500 projects that badge holders had to sift through. Next round will likely be 3-4x that much. Badge holders should not be expected to have to view thousands of projects. The ballot creation process must be streamlined.
+OID enables builders to view their ongoing impact post-Retro Funding 4. Overview [here](https://plaid-cement-e44.notion.site/Post-Retro-Funding-4-Driving-Behavior-4952cf9a99d144759321d392e9612db4).
 
-Goal: The Impact Calculator is designed to streamline the evaluation of projects in the Optimism RetroPGF voting process by quantifying their impact through various metrics. This tool is expected to transition the grantmaking process from individual project evaluation to a more strategic overview, helping to maintain and improve the ROI of grant allocations. The idea for this project is to build a simple prototype to test out the idea.
-https://github.com/ethereum-optimism/ecosystem-contributions/issues/120 (https://github.com/ethereum-optimism/ecosystem-contributions/issues/120)
+The goal is to raise awareness of the existence of Retro Funding for onchain builders, encouraging them to:
+- sign up
+- view their impact based on past rounds outcomes
+- apply to future rounds
 
-Design: https://www.figma.com/file/OS8DSbKyuiYPqcRTmmhTIM/Impact-Calculator-%F0%9F%8C%B1?type=design&node-id=0-1&mode=design
+Raising awareness of RF is the goal so we will be taking every opportunity to celebrate the wins of each projects by sharing updates to the leaderboard weekly (or when appropriate).
 
-Static data set: https://github.com/opensource-observer/insights/blob/main/community/datasets/retropgf3_results/csv/RetroPGF3%20Results%20-%20ConsolidatedData.csv
+The MVP will need the following:
+
+[] Design (can use components and general feel of this other [build](https://www.figma.com/design/eVb3MoRIALsWo6AmcgfOiL/Retro-Funding-Round-4%3A-Sign-Up-%26-Application--(Public-Draft)?node-id=0-1&t=Be4LjY2TtxRvsiio-0))
+[] Agora API integration - to get project data (profile pic, description, etc.)
+[] Navigation Menu with CTA for builders to 
+[] View - Leaderboard (Top 10? Top 50?)
+- [] Ranked Projects, each project's profile picture and name, scrollable (left)
+- [] Chart showing impact of all projects, single overall metric (right)
+[] View - Individual Projects
+- [] Project Details
+- [] Chart showing individual metrics for the project (15 or so metrics)
+[] Social Media sharing integration
+[] Backend for indexing and serving the metrics
+
+Extras (We don't need these by deadline but we will add them when we can):
+[] Add timeframes filtering to leaderboard/individual project
+- [] Select 1 day, 1 week, 1 month, 1 year and all-time timeframes
+- [] Share a link that has a specific timeframe selected
+[] Add metric type filtering to leaderboard
+- [] Select which metrics to see on the chart
+- [] Share a link that has a specific metrics selected
 
 ### Database setup
 
