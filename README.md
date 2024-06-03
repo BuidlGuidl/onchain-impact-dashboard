@@ -5,9 +5,9 @@ OID enables builders to view their ongoing impact post-Retro Funding 4. Overview
 The goal is to raise awareness of the existence of Retro Funding for onchain builders, encouraging them to:
 - sign up
 - view their impact based on past rounds outcomes
-- apply to future rounds
+- be positioned to apply to future rounds
 
-__Raising awareness of RF is the goal so we will be taking every opportunity to celebrate the wins of each projects by sharing updates to the leaderboard weekly (or when appropriate) on social media.__
+__Raising awareness of RF is the goal so we will be taking every opportunity to celebrate the wins of each project by sharing updates to the leaderboard weekly (or when appropriate) on social media.__
 
 ### The MVP will need the following:
 - [ ] Design (can use components and general feel of this other [build](https://www.figma.com/design/eVb3MoRIALsWo6AmcgfOiL/Retro-Funding-Round-4%3A-Sign-Up-%26-Application--(Public-Draft)?node-id=0-1&t=Be4LjY2TtxRvsiio-0))
