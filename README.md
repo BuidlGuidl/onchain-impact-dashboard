@@ -7,9 +7,9 @@ The goal is to raise awareness of the existence of Retro Funding for onchain bui
 - view their impact based on past rounds outcomes
 - apply to future rounds
 
-Raising awareness of RF is the goal so we will be taking every opportunity to celebrate the wins of each projects by sharing updates to the leaderboard weekly (or when appropriate).
+__Raising awareness of RF is the goal so we will be taking every opportunity to celebrate the wins of each projects by sharing updates to the leaderboard weekly (or when appropriate) on social media.__
 
-The MVP will need the following:
+### The MVP will need the following:
 - [ ] Design (can use components and general feel of this other [build](https://www.figma.com/design/eVb3MoRIALsWo6AmcgfOiL/Retro-Funding-Round-4%3A-Sign-Up-%26-Application--(Public-Draft)?node-id=0-1&t=Be4LjY2TtxRvsiio-0))
 - [ ] Agora API integration - to get project data (profile pic, description, etc.)
 - [ ] Navigation Menu with CTA for builders to  
@@ -22,7 +22,7 @@ The MVP will need the following:
 - [ ] Social Media sharing integration 
 - [ ] Backend for indexing and serving the metrics
 
-Extras (We don't need these by deadline but we will add them when we can): 
+### Extras (We don't need these by deadline but we will add them when we can): 
 - [ ] Add timeframes filtering to leaderboard/individual project
 - - [ ] Select 1 day, 1 week, 1 month, 1 year and all-time timeframes
 - - [ ] Share a link that has a specific timeframe selected 
