@@ -10,26 +10,25 @@ The goal is to raise awareness of the existence of Retro Funding for onchain bui
 Raising awareness of RF is the goal so we will be taking every opportunity to celebrate the wins of each projects by sharing updates to the leaderboard weekly (or when appropriate).
 
 The MVP will need the following:
+- [ ] Design (can use components and general feel of this other [build](https://www.figma.com/design/eVb3MoRIALsWo6AmcgfOiL/Retro-Funding-Round-4%3A-Sign-Up-%26-Application--(Public-Draft)?node-id=0-1&t=Be4LjY2TtxRvsiio-0))
+- [ ] Agora API integration - to get project data (profile pic, description, etc.)
+- [ ] Navigation Menu with CTA for builders to  
+- [ ] View - Leaderboard (Top 10? Top 50?)
+- - [ ] Ranked Projects, each project's profile picture and name, scrollable (left)
+- - [ ] Chart showing impact of all projects, single overall metric (right) 
+- [ ] View - Individual Projects
+- - [ ] Project Details
+- - [ ] Chart showing individual metrics for the project (15 or so metrics) 
+- [ ] Social Media sharing integration 
+- [ ] Backend for indexing and serving the metrics
 
-[] Design (can use components and general feel of this other [build](https://www.figma.com/design/eVb3MoRIALsWo6AmcgfOiL/Retro-Funding-Round-4%3A-Sign-Up-%26-Application--(Public-Draft)?node-id=0-1&t=Be4LjY2TtxRvsiio-0))
-[] Agora API integration - to get project data (profile pic, description, etc.)
-[] Navigation Menu with CTA for builders to 
-[] View - Leaderboard (Top 10? Top 50?)
-- [] Ranked Projects, each project's profile picture and name, scrollable (left)
-- [] Chart showing impact of all projects, single overall metric (right)
-[] View - Individual Projects
-- [] Project Details
-- [] Chart showing individual metrics for the project (15 or so metrics)
-[] Social Media sharing integration
-[] Backend for indexing and serving the metrics
-
-Extras (We don't need these by deadline but we will add them when we can):
-[] Add timeframes filtering to leaderboard/individual project
-- [] Select 1 day, 1 week, 1 month, 1 year and all-time timeframes
-- [] Share a link that has a specific timeframe selected
-[] Add metric type filtering to leaderboard
-- [] Select which metrics to see on the chart
-- [] Share a link that has a specific metrics selected
+Extras (We don't need these by deadline but we will add them when we can): 
+- [ ] Add timeframes filtering to leaderboard/individual project
+- - [ ] Select 1 day, 1 week, 1 month, 1 year and all-time timeframes
+- - [ ] Share a link that has a specific timeframe selected 
+- [ ] Add metric type filtering to leaderboard
+- - [ ] Select which metrics to see on the chart
+- - [ ] Share a link that has a specific metrics selected
 
 ### Database setup
 
