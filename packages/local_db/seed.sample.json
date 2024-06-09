@@ -1,0 +1,179 @@
+{
+  "version": "1.1.1",
+  "projects": {
+    "project-id1": {
+      "avatarUrl": "string",
+      "coverImageUrl": "string",
+      "attestationUid": "string",
+      "approvalAttestationUid": "string",
+      "name": "string",
+      "description": "string",
+      "externalLink": "string",
+      "socialLinks": {
+        "twitter": "string",
+        "farcaster": "string",
+        "mirror": "string",
+        "website": "string"
+      },
+      "team": [
+        {
+          "farcasterId": "string"
+        }
+      ],
+      "repositories": [
+        "string"
+      ],
+      "deployedContracts": [
+        {}
+      ],
+      "categories": [
+        {
+          "name": "string",
+          "description": "string"
+        }
+      ],
+      "funding": {
+        "ventureCapital": [
+          {
+            "amount": "string",
+            "source": "string",
+            "date": "2024-06-07T18:41:57.328Z",
+            "details": "string"
+          }
+        ],
+        "grants": [
+          {
+            "amount": "string",
+            "source": "string",
+            "date": "2024-06-07T18:41:57.328Z",
+            "details": "string"
+          }
+        ],
+        "optimismGrants": [
+          {}
+        ]
+      }
+    },
+    "project-id2": {
+      "avatarUrl": "string",
+      "coverImageUrl": "string",
+      "attestationUid": "string",
+      "approvalAttestationUid": "string",
+      "name": "string",
+      "description": "string",
+      "externalLink": "string",
+      "socialLinks": {
+        "twitter": "string",
+        "farcaster": "string",
+        "mirror": "string",
+        "website": "string"
+      },
+      "team": [
+        {
+          "farcasterId": "string"
+        }
+      ],
+      "repositories": [
+        "string"
+      ],
+      "deployedContracts": [
+        {}
+      ],
+      "categories": [
+        {
+          "name": "string",
+          "description": "string"
+        }
+      ],
+      "funding": {
+        "ventureCapital": [
+          {
+            "amount": "string",
+            "source": "string",
+            "date": "2024-06-07T18:41:57.328Z",
+            "details": "string"
+          }
+        ],
+        "grants": [
+          {
+            "amount": "string",
+            "source": "string",
+            "date": "2024-06-07T18:41:57.328Z",
+            "details": "string"
+          }
+        ],
+        "optimismGrants": [
+          {}
+        ]
+      }
+    }
+  },
+  "metrics": {
+    "onchain-users": {
+      "name": "string",
+      "description": "string",
+      "weight": 1
+    },
+    "tx-fees": {
+      "name": "string",
+      "description": "string",
+      "weight": 1
+    }
+  },
+  "totals-by-date":{
+    "20240101": {
+      "totalProjects": 157,
+      "totalOverallScore": 15898,
+      "metrics": {
+        "onchain-users": 4078,
+        "tx-fees": 11820
+      }
+    }
+  },
+  "project-totals-by-date": {
+    "20240101": {
+      "project-id1": {
+        "isNew": false,
+        "overallScore": 1202,
+        "rank": 1,
+        "rankChange": 0,
+        "rankChangeWeek": 0,
+        "rankChangeMonth": 1,
+        "momentum": 2,
+        "metrics": {
+          "onchain-users": {
+            "score": 1001,
+            "rank": 1,
+            "momentum": 2
+          },
+          "tx-fees": {
+            "score": 101,
+            "rank": 2,
+            "momentum": 2
+          }
+        }
+      },
+      "project-id2": {
+        "isNew": false,
+        "overallScore": 1202,
+        "rank": 2,
+        "rankChange": 0,
+        "rankChangeWeek": 0,
+        "rankChangeMonth": -1,
+        "momentum": 2,
+        "metrics": {
+          "onchain-users": {
+            "score": 1001,
+            "rank": 1,
+            "momentum": 2
+          },
+          "tx-fees": {
+            "score": 101,
+            "rank": 2,
+            "momentum": 2
+          }
+        }
+      }
+    }
+  }
+}

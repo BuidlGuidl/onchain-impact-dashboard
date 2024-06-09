@@ -11,4 +11,8 @@ node_modules
 .eslintcache
 .vscode/**
 .DS_Store
-.env
+.env*
+!.env.example
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
