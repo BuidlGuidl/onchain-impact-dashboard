@@ -96,3 +96,85 @@ export interface VectorList {
   description: string;
   vectors: SelectedVector[];
 }
+
+interface AgoraMetadata {
+  hasNext: boolean;
+  totalReturned: number;
+  nextOffset: number;
+}
+
+interface SocialLinks {
+  twitter: string;
+  farcaster: string;
+  mirror: string;
+  website: string;
+}
+
+interface TeamMember {
+  farcasterId: string;
+}
+
+interface DeployedContract {
+  address: string;
+  chainId: string;
+  deployer: string;
+  creationBlock: string;
+  transactionId: string;
+  verificationProof: string;
+  openSourceObserverSlug: string;
+}
+
+interface Category {
+  name: string;
+  description: string;
+}
+
+interface VentureCapitalFunding {
+  amount: string;
+  source: string;
+  date: string;
+  details: string;
+}
+
+interface Grant {
+  amount: string;
+  source: string;
+  date: string;
+  details: string;
+}
+
+interface OptimismGrant {
+  amount: string;
+  source: string;
+  date: string;
+  details: string;
+  link: string;
+  type: string;
+}
+
+interface Funding {
+  ventureCapital: VentureCapitalFunding[];
+  grants: Grant[];
+  optimismGrants: OptimismGrant[];
+}
+
+interface Project {
+  avatarUrl: string;
+  coverImageUrl: string;
+  attestationUid: string;
+  approvalAttestationUid: string;
+  name: string;
+  description: string;
+  externalLink: string;
+  socialLinks: SocialLinks;
+  team: TeamMember[];
+  repositories: string[];
+  deployedContracts: DeployedContract[];
+  categories: Category[];
+  funding: Funding;
+}
+
+export interface AgoraApiResponse {
+  metadata: AgoraMetadata;
+  projects: Project[];
+}
