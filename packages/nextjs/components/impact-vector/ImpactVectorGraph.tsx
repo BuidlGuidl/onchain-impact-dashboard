@@ -6,7 +6,7 @@ import { scaleLog } from "d3-scale";
 import { Area, Bar, CartesianGrid, ComposedChart, ResponsiveContainer, Text, Tooltip, XAxis, YAxis } from "recharts";
 import { formatEther } from "viem";
 import { DataSet, ImpactVectors } from "~~/app/types/data";
-import { abbreviateNumber } from "~~/utils/impactCalculator/common";
+import { abbreviateNumber } from "~~/utils/onchainImpactDashboard/common";
 
 const logScale = scaleLog();
 
