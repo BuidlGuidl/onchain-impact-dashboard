@@ -11,16 +11,16 @@ const imageUrl = `${baseUrl}/thumbnail.jpg`;
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Impact Calculator",
-    template: "%s | Impact Calculator",
+    default: "Onchain Impact Dashboard",
+    template: "%s | Onchain Impact Dashboard",
   },
-  description: "Impact Calculator | Powered by BuidlGuidl",
+  description: "Onchain Impact Dashboard | Powered by BuidlGuidl",
   openGraph: {
     title: {
-      default: "Impact Calculator App",
-      template: "%s | Impact Calculator",
+      default: "Onchain Impact Dashboard App",
+      template: "%s | Onchain Impact Dashboard",
     },
-    description: "Impact Calculator | Powered by BuidlGuidl",
+    description: "Onchain Impact Dashboard | Powered by BuidlGuidl",
     images: [
       {
         url: imageUrl,
@@ -31,10 +31,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [imageUrl],
     title: {
-      default: "Impact Calculator",
-      template: "%s | Impact Calculator",
+      default: "Onchain Impact Dashboard",
+      template: "%s | Onchain Impact Dashboard",
     },
-    description: "Impact Calculator | Powered by BuidlGuidl",
+    description: "Onchain Impact Dashboard | Powered by BuidlGuidl",
   },
   icons: {
     icon: [{ url: "/favicon.svg", sizes: "32x32", type: "image/svg" }],

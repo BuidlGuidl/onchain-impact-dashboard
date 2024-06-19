@@ -12,7 +12,7 @@ export const Footer = () => {
           <div className="flex justify-center items-center gap-2 text-sm w-full">
             <div className="text-center">
               <a
-                href="https://github.com/BuidlGuidl/impact-calculator"
+                href="https://github.com/BuidlGuidl/onchain-impact-dashboard"
                 target="_blank"
                 rel="noreferrer"
                 className="link"
