@@ -69,37 +69,39 @@ __Raising awareness of RF is the goal so we will be taking every opportunity to 
 
 ## API
 
-### Projects
+### Stubbed external APIs
+
+#### Projects (Agora)
 To get all:
 ```
-    http://localhost:3000/api/projects
+    http://localhost:3000/api/stub/projects
 ```
 
 To get one by id (attestationUid):
 ```
-    http://localhost:3000/api/projects?id=1323922809-927310647
+    http://localhost:3000/api/stub/projects?id=1323922809-927310647
 ```
 
-### Time Series Data (OSO)
+#### Time Series Data (OSO)
 The data starts on 2024-01-01 and ends on 2024-04-01.
 To get all:
 ```
-    http://localhost:3000/api/series
+    http://localhost:3000/api/stub/series
 ```
 
 To get specific dates:
 ```
-    http://localhost:3000/api/series?startDate=2024-02-01&endDate=2024-02-28
+    http://localhost:3000/api/stub/series?startDate=2024-02-01&endDate=2024-02-28
 ```
 
-### Mapping
+#### Mapping (OSO)
 This is how we can associate Agora data to OSO data.
 To get all:
 ```
-    http://localhost:3000/api/mapping
+    http://localhost:3000/api/stub/mapping
 ```
 
 To get OSO id by Agora id:
 ```
-    http://localhost:3000/api/mapping?id=1323922809-927310647
+    http://localhost:3000/api/stub/mapping?id=1323922809-927310647
 ```
