@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="flex items-center gap-3">
         <SwitchTheme />
         <div className="w-[1px] h-[24px] bg-neutral-200"></div>
-        <button className="bg-primary rounded-md p-2 flex gap-2 text-white font-medium text-xs sm:text-sm">
+        <button className="bg-OPred rounded-md p-2 flex gap-2 text-white font-medium text-xs sm:text-sm">
           <Image src="/assets/svg/farcaster-fill.svg" alt="" width={16} height={16} /> Add your own project
         </button>
       </div>
