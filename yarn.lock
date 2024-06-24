@@ -6610,6 +6610,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"firebase@workspace:packages/firebase":
+  version: 0.0.0-use.local
+  resolution: "firebase@workspace:packages/firebase"
+  dependencies:
+    "@types/node": ^20.12.12
+    dotenv: ^16.4.5
+    firebase-admin: ^11.11.1
+    tsx: ^4.11.2
+    typescript: ^5.4.5
+  languageName: unknown
+  linkType: soft
+
 "flat-cache@npm:^3.0.4":
   version: 3.1.0
   resolution: "flat-cache@npm:3.1.0"
@@ -8564,18 +8576,6 @@ __metadata:
   checksum: 2480e733f7d022d3ecba91abc58a20968f0ca8f5fa30b3341ecf4bcf4845e674ad27b721a5ae53529cafc6ca603c015b80d0979ceb7a711e268ef20bb6bc7527
   languageName: node
   linkType: hard
-
-"local_db@workspace:packages/local_db":
-  version: 0.0.0-use.local
-  resolution: "local_db@workspace:packages/local_db"
-  dependencies:
-    "@types/node": ^20.12.12
-    dotenv: ^16.4.5
-    firebase-admin: ^11.11.1
-    tsx: ^4.11.2
-    typescript: ^5.4.5
-  languageName: unknown
-  linkType: soft
 
 "locate-path@npm:^5.0.0":
   version: 5.0.0

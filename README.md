@@ -52,7 +52,7 @@ __Raising awareness of RF is the goal so we will be taking every opportunity to 
 
 3. Seed data in your local Firebase instance:
 
-    Copy the `packages/local_db/seed.sample.json` to `packages/local_db/seed.json` and tweak the data as you see fit. Then run the following command:
+    Copy the `packages/firebase/seed.sample.json` to `packages/firebase/seed.json` and tweak the data as you see fit. Then run the following command:
 
     ```bash
     yarn seed
@@ -66,3 +66,42 @@ __Raising awareness of RF is the goal so we will be taking every opportunity to 
     ```bash
     yarn dev
     ```
+
+## API
+
+### Stubbed external APIs
+
+#### Projects (Agora)
+To get all:
+```
+    http://localhost:3000/api/stub/projects
+```
+
+To get one by id (attestationUid):
+```
+    http://localhost:3000/api/stub/projects?id=1323922809-927310647
+```
+
+#### Time Series Data (OSO)
+The data starts on 2024-01-01 and ends on 2024-04-01.
+To get all:
+```
+    http://localhost:3000/api/stub/series
+```
+
+To get specific dates:
+```
+    http://localhost:3000/api/stub/series?startDate=2024-02-01&endDate=2024-02-28
+```
+
+#### Mapping (OSO)
+This is how we can associate Agora data to OSO data.
+To get all:
+```
+    http://localhost:3000/api/stub/mapping
+```
+
+To get OSO id by Agora id:
+```
+    http://localhost:3000/api/stub/mapping?id=1323922809-927310647
+```
