@@ -1,6 +1,7 @@
 import "./layout.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Metadata } from "next";
+import Navbar from "~~/components/Navbar";
 import { ScaffoldEthProviders } from "~~/components/ScaffoldEthProviders";
 import "~~/styles/globals.css";
 
@@ -46,6 +47,7 @@ const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   return (
     <html>
       <body>
+        <Navbar />
         <ScaffoldEthProviders>{children}</ScaffoldEthProviders>
       </body>
     </html>
