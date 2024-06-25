@@ -10,7 +10,7 @@ const Navbar = () => {
           <div className="max-w-[24px]">
             <Image src="/assets/svg/logo.svg" width={24} height={24} className="w-full" alt="logo" />
           </div>
-          <h3 className="text-op-neutral-900  font-bold text-sm sm:text-xl  m-0">Retro Funding</h3>
+          <h3 className="text-op-neutral-900  font-sora font-medium text-sm sm:text-xl  m-0">Retro Funding</h3>
         </div>
         <div className="flex items-center gap-3">
           <SwitchTheme />

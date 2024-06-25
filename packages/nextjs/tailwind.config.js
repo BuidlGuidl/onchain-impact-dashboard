@@ -79,6 +79,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      fontFamily: {
+        sora: "Sora",
+      },
       colors: {
         lightGray: "#68778D",
         lightBlack: "#202327",
