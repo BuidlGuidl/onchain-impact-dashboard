@@ -13,7 +13,7 @@ const OnchainInfoModal: React.FC<Props> = ({ isModalOpen, closeModal }) => {
           <div className="modal-box max-w-md w-full px-6 pt-11">
             <div className="text-center">
               <h3 className="font-bold  sm:text-lg m-0">Select the information you want to share</h3>
-              <p className="m-0 text-sm sm:text-base text-[#404454]">
+              <p className="m-0 text-sm sm:text-base text-center ">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate.
               </p>
             </div>
