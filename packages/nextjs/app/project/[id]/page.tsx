@@ -8,7 +8,7 @@ const ProjectDetail: NextPage = () => {
   return (
     <>
       <section className="px-4">
-        <img className="w-full mb-4 rounded-lg" src="https://placehold.co/1064x200" alt="placeholder"></img>
+        <div className="w-full h-[200px] bg-OPlightgray mb-4 rounded-lg"></div>
         <div className="flex w-full justify-between mb-4 items-center">
           <Image width={54} height={54} className="mr-2" src={IMAGE_URL} alt="Avatar" />
           <div className="flex flex-col flex-1 ml-4 justify-center">
