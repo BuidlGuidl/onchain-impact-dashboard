@@ -1,6 +1,6 @@
 .main-container::before,
 .main-container::after {
-  background: linear-gradient(180deg, #ffefd1 -10.38%, #ffd1d6 19.32%, #d2cbff 57.58%, #9cffe7 82.73%, #a6ffb4 105.86%);
+  background: linear-gradient(180deg, #fbfcfe -10.38%, #ffd1d6 19.32%, #d2cbff 57.58%, #9cffe7 82.73%, #a6ffb4 105.86%);
   content: " ";
   position: absolute;
   top: 0;
@@ -11,19 +11,30 @@
 .main-container::after {
   background: linear-gradient(180deg, rgba(251, 252, 254, 0) 0%, #fbfcfe 100%);
 }
+.main-container.dark::after {
+  background: linear-gradient(180deg, rgba(251, 252, 254, 0) 0%, #1a1e23 100%);
+}
 
 .main-content {
-  background-color: #fbfcfe;
-  border: 1px solid linear-gradient(180deg, #e0e2eb 0%, rgba(224, 226, 235, 0) 16.89%);
   border-radius: 20px;
   width: 80%;
   max-width: 1200px;
-  min-height: 650px;
+  min-height: calc(100vh - 270px);
   margin: 120px auto;
   margin-bottom: 0;
   z-index: 800;
-  padding: 50px 0px;
+  padding: 20px 0px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: 1px solid transparent;
+
+}
+
+@media (min-width: 1024px) {
+  .projects-container {
+    max-height:38vh;
+    min-height:38vh;
+    overflow-y: auto;
+  }
 }
