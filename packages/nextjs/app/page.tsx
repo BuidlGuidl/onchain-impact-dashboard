@@ -29,7 +29,7 @@ const LeaderboardView: NextPage = () => {
 
   return (
     <>
-      <div className="leaderboard-heading">
+      <div className="leaderboard-heading mb-6">
         <h1>Onchain Impact Dashboard</h1>
         <p>
           See the onchain impact that is beeing generated across the superchain Retro Funding 4 established metrics to
