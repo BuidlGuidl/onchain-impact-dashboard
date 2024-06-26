@@ -22,6 +22,7 @@ const OnchainInfoModal: React.FC<Props> = ({ isModalOpen, closeModal }) => {
                 <input id="currentDate" type="checkbox" className=" w-[18px] h-[18px]  accent-blue-600" />
                 <span className="ml-4">Current date</span>
               </label>
+
               <label className="inline-flex items-center" htmlFor="selectedProject">
                 <input id="selectedProject" type="checkbox" className=" w-[18px] h-[18px]  accent-blue-600" />
                 <span className="ml-4">Selected project</span>
@@ -32,13 +33,13 @@ const OnchainInfoModal: React.FC<Props> = ({ isModalOpen, closeModal }) => {
               </label>
             </div>
             <div className="mt-4 flex items-center justify-center gap-6">
-              <div className="py-1 max-w-[72px] w-full px-4 border  border-neutral-400/30 rounded-xl">
+              <div className="cursor-pointer py-1 max-w-[72px] w-full px-4 border  border-neutral-400/30 rounded-xl">
                 <Image src="/assets/svg/icons/farcaster.svg" width={40} height={40} alt="farcaster" />
               </div>
-              <div className="py-1 max-w-[72px] w-full px-4 border  border-neutral-400/30 rounded-xl">
+              <div className="cursor-pointer py-1 max-w-[72px] w-full px-4 border  border-neutral-400/30 rounded-xl">
                 <Image src="/assets/svg/icons/twitter.svg" width={40} height={40} alt="farcaster" />
               </div>
-              <div className="py-1 max-w-[72px] w-full px-4 border  border-neutral-400/30 rounded-xl">
+              <div className="cursor-pointer py-1 max-w-[72px] w-full px-4 border  border-neutral-400/30 rounded-xl">
                 <Image src="/assets/svg/icons/copy-link.svg" width={40} height={40} alt="farcaster" />
               </div>
             </div>
