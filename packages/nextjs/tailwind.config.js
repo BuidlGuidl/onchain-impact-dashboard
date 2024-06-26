@@ -86,7 +86,7 @@ module.exports = {
         lightGray: "#68778D",
         lightBlack: "#202327",
         "secondary-text": "#4A5568",
-        customGray: "",
+        customGray: "#FBFCFE",
         customWhite: "#E2E8F0",
         customGrayBtn: "#323A43",
         OPlightgray: "#CBD5E0",
