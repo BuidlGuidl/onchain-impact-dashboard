@@ -3,6 +3,7 @@ export interface Projects {
 }
 
 export interface Project {
+  id?: string;
   avatarUrl: string;
   coverImageUrl: string;
   attestationUid: string;

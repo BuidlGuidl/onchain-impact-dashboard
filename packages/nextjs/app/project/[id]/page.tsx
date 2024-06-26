@@ -20,7 +20,9 @@ const ProjectDetail: NextPage = () => {
           </CustomButton>
         </div>
         <main className="leaderboard-content lg:flex">
-          <div className="mb-3 border border-gray-300 rounded-lg p-4 grow lg:mr-4 lg:7/12">Graph goes here...</div>
+          <div className="mb-3 border border-gray-300 rounded-lg p-4 grow lg:mr-4 lg:7/12 min-h-[300px]">
+            Graph goes here...
+          </div>
           <div className="mb-3 border border-gray-300 rounded-lg pl-4 pt-4 pr-4 lg:basis-5/12">
             <CheckboxItem name="check1" />
             <CheckboxItem name="check2" />
