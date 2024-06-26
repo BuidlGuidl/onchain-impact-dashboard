@@ -20,8 +20,8 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ['content.optimism.io'],
-  }
+    domains: ["content.optimism.io", "github.com"],
+  },
 };
 
 module.exports = nextConfig;

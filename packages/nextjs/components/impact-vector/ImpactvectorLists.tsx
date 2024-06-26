@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { SearchBar } from "../onchain-impact-dashboard/SearchBar";
 import ImpactVectorListCard from "./ImpactVectorListCard";
-import { SearchBar } from "./SearchBar";
 import { useFetch } from "usehooks-ts";
 import { VectorList } from "~~/app/types/data";
 
