@@ -1,0 +1,16 @@
+{
+    "active_contract_count_90_days": 100,
+    "address_count": 50,
+    "address_count_90_days": 75,
+    "days_since_first_transaction": 10,
+    "gas_fees_sum": 75,
+    "gas_fees_sum_6_months": 85,
+    "high_activity_address_count_90_days": 90,
+    "low_activity_address_count_90_days": 30,
+    "medium_activity_address_count_90_days": 60,
+    "multi_project_address_count_90_days": 100,
+    "new_address_count_90_days": 30,
+    "returning_address_count_90_days": 70,
+    "transaction_count": 10,
+    "transaction_count_6_months": 30
+  }
