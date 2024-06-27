@@ -1,4 +1,4 @@
-import weightingsJSON from "./weightings.json";
+import weightingsJSON from "../weightings.json";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { OnchainMetricsByProject } from "~~/app/types/OSO";
 
@@ -26,8 +26,8 @@ interface DataSet {
   projectId: string;
 }
 
-interface DateResult {
-  projects: DataSet[];
+interface LeaderboardGraphData {
+  // projects: DataSet[];
   totalScore: number;
   metricTotals: Metrics;
   date: string;
@@ -40,17 +40,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const weightings = weightingsJSON as { [key in keyof Metrics]: number };
   try {
     // Get data from the stubbed API
-    // const mappings = await fetch("localhost:3000/api/stub/mappings").then(res => res.json());
-    // const projects = await fetch("localhost:3000/api/stub/projects").then(res => res.json());
-    const seriesResponse = await fetch("localhost:3000/api/stub/series").then(res => res.json());
+    // const mappings = await fetch("http://localhost:3000/api/stub/mappings").then(res => res.json());
+    // const projects = await fetch("http://localhost:3000/api/stub/projects").then(res => res.json());
+    const seriesResponse = await fetch("http://localhost:3000/api/stub/series").then(res => res.json());
 
-    if (seriesResponse.status !== 200) {
-      return res.status(seriesResponse.status).json(seriesResponse);
+    if (!seriesResponse) {
+      return res.status(400).json(seriesResponse);
     }
     const series = seriesResponse.series as {
       [key: string]: OnchainMetricsByProject[];
     };
-    const dateResults = [] as DateResult[];
+    const dateResults = [] as LeaderboardGraphData[];
     // Tally the totals in each metric for each day
     for (const date in series) {
       const data = series[date];
@@ -80,7 +80,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         );
       }
       const dateResult = {
-        projects: projectsData,
+        // projects: projectsData,
         totalScore,
         metricTotals,
         date,
@@ -125,10 +125,6 @@ const scoreProjectsByMetricWeight = ({
       score: 0,
       rank: 0,
       projectId: data["project_id"],
-      // metadata: {
-      //   project_name: data["project_name"],
-      //   project_image: "",
-      // },
     };
     for (const metric of allMetrics) {
       const weight = metricWeights[metric];
