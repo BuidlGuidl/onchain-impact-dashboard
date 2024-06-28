@@ -4,12 +4,24 @@ import { useState } from "react";
 import OnchainInfoModal from "../OnchainInfoModal";
 import LeaderboardCollapse from "./LeaderboardCollapse";
 import { SearchBar } from "./SearchBar";
+import { useEffectOnce } from "usehooks-ts";
+import { Project } from "~~/services/database/schema";
 
-const Leaderboard = ({ projects }: any) => {
+const Leaderboard = () => {
   const rating = 10;
   const [selectedProject, setSelectedProject] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  const getProjects = async () => {
+    const response = await fetch(`http://localhost:3000/api/stub/projects`);
+    const data: Project[] = await response.json();
+    setProjects(data);
+  };
+  useEffectOnce(() => {
+    getProjects();
+  });
 
   const changeSelectedProject = (newValue: string) => {
     if (selectedProject == newValue) {
@@ -26,12 +38,13 @@ const Leaderboard = ({ projects }: any) => {
         <div className="projects-container ">
           {projects
             .filter((it: any) => it.name.toLowerCase().includes(searchValue.toLowerCase()))
-            .map((item: any) => (
+            .map((item: Project) => (
               <LeaderboardCollapse
-                isActive={item.id == selectedProject}
-                setSelectedProject={() => changeSelectedProject(item.id)}
-                shareProject={() => setIsModalOpen(item.id)}
-                key={item.id}
+                isActive={item.attestationUid == selectedProject}
+                setSelectedProject={() => changeSelectedProject(item.attestationUid)}
+                shareProject={() => setIsModalOpen(true)}
+                key={item.attestationUid}
+                id={item.attestationUid}
                 project={item}
                 rating={rating}
               ></LeaderboardCollapse>

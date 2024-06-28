@@ -2,18 +2,20 @@ import Image from "next/image";
 import type { NextPage } from "next";
 import { ShareIcon } from "~~/components/assets/ShareIcon";
 import CustomButton from "~~/components/onchain-impact-dashboard/CustomButton";
-import { IMAGE_URL } from "~~/utils/onchainImpactDashboard/initialMockData";
+import { Project } from "~~/services/database/schema";
 
-const ProjectDetail: NextPage = () => {
+const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) => {
+  const response = await fetch(`http://localhost:3000/api/stub/projects?id=${params.id}`);
+  const data: Project = await response.json();
   return (
     <>
       <section className="px-4">
         <div className="w-full h-[200px] bg-OPlightgray mb-4 rounded-lg"></div>
         <div className="flex w-full justify-between mb-4 items-center">
-          <Image width={54} height={54} className="mr-2" src={IMAGE_URL} alt="Avatar" />
+          <img width={54} height={54} className="mr-2" src={data.avatarUrl} alt="Avatar" />
           <div className="flex flex-col flex-1 ml-4 justify-center">
-            <h1 className="text-lg m-0">#1 Project Detail Page</h1>
-            <span>Lorem ipsum dolor sit amet, consectetur.</span>
+            <h1 className="text-lg m-0">#1 {data?.name}</h1>
+            <span>{data?.description}</span>
           </div>
           <CustomButton text={"Share"} customClassName="border bg-transparent border-gray-200">
             <ShareIcon />
@@ -30,27 +32,72 @@ const ProjectDetail: NextPage = () => {
           </div>
         </main>
         <h2 className="font-semibold mt-8 mb-4">Description</h2>
-        <p>
-          See the onchain impact that is beeing generated across the superchain Retro Funding 4 established metrics to
-          measure onchain impact. These metrics will be evolve round over round.
-        </p>
-        <h2 className="font-semibold mt-8 mb-4">Web</h2>
-        <div className="flex items-center mb-2">
-          <a href="">Lorem ipsum dolor sit amet</a>
-          <Image className="ml-2" src="/assets/svg/icons/linkArrow.svg" width={14} height={14} alt="farcaster" />
-        </div>
-        <div className="flex items-center mb-2">
-          <a href="">Lorem ipsum dolor sit amet</a>
-          <Image className="ml-2" src="/assets/svg/icons/linkArrow.svg" width={14} height={14} alt="farcaster" />
-        </div>
-        <h2 className="font-semibold mt-8 mb-4">Farcaster</h2>
-        <div className="flex items-center mb-2">
-          <a href="">Lorem ipsum dolor sit amet</a>
-          <Image className="ml-2" src="/assets/svg/icons/linkArrow.svg" width={14} height={14} alt="farcaster" />
-        </div>
-        <div className="flex items-center mb-2">
-          <a href="">Lorem ipsum dolor sit amet</a>
-          <Image className="ml-2" src="/assets/svg/icons/linkArrow.svg" width={14} height={14} alt="farcaster" />
+        <p>{data?.description}</p>
+        {data?.socialLinks.website && (
+          <>
+            <h2 className="font-semibold mt-8 mb-4">Web</h2>
+            <div className="flex items-center mb-2">
+              <a href={`${data?.socialLinks.website}`} className="flex items-center" target="_blank" rel="noreferrer">
+                {data?.socialLinks.website}
+                <Image
+                  className="ml-2"
+                  src="/assets/svg/icons/linkArrow.svg"
+                  width={14}
+                  height={14}
+                  alt={`${data.name} website`}
+                />
+              </a>
+            </div>
+          </>
+        )}
+
+        <h2 className="font-semibold mt-8 mb-4">Social Media Links</h2>
+        <div className="flex">
+          {data?.socialLinks.farcaster && (
+            <>
+              <div className="flex items-center mb-2">
+                <a href={`${data?.socialLinks.farcaster}`} target="_blank" rel="noreferrer">
+                  <Image
+                    className="ml-2"
+                    src="/assets/svg/icons/farcaster.svg"
+                    width={28}
+                    height={28}
+                    alt={`${data.name} farcaster link`}
+                  />
+                </a>
+              </div>
+            </>
+          )}
+          {data?.socialLinks.mirror && (
+            <>
+              <div className="flex items-center mb-2">
+                <a href={`${data?.socialLinks.mirror}`} target="_blank" rel="noreferrer">
+                  <Image
+                    className="ml-2"
+                    src="/assets/svg/icons/twitter.svg"
+                    width={28}
+                    height={28}
+                    alt={`${data.name} mirror link`}
+                  />
+                </a>
+              </div>
+            </>
+          )}
+          {data?.socialLinks.twitter && (
+            <>
+              <div className="flex items-center mb-2">
+                <a href={`${data?.socialLinks.twitter}`} target="_blank" rel="noreferrer">
+                  <Image
+                    className="ml-2"
+                    src="/assets/svg/icons/twitter.svg"
+                    width={28}
+                    height={28}
+                    alt={`${data.name} twitter link`}
+                  />
+                </a>
+              </div>
+            </>
+          )}
         </div>
       </section>
     </>
