@@ -4,8 +4,16 @@ import { ShareIcon } from "~~/components/assets/ShareIcon";
 import CustomButton from "~~/components/onchain-impact-dashboard/CustomButton";
 import { Project } from "~~/services/database/schema";
 
+export async function generateStaticParams() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects`);
+  const data: Project[] = await response.json();
+  return data.map(item => ({
+    id: item.attestationUid,
+  }));
+}
+
 const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) => {
-  const response = await fetch(`http://localhost:3000/api/stub/projects?id=${params.id}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects?id=${params.id}`);
   const data: Project = await response.json();
   return (
     <>

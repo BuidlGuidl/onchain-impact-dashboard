@@ -15,7 +15,7 @@ const Leaderboard = () => {
   const [projects, setProjects] = useState<Project[]>([]);
 
   const getProjects = async () => {
-    const response = await fetch(`http://localhost:3000/api/stub/projects`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects`);
     const data: Project[] = await response.json();
     setProjects(data);
   };
