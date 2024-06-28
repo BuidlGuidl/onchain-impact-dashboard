@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OnchainInfoModal from "../OnchainInfoModal";
 import LeaderboardCollapse from "./LeaderboardCollapse";
 import { SearchBar } from "./SearchBar";
-import { useEffectOnce } from "usehooks-ts";
 import { Project } from "~~/services/database/schema";
 
 const Leaderboard = () => {
@@ -19,9 +18,9 @@ const Leaderboard = () => {
     const data: Project[] = await response.json();
     setProjects(data);
   };
-  useEffectOnce(() => {
+  useEffect(() => {
     getProjects();
-  });
+  }, []);
 
   const changeSelectedProject = (newValue: string) => {
     if (selectedProject == newValue) {
