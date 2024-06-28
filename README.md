@@ -46,7 +46,7 @@ __Raising awareness of RF is the goal so we will be taking every opportunity to 
     (Optional) Start the firebase emulators (vs set up a live Firebase instance). You will need to install the [firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli) `npm i -g firebase-tools` and run the following command:
 
     ```bash
-    # You might need to add a real "--project <projectName>" (run firebase projects:list)
+    # You might need to add a real "--project <projectId>" (run firebase projects:list)
     firebase emulators:start
     ```
 
