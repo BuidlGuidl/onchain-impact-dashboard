@@ -176,9 +176,9 @@
       }
     }
   },
-  "etl-process-log": {
+  "etl-log": {
     "20240101": {
-      "status": "success",
+      "complete": true,
       "message": "string"
     }
   },

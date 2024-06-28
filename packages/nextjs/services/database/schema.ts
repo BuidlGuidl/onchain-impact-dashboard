@@ -101,3 +101,12 @@ export interface Metric {
   description: string;
   weight: number;
 }
+
+export interface ETLLogs {
+  [date: string]: ETLLog;
+}
+
+export interface ETLLog {
+  complete: boolean;
+  message: string;
+}

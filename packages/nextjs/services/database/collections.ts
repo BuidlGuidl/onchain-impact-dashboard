@@ -32,4 +32,19 @@ const addDocumentToCollection = async (collectionName: string, data: any) => {
   }
 };
 
-export { listCollections, addDocumentToCollection };
+const upsertDocumentInCollection = async (collectionName: string, docName: string, data: any) => {
+  const firestoreDB = getFirestoreConnector();
+
+  try {
+    // @notice Add a new document with a specified ID to the specified collection
+    // @dev Creates the collection if it doesn't already exist.
+    await firestoreDB.collection(collectionName).doc(docName).set(data);
+    console.log("DocumentID: ", docName);
+    return docName;
+  } catch (error) {
+    console.error("Error adding document: ", error);
+    throw error;
+  }
+};
+
+export { listCollections, addDocumentToCollection, upsertDocumentInCollection };
