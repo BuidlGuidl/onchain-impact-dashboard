@@ -1,18 +1,24 @@
 import globalScore from "./global-score.json";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { GlobalScores } from "~~/services/database/schema";
 
+export interface GlobalScoreDTO {
+  [key: string]: string | number;
+}
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed." });
   }
-  const scores = Object.entries(globalScore).map(item => {
-    const projects: any = {};
+  const staticScores = globalScore as GlobalScores;
+
+  const scores = Object.entries(staticScores).map(item => {
+    const eachScore: GlobalScoreDTO = {};
     item[1].projects.forEach(proj => {
-      projects[proj.name] = proj.overallScore;
+      eachScore[proj.name] = proj.overallScore;
     });
     return {
       date: item[0],
-      ...projects,
+      ...eachScore,
     };
   });
 
