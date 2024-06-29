@@ -1,7 +1,6 @@
 import "./page.css";
 import type { NextPage } from "next";
 import Leaderboard from "~~/components/onchain-impact-dashboard/Leaderboard";
-import { TEST_PROJECTS } from "~~/utils/onchainImpactDashboard/initialMockData";
 
 const LeaderboardView: NextPage = () => {
   return (
@@ -18,7 +17,7 @@ const LeaderboardView: NextPage = () => {
           Graph goes here...
         </div>
         <div className="mb-3 lg:basis-5/12">
-          <Leaderboard projects={TEST_PROJECTS} />
+          <Leaderboard />
         </div>
       </main>
     </div>

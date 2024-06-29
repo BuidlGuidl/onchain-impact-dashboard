@@ -9,18 +9,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const projects = projectsJSON as Project[];
   // check if id param is present
   const { id } = req.query;
+
   try {
-    if (id && typeof id === "string") {
+    if (id) {
       const project = projects.find(project => project.attestationUid === id);
       if (!project) {
         return res.status(404).json({ message: "Project not found. Make sure you are URL encoding the id" });
       }
-      // return single project
-      return res.status(200).json({ projects: [project] });
-    } else {
-      // return all projects
-      res.status(200).json({ projects });
+      return res.status(200).json(project);
     }
+    res.status(200).json(projects);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
