@@ -1,3 +1,23 @@
+export interface GlobalScores {
+  [date: string]: GlobalScoreDay;
+}
+export interface GlobalScoreDay {
+  createdAt: string;
+  projects: GlobalScoreRecord[];
+}
+
+export interface GlobalScoreRecord {
+  id: string;
+  name: string;
+  isNew: boolean;
+  overallScore: number;
+  rank: number;
+  rankChange: number;
+  rankChangeWeek: number;
+  rankChangeMonth: number;
+  momentum: number;
+}
+
 export interface Projects {
   [projectId: string]: Project;
 }
@@ -100,4 +120,13 @@ export interface Metric {
   name: string;
   description: string;
   weight: number;
+}
+
+export interface ETLLogs {
+  [date: string]: ETLLog;
+}
+
+export interface ETLLog {
+  complete: boolean;
+  message: string;
 }
