@@ -17,6 +17,17 @@ const getTargetDate = (date: Date, filter: string) => {
   return `${year}${stringMonth}${stringDay}`;
 };
 
+const toDTO = (entity: GlobalScoreDay) => {
+  const projectScores: GlobalScoreDTO = {};
+  entity.projects.forEach(proj => {
+    projectScores[proj.name] = proj.overallScore;
+  });
+  return {
+    date: entity.createdAt,
+    ...projectScores,
+  };
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed." });
@@ -33,20 +44,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(404).json({ message: "No data" });
   }
   const staticScores = querySnapshot.docs.map(doc => doc.data()) as GlobalScoreDay[];
-  const scores: GlobalScoreDTO[] = staticScores.map(item => {
-    const eachScore: GlobalScoreDTO = {};
-    item.projects.forEach(proj => {
-      eachScore[proj.name] = proj.overallScore;
-    });
-    return {
-      date: item.createdAt,
-      ...eachScore,
-    };
-  });
+  const scoresDto: GlobalScoreDTO[] = staticScores.map(item => toDTO(item));
 
-  // check if id param is present
   try {
-    res.status(200).json(scores);
+    res.status(200).json(scoresDto);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
