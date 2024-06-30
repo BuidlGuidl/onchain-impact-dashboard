@@ -1,26 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import OnchainInfoModal from "../OnchainInfoModal";
 import LeaderboardCollapse from "./LeaderboardCollapse";
 import { SearchBar } from "./SearchBar";
 import { Project } from "~~/services/database/schema";
 
-const Leaderboard = () => {
+const Leaderboard = ({ projects }: { projects: Project[] }) => {
   const rating = 10;
   const [selectedProject, setSelectedProject] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [projects, setProjects] = useState<Project[]>([]);
-
-  const getProjects = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects`);
-    const data: Project[] = await response.json();
-    setProjects(data);
-  };
-  useEffect(() => {
-    getProjects();
-  }, []);
 
   const changeSelectedProject = (newValue: string) => {
     if (selectedProject == newValue) {

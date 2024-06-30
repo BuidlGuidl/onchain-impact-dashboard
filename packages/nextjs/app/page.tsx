@@ -1,11 +1,10 @@
 import "./page.css";
 import type { NextPage } from "next";
-import { LeaderBoardGraph } from "~~/components/impact-vector/leaderboardGraph/leaderBoardGraph";
-import Leaderboard from "~~/components/onchain-impact-dashboard/Leaderboard";
+import { LeaderBoardComponent } from "~~/components/onchain-impact-dashboard/leaderBoardComponent/leaderBoardComponent";
 
 const LeaderboardView: NextPage = () => {
   return (
-    <div className="px-4">
+    <div className="px-4 leaderboard-container">
       <div className="leaderboard-heading mb-6">
         <h1>Onchain Impact Dashboard</h1>
         <p>
@@ -13,14 +12,7 @@ const LeaderboardView: NextPage = () => {
           measure onchain impact. These metrics will be evolve round over round.
         </p>
       </div>
-      <main className="leaderboard-content lg:flex">
-        <div className="mb-3 border border-gray-300 w-full h-[50vh] rounded-lg p-4 grow min-h-[300px] lg:mr-4 lg:7/12">
-          <LeaderBoardGraph />
-        </div>
-        <div className="mb-3 lg:basis-5/12">
-          <Leaderboard />
-        </div>
-      </main>
+      <LeaderBoardComponent />
     </div>
   );
 };

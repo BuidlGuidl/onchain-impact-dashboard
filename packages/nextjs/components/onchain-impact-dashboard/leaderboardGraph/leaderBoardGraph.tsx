@@ -1,22 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { GlobalScoreDTO } from "~~/pages/api/stub/globalScore";
 
-export const LeaderBoardGraph = () => {
-  const [scores, setScores] = useState<any[]>([]);
-
-  const getScores = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/globalScore`);
-    const data: GlobalScoreDTO[] = await response.json();
-    setScores(data);
-  };
-
-  useEffect(() => {
-    getScores();
-  }, []);
-
+export const LeaderBoardGraph = ({ scores }: { scores: GlobalScoreDTO[] }) => {
   const keys = scores.length > 0 ? Object.keys(scores[0]) : [];
   return (
     <ResponsiveContainer width="100%" height={"100%"}>
