@@ -6,6 +6,23 @@ import { GlobalScoreDTO } from "~~/pages/api/stub/globalScore";
 
 export const LeaderBoardGraph = ({ scores }: { scores: GlobalScoreDTO[] }) => {
   const keys = scores.length > 0 ? Object.keys(scores[0]) : [];
+
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-base-300">
+          <p className="m-1 label">{`Date : ${label}`}</p>
+          {payload.map((entry: any, index: any) => (
+            <p key={`item-${index}`} className="m-1" style={{ color: entry.color }}>
+              {`${entry.name} : ${entry.value}`}
+            </p>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <ResponsiveContainer width="100%" height={"100%"}>
       <LineChart data={scores} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
@@ -22,8 +39,8 @@ export const LeaderBoardGraph = ({ scores }: { scores: GlobalScoreDTO[] }) => {
             />
           );
         })}
-        <XAxis dataKey="date" />
-        <Tooltip />
+        <XAxis hide={true} dataKey="date" />
+        <Tooltip content={<CustomTooltip />} />
       </LineChart>
     </ResponsiveContainer>
   );

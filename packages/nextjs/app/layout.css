@@ -17,7 +17,7 @@
 
 .main-content {
   border-radius: 20px;
-  width: 80%;
+  width: 95%;
   max-width: 1200px;
   min-height: calc(100vh - 270px);
   margin: 120px auto;
@@ -28,13 +28,16 @@
   align-items: center;
   flex-direction: column;
   border: 1px solid transparent;
-
 }
 
 @media (min-width: 1024px) {
   .projects-container {
-    max-height:38vh;
-    min-height:38vh;
+    max-height: 41vh;
+    min-height: 41vh;
     overflow-y: auto;
+  }
+
+  .main-content {
+    width: 80%;
   }
 }
