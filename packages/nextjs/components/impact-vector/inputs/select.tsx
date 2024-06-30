@@ -13,7 +13,7 @@ interface IProps {
 export const SelectInput = ({ value, name, placeholder, onChange, options }: IProps) => {
   return (
     <select
-      className="select max-w-[180px] select-info select-bordered bg-secondary focus:outline-none border border-neutral hover:border-gray-400 rounded-xl text-neutral-500"
+      className="select lg:max-w-[180px] select-info select-bordered bg-secondary focus:outline-none border border-neutral hover:border-gray-400 rounded-xl text-neutral-500"
       name={name}
       value={value}
       onChange={e => onChange(e.target.value)}

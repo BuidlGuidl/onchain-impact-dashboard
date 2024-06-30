@@ -91,6 +91,9 @@ input[type="number"] {
   width: 0;
 }
 
-.leaderboard-wrap {
-  min-width: 375px;
+
+@media (min-width: 1024px) {
+  .leaderboard-wrap {
+    min-width: 375px;
+  }
 }
