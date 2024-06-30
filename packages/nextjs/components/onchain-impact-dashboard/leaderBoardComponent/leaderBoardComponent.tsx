@@ -11,7 +11,7 @@ import { Project } from "~~/services/database/schema";
 export const LeaderBoardComponent = () => {
   const [scores, setScores] = useState<any[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState("1");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
@@ -23,7 +23,7 @@ export const LeaderBoardComponent = () => {
   };
   useEffect(() => {
     getProjects();
-    getScores();
+    getScores("1");
   }, []);
   useEffect(() => {
     const val = startDate.replace("_", "");
@@ -35,9 +35,7 @@ export const LeaderBoardComponent = () => {
 
   const getScores = async (value?: string) => {
     let url = `${process.env.NEXT_PUBLIC_API_URL}/stub/globalScore`;
-    if (value == "last-week") {
-      url += `?filter=${value}`;
-    }
+    url += `?filter=${value}`;
     const response = await fetch(url);
     const data: GlobalScoreDTO[] = await response.json();
     setScores(data);
@@ -56,25 +54,25 @@ export const LeaderBoardComponent = () => {
           placeholder={"Action"}
           options={[
             {
-              value: "today",
-              label: "Today",
+              value: "1",
+              label: "24h",
             },
             {
-              value: "last-week",
-              label: "Last Week",
+              value: "7",
+              label: "7d",
             },
             {
-              value: "last-month",
-              label: "Last Month",
+              value: "30",
+              label: "1m",
             },
             {
-              value: "last-year",
-              label: "Last Year",
+              value: "365",
+              label: "1y",
             },
-            {
-              value: "range",
-              label: "Day Range",
-            },
+            // {
+            //   value: "range",
+            //   label: "Day Range",
+            // },
           ]}
         />
         {filter == "range" && (
