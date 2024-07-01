@@ -15,9 +15,9 @@ export const LeaderBoardComponent = () => {
   const [endDate, setEndDate] = useState("");
 
   const getProjects = async () => {
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/stub/projects`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/stub/projects?limit=100`;
     const response = await fetch(url);
-    const data: Project[] = await response.json();
+    const { data }: { data: Project[] } = await response.json();
     setProjects(data);
   };
   useEffect(() => {
