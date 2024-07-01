@@ -4,7 +4,8 @@ import { getGlobalScoreFiltered, getGlobalScoreFilteredDate } from "~~/services/
 import { GlobalScoreDay } from "~~/services/database/schema";
 
 export interface GlobalScoreDTO {
-  [key: string]: string | number;
+  createdAt: string;
+  globalScore: string;
 }
 
 const getTargetDate = (date: Date, filter: string) => {
@@ -20,14 +21,10 @@ const getTargetDate = (date: Date, filter: string) => {
   return [`${year}${stringMonth}${stringDay}`];
 };
 
-const toDTO = (entity: GlobalScoreDay) => {
-  const projectScores: GlobalScoreDTO = {};
-  entity.projects.forEach(proj => {
-    projectScores[proj.name] = proj.overallScore;
-  });
+const toDTO = (entity: GlobalScoreDay): GlobalScoreDTO => {
   return {
-    date: entity.createdAt,
-    ...projectScores,
+    createdAt: entity.createdAt,
+    globalScore: entity.metrics[0].value,
   };
 };
 
@@ -35,11 +32,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed." });
   }
-  let limit = ["20240110"];
+  let limit = ["20240309"];
   const filter = req.query.filter as string | undefined;
   let querySnapshot: QuerySnapshot | null = null;
   if (!!filter) {
-    limit = getTargetDate(new Date("2024-01-10"), filter);
+    limit = getTargetDate(new Date("2024-03-09"), filter);
   }
 
   querySnapshot =

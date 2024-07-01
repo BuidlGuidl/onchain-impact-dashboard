@@ -8,7 +8,7 @@ import { GlobalScoreDTO } from "~~/pages/api/stub/globalScore";
 import { Project } from "~~/services/database/schema";
 
 export const LeaderBoardComponent = () => {
-  const [scores, setScores] = useState<any[]>([]);
+  const [scores, setScores] = useState<GlobalScoreDTO[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [filter, setFilter] = useState("1");
   const [startDate, setStartDate] = useState("");
@@ -58,7 +58,7 @@ export const LeaderBoardComponent = () => {
   return (
     <main>
       <div className="leaderboard-content lg:flex">
-        <div className="mb-3 border border-gray-300 w-full h-[50vh] rounded-lg p-2 grow min-h-[300px] lg:mr-4 lg:7/12">
+        <div className="mb-3 border border-gray-300 w-full h-[50vh] rounded-lg p-2 grow min-h-[300px] lg:mr-4 lg:7/12 relative">
           <div className="flex flex-col lg:flex-row mb-4">
             <div className="flex  flex-col xl:flex-row items-center bg-base-300 rounded-lg p-2 pr-2 w-full xl:w-auto">
               <div className="flex items-center">
