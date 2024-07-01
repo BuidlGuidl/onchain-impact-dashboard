@@ -8,10 +8,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   const projects = projectsJSON as Project[];
   // check if id param is present
-  const { limit = "10", offset = "0" } = req.query;
+  const { limit = "10", offset = "0", id } = req.query;
   const parseLimit: number = parseInt(limit as string);
   const parsedOffset: number = parseInt(offset as string);
   try {
+    if (!!id) {
+      const project = projects.find(project => project.id === id);
+      if (!project) {
+        return res.status(404).json({ message: "Project not found. Make sure you are URL encoding the id" });
+      }
+      return res.status(200).json({ data: project });
+    }
+
     if (parseLimit && parseLimit > 100) {
       return res.status(500).json({
         code: "custom",
