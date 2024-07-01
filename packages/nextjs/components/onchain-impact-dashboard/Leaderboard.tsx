@@ -29,11 +29,11 @@ const Leaderboard = ({ projects }: { projects: Project[] }) => {
             .filter((it: any) => it.name.toLowerCase().includes(searchValue.toLowerCase()))
             .map((item: Project) => (
               <LeaderboardCollapse
-                isActive={item.attestationUid == selectedProject}
-                setSelectedProject={() => changeSelectedProject(item.attestationUid)}
+                isActive={item.id == selectedProject}
+                setSelectedProject={() => changeSelectedProject(item.id)}
                 shareProject={() => setIsModalOpen(true)}
-                key={item.attestationUid}
-                id={item.attestationUid}
+                key={item.id}
+                id={item.id}
                 project={item}
                 rating={rating}
               ></LeaderboardCollapse>

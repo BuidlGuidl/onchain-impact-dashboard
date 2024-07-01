@@ -77,7 +77,7 @@ To get all:
     http://localhost:3000/api/stub/projects
 ```
 
-To get one by id (attestationUid):
+To get one by id:
 ```
     http://localhost:3000/api/stub/projects?id=1323922809-927310647
 ```

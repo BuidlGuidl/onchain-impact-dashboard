@@ -23,64 +23,45 @@ export interface Projects {
 }
 
 export interface Project {
-  id?: string;
-  avatarUrl: string;
-  coverImageUrl: string;
-  attestationUid: string;
-  approvalAttestationUid: string;
+  id: string;
+  category: string;
   name: string;
   description: string;
-  externalLink: string;
+  profileAvatarUrl: string;
+  proejctCoverImageUrl: string; // Typo intentional (Agora has typo)
   socialLinks: SocialLinks;
-  team: Team[];
-  repositories: string[];
-  deployedContracts: DeployedContract[];
-  categories: Category[];
-  funding: Funding;
+  team: string[];
+  github: string[];
+  packages: any[];
+  contracts: any[];
+  grantsAndFunding: GrantsAndFunding;
 }
 
 export interface SocialLinks {
   twitter: string;
-  farcaster: string;
-  mirror: string;
-  website: string;
+  farcaster: any[];
+  mirror: any;
+  website: string[];
 }
 
-export interface Team {
-  farcasterId: string;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface DeployedContract {}
-
-export interface Category {
-  name: string;
-  description: string;
-}
-
-export interface Funding {
-  ventureCapital: VentureCapital[];
+export interface GrantsAndFunding {
+  ventureFunding: any[];
   grants: Grant[];
-  optimismGrants: OptimismGrant[];
-}
-
-export interface VentureCapital {
-  amount: string;
-  source: string;
-  date: string;
-  details: string;
+  revenue: Revenue[];
 }
 
 export interface Grant {
+  grant: string;
+  link: string;
   amount: string;
-  source: string;
   date: string;
   details: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface OptimismGrant {}
-
+export interface Revenue {
+  amount: string;
+  details: string;
+}
 export interface TotalsByDate {
   totalProjects: number;
   totalOverallScore: number;
