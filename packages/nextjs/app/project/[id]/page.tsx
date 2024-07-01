@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 
 const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects?id=${params.id}`);
-  const data: Project = await response.json();
+  const { data }: { data: Project } = await response.json();
   return (
     <>
       <section className="px-4">
