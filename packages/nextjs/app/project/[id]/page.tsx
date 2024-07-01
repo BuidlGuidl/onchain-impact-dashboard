@@ -8,7 +8,7 @@ export async function generateStaticParams() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects`);
   const data: Project[] = await response.json();
   return data.map(item => ({
-    id: item.attestationUid,
+    id: item.id,
   }));
 }
 
@@ -20,7 +20,7 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
       <section className="px-4">
         <div className="w-full h-[200px] bg-OPlightgray mb-4 rounded-lg"></div>
         <div className="flex w-full justify-between mb-4 items-center">
-          <Image width={54} height={54} className="mr-2" src={data.avatarUrl} alt="Avatar" />
+          <Image width={54} height={54} className="mr-2" src={data.profileAvatarUrl} alt="Avatar" />
           <div className="flex flex-col flex-1 ml-4 justify-center">
             <h1 className="text-lg m-0">#1 {data?.name}</h1>
             <span>{data?.description}</span>

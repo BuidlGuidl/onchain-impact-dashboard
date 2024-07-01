@@ -103,78 +103,47 @@ interface AgoraMetadata {
   nextOffset: number;
 }
 
-interface SocialLinks {
-  twitter: string;
-  farcaster: string;
-  mirror: string;
-  website: string;
-}
-
-interface TeamMember {
-  farcasterId: string;
-}
-
-interface DeployedContract {
-  address: string;
-  chainId: string;
-  deployer: string;
-  creationBlock: string;
-  transactionId: string;
-  verificationProof: string;
-  openSourceObserverSlug: string;
-}
-
-interface Category {
+export interface Project {
+  id: string;
+  category: string;
   name: string;
   description: string;
-}
-
-interface VentureCapitalFunding {
-  amount: string;
-  source: string;
-  date: string;
-  details: string;
-}
-
-interface Grant {
-  amount: string;
-  source: string;
-  date: string;
-  details: string;
-}
-
-interface OptimismGrant {
-  amount: string;
-  source: string;
-  date: string;
-  details: string;
-  link: string;
-  type: string;
-}
-
-interface Funding {
-  ventureCapital: VentureCapitalFunding[];
-  grants: Grant[];
-  optimismGrants: OptimismGrant[];
-}
-
-interface Project {
-  avatarUrl: string;
-  coverImageUrl: string;
-  attestationUid: string;
-  approvalAttestationUid: string;
-  name: string;
-  description: string;
-  externalLink: string;
+  profileAvatarUrl: string;
+  proejctCoverImageUrl: string; // Typo intentional (Agora has typo)
   socialLinks: SocialLinks;
-  team: TeamMember[];
-  repositories: string[];
-  deployedContracts: DeployedContract[];
-  categories: Category[];
-  funding: Funding;
+  team: string[];
+  github: string[];
+  packages: any[];
+  contracts: any[];
+  grantsAndFunding: GrantsAndFunding;
 }
 
+export interface SocialLinks {
+  twitter: string;
+  farcaster: any[];
+  mirror: any;
+  website: string[];
+}
+
+export interface GrantsAndFunding {
+  ventureFunding: any[];
+  grants: Grant[];
+  revenue: Revenue[];
+}
+
+export interface Grant {
+  grant: string;
+  link: string;
+  amount: string;
+  date: string;
+  details: string;
+}
+
+export interface Revenue {
+  amount: string;
+  details: string;
+}
 export interface AgoraApiResponse {
-  metadata: AgoraMetadata;
-  projects: Project[];
+  meta: AgoraMetadata;
+  data: Project[];
 }
