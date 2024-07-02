@@ -1,4 +1,4 @@
-import projectsJSON from "../projects/projects.json";
+import projectsJSON from "../stub/projects/projects.json";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Project } from "~~/services/database/schema";
 
