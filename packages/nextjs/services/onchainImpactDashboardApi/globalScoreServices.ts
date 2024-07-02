@@ -1,7 +1,7 @@
-import { GlobalScoreDTO } from "~~/pages/api/stub/globalScore";
+import { GlobalScoreDTO } from "~~/pages/api/globalScore";
 
 export const GlobalScoreService = () => {
-  const baseURL = `${process.env.NEXT_PUBLIC_API_URL}/stub/globalScore`;
+  const baseURL = `${process.env.NEXT_PUBLIC_API_URL}/globalScore`;
   const getPaginatedGlobalScores = async (filter?: string) => {
     let url = `${baseURL}`;
     url += `?filter=${filter}`;

@@ -4,7 +4,7 @@ import { getGlobalScoreFiltered, getGlobalScoreFilteredDate } from "~~/services/
 import { GlobalScoreDay } from "~~/services/database/schema";
 
 export interface GlobalScoreDTO {
-  createdAt: string;
+  date: string;
   globalScore: string;
 }
 
@@ -23,7 +23,7 @@ const getTargetDate = (date: Date, filter: string) => {
 
 const toDTO = (entity: GlobalScoreDay): GlobalScoreDTO => {
   return {
-    createdAt: entity.createdAt,
+    date: entity.createdAt,
     globalScore: entity.metrics[0].value,
   };
 };

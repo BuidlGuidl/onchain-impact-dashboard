@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Leaderboard from "../Leaderboard";
 import { LeaderBoardGraph } from "../leaderboardGraph/leaderBoardGraph";
 import { DatePicker } from "~~/components/impact-vector/inputs/datePicker";
-import { GlobalScoreDTO } from "~~/pages/api/stub/globalScore";
+import { GlobalScoreDTO } from "~~/pages/api/globalScore";
 import { Project } from "~~/services/database/schema";
 import { GlobalScoreService } from "~~/services/onchainImpactDashboardApi/globalScoreServices";
 import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
