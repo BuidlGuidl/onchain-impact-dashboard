@@ -20,7 +20,7 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ["content.optimism.io", "github.com"],
+    domains: ["content.optimism.io", "github.com", "storage.googleapis.com"],
   },
 };
 

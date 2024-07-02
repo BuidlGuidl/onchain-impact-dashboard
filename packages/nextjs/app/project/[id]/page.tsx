@@ -5,8 +5,8 @@ import CustomButton from "~~/components/onchain-impact-dashboard/CustomButton";
 import { Project } from "~~/services/database/schema";
 
 export async function generateStaticParams() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects`);
-  const data: Project[] = await response.json();
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects?limit=100`);
+  const { data }: { data: Project[] } = await response.json();
   return data.map(item => ({
     id: item.id,
   }));
@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 
 const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects?id=${params.id}`);
-  const data: Project = await response.json();
+  const { data }: { data: Project } = await response.json();
   return (
     <>
       <section className="px-4">
@@ -41,12 +41,12 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
         </main>
         <h2 className="font-semibold mt-8 mb-4">Description</h2>
         <p>{data?.description}</p>
-        {data?.socialLinks.website && (
+        {data?.socialLinks?.website && (
           <>
             <h2 className="font-semibold mt-8 mb-4">Web</h2>
             <div className="flex items-center mb-2">
-              <a href={`${data?.socialLinks.website}`} className="flex items-center" target="_blank" rel="noreferrer">
-                {data?.socialLinks.website}
+              <a href={`${data.socialLinks.website}`} className="flex items-center" target="_blank" rel="noreferrer">
+                {data.socialLinks.website}
                 <Image
                   className="ml-2"
                   src="/assets/svg/icons/linkArrow.svg"
@@ -61,10 +61,10 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
 
         <h2 className="font-semibold mt-8 mb-4">Social Media Links</h2>
         <div className="flex">
-          {data?.socialLinks.farcaster && (
+          {data?.socialLinks?.farcaster && (
             <>
               <div className="flex items-center mb-2">
-                <a href={`${data?.socialLinks.farcaster}`} target="_blank" rel="noreferrer">
+                <a href={`${data.socialLinks.farcaster}`} target="_blank" rel="noreferrer">
                   <Image
                     className="ml-2"
                     src="/assets/svg/icons/farcaster.svg"
@@ -76,10 +76,10 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
               </div>
             </>
           )}
-          {data?.socialLinks.mirror && (
+          {data?.socialLinks?.mirror && (
             <>
               <div className="flex items-center mb-2">
-                <a href={`${data?.socialLinks.mirror}`} target="_blank" rel="noreferrer">
+                <a href={`${data.socialLinks.mirror}`} target="_blank" rel="noreferrer">
                   <Image
                     className="ml-2"
                     src="/assets/svg/icons/twitter.svg"
@@ -91,10 +91,10 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
               </div>
             </>
           )}
-          {data?.socialLinks.twitter && (
+          {data?.socialLinks?.twitter && (
             <>
               <div className="flex items-center mb-2">
-                <a href={`${data?.socialLinks.twitter}`} target="_blank" rel="noreferrer">
+                <a href={`${data.socialLinks.twitter}`} target="_blank" rel="noreferrer">
                   <Image
                     className="ml-2"
                     src="/assets/svg/icons/twitter.svg"
