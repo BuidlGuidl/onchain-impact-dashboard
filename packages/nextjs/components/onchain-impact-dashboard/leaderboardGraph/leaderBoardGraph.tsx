@@ -3,17 +3,20 @@
 import React from "react";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { GlobalScoreDTO } from "~~/pages/api/globalScore";
+import { formatDate } from "~~/utils/onchainImpactDashboard/common";
 
 export const LeaderBoardGraph = ({ scores }: { scores: GlobalScoreDTO[] }) => {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-base-300">
-          <p className="m-1 label">{`Date : ${label}`}</p>
+        <div className="bg-base-300 p-4 rounded-lg shadow">
+          <p className="m-0 p-0 label font-bold">Date</p>
+          <p className="m-0 p-0 label">{formatDate(label)}</p>
           {payload.map((entry: any, index: any) => (
-            <p key={`item-${index}`} className="m-1" style={{ color: entry.color }}>
-              {`${entry.name} : ${entry.value}`}
-            </p>
+            <div key={`item-${index}`} style={{ color: entry.color }}>
+              <p className="m-0 mt-4 p-0 label font-bold">Global Score</p>
+              <p className="m-0 p-0 label">{entry.value}</p>
+            </div>
           ))}
         </div>
       );
