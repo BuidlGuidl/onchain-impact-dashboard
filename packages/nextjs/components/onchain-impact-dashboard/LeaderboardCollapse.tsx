@@ -22,21 +22,22 @@ const LeaderboardCollapse: React.FC<
         <LeaderboardCard project={project} rating={rating}></LeaderboardCard>
       </div>
 
-      <div className="collapse-content">
-        <>
-          <p className="m-0">{description}</p>
-          <div className="flex mt-5">
-            <Link href={`/project/${id}`}>
-              <CustomButton
-                text={"View more"}
-                customClassName="bg-red-600 mr-3 text-white hover:bg-red-500 border-transparent btn-md"
-              />
-            </Link>
-            <CustomButton text={"Share"} customClassName="border border-gray-200" onClick={() => shareProject()}>
-              <ShareIcon />
-            </CustomButton>
-          </div>
-        </>
+      <div className="collapse-content flex flex-col">
+        <div className="lg:max-w-[300px]">
+          <span>{description}</span>
+        </div>
+
+        <div className="flex mt-5">
+          <Link href={`/project/${id}`}>
+            <CustomButton
+              text={"View more"}
+              customClassName="bg-red-600 mr-3 text-white hover:bg-red-500 border-transparent btn-md"
+            />
+          </Link>
+          <CustomButton text={"Share"} customClassName="border border-gray-200" onClick={() => shareProject()}>
+            <ShareIcon />
+          </CustomButton>
+        </div>
       </div>
     </div>
   );

@@ -4,20 +4,22 @@ import React, { useEffect, useState } from "react";
 import Leaderboard from "../Leaderboard";
 import { LeaderBoardGraph } from "../leaderboardGraph/leaderBoardGraph";
 import { DatePicker } from "~~/components/impact-vector/inputs/datePicker";
-import { GlobalScoreDTO } from "~~/pages/api/stub/globalScore";
+import { GlobalScoreDTO } from "~~/pages/api/globalScore";
 import { Project } from "~~/services/database/schema";
+import { GlobalScoreService } from "~~/services/onchainImpactDashboardApi/globalScoreServices";
+import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
 
 export const LeaderBoardComponent = () => {
-  const [scores, setScores] = useState<any[]>([]);
+  const [scores, setScores] = useState<GlobalScoreDTO[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [filter, setFilter] = useState("1");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const { getPaginatedGlobalScores } = GlobalScoreService();
+  const { getPaginatedProjects } = ProjectService();
 
   const getProjects = async () => {
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/stub/projects?limit=100`;
-    const response = await fetch(url);
-    const { data }: { data: Project[] } = await response.json();
+    const data = await getPaginatedProjects();
     setProjects(data);
   };
   useEffect(() => {
@@ -40,10 +42,7 @@ export const LeaderBoardComponent = () => {
   }, [startDate, endDate]);
 
   const getScores = async (value?: string) => {
-    let url = `${process.env.NEXT_PUBLIC_API_URL}/stub/globalScore`;
-    url += `?filter=${value}`;
-    const response = await fetch(url);
-    const data: GlobalScoreDTO[] = await response.json();
+    const data: GlobalScoreDTO[] = await getPaginatedGlobalScores(value);
     setScores(data);
   };
 
@@ -58,7 +57,7 @@ export const LeaderBoardComponent = () => {
   return (
     <main>
       <div className="leaderboard-content lg:flex">
-        <div className="mb-3 border border-gray-300 w-full h-[50vh] rounded-lg p-2 grow min-h-[300px] lg:mr-4 lg:7/12">
+        <div className="mb-3 border border-gray-300 w-full h-[50vh] rounded-lg p-2 grow min-h-[300px] lg:mr-4 lg:7/12 relative">
           <div className="flex flex-col lg:flex-row mb-4">
             <div className="flex  flex-col xl:flex-row items-center bg-base-300 rounded-lg p-2 pr-2 w-full xl:w-auto">
               <div className="flex items-center">

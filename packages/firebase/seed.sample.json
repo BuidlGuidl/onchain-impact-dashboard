@@ -16378,6 +16378,226 @@
               "momentum": 2
             }
           }
+        },
+        {
+          "createdAt": "1719602003467",
+          "isNew": false,
+          "overallScore": 1203,
+          "rank": 1,
+          "rankChange": 1,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": 1,
+          "momentum": 3,
+          "metrics": {
+            "onchain-users": {
+              "score": 1002,
+              "rank": 1,
+              "momentum": 3
+            },
+            "tx-fees": {
+              "score": 102,
+              "rank": 2,
+              "momentum": 3
+            }
+          }
+        },
+        {
+          "createdAt": "1719603003467",
+          "isNew": false,
+          "overallScore": 1204,
+          "rank": 1,
+          "rankChange": 2,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": 2,
+          "momentum": 4,
+          "metrics": {
+            "onchain-users": {
+              "score": 1003,
+              "rank": 1,
+              "momentum": 4
+            },
+            "tx-fees": {
+              "score": 103,
+              "rank": 2,
+              "momentum": 4
+            }
+          }
+        },
+        {
+          "createdAt": "1719604003467",
+          "isNew": false,
+          "overallScore": 1205,
+          "rank": 1,
+          "rankChange": 3,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": 2,
+          "momentum": 5,
+          "metrics": {
+            "onchain-users": {
+              "score": 1004,
+              "rank": 1,
+              "momentum": 5
+            },
+            "tx-fees": {
+              "score": 104,
+              "rank": 2,
+              "momentum": 5
+            }
+          }
+        },
+        {
+          "createdAt": "1719605003467",
+          "isNew": false,
+          "overallScore": 1206,
+          "rank": 1,
+          "rankChange": 4,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": 3,
+          "momentum": 6,
+          "metrics": {
+            "onchain-users": {
+              "score": 1005,
+              "rank": 1,
+              "momentum": 6
+            },
+            "tx-fees": {
+              "score": 105,
+              "rank": 2,
+              "momentum": 6
+            }
+          }
+        },
+        {
+          "createdAt": "1719606003467",
+          "isNew": false,
+          "overallScore": 1207,
+          "rank": 1,
+          "rankChange": 5,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": 3,
+          "momentum": 7,
+          "metrics": {
+            "onchain-users": {
+              "score": 1006,
+              "rank": 1,
+              "momentum": 7
+            },
+            "tx-fees": {
+              "score": 106,
+              "rank": 2,
+              "momentum": 7
+            }
+          }
+        },
+        {
+          "createdAt": "1719607003467",
+          "isNew": false,
+          "overallScore": 1208,
+          "rank": 1,
+          "rankChange": 6,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": 4,
+          "momentum": 8,
+          "metrics": {
+            "onchain-users": {
+              "score": 1007,
+              "rank": 1,
+              "momentum": 8
+            },
+            "tx-fees": {
+              "score": 107,
+              "rank": 2,
+              "momentum": 8
+            }
+          }
+        },
+        {
+          "createdAt": "1719608003467",
+          "isNew": false,
+          "overallScore": 1209,
+          "rank": 1,
+          "rankChange": 7,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": 4,
+          "momentum": 9,
+          "metrics": {
+            "onchain-users": {
+              "score": 1008,
+              "rank": 1,
+              "momentum": 9
+            },
+            "tx-fees": {
+              "score": 108,
+              "rank": 2,
+              "momentum": 9
+            }
+          }
+        },
+        {
+          "createdAt": "1719609003467",
+          "isNew": false,
+          "overallScore": 1210,
+          "rank": 1,
+          "rankChange": 8,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": 5,
+          "momentum": 10,
+          "metrics": {
+            "onchain-users": {
+              "score": 1009,
+              "rank": 1,
+              "momentum": 10
+            },
+            "tx-fees": {
+              "score": 109,
+              "rank": 2,
+              "momentum": 10
+            }
+          }
+        },
+        {
+          "createdAt": "1719610003467",
+          "isNew": false,
+          "overallScore": 1211,
+          "rank": 1,
+          "rankChange": 9,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": 5,
+          "momentum": 11,
+          "metrics": {
+            "onchain-users": {
+              "score": 1010,
+              "rank": 1,
+              "momentum": 11
+            },
+            "tx-fees": {
+              "score": 110,
+              "rank": 2,
+              "momentum": 11
+            }
+          }
+        },
+        {
+          "createdAt": "1719611003467",
+          "isNew": false,
+          "overallScore": 1212,
+          "rank": 1,
+          "rankChange": 10,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": 6,
+          "momentum": 12,
+          "metrics": {
+            "onchain-users": {
+              "score": 1011,
+              "rank": 1,
+              "momentum": 12
+            },
+            "tx-fees": {
+              "score": 111,
+              "rank": 2,
+              "momentum": 12
+            }
+          }
         }
       ]
     },
@@ -16427,1159 +16647,849 @@
               "momentum": 2
             }
           }
+        },
+        {
+          "createdAt": "1719602003467",
+          "isNew": false,
+          "overallScore": 1203,
+          "rank": 2,
+          "rankChange": 1,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": -1,
+          "momentum": 3,
+          "metrics": {
+            "onchain-users": {
+              "score": 1002,
+              "rank": 1,
+              "momentum": 3
+            },
+            "tx-fees": {
+              "score": 102,
+              "rank": 2,
+              "momentum": 3
+            }
+          }
+        },
+        {
+          "createdAt": "1719603003467",
+          "isNew": false,
+          "overallScore": 1204,
+          "rank": 2,
+          "rankChange": 2,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": -1,
+          "momentum": 4,
+          "metrics": {
+            "onchain-users": {
+              "score": 1003,
+              "rank": 1,
+              "momentum": 4
+            },
+            "tx-fees": {
+              "score": 103,
+              "rank": 2,
+              "momentum": 4
+            }
+          }
+        },
+        {
+          "createdAt": "1719604003467",
+          "isNew": false,
+          "overallScore": 1205,
+          "rank": 2,
+          "rankChange": 3,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": -1,
+          "momentum": 5,
+          "metrics": {
+            "onchain-users": {
+              "score": 1004,
+              "rank": 1,
+              "momentum": 5
+            },
+            "tx-fees": {
+              "score": 104,
+              "rank": 2,
+              "momentum": 5
+            }
+          }
+        },
+        {
+          "createdAt": "1719605003467",
+          "isNew": false,
+          "overallScore": 1206,
+          "rank": 2,
+          "rankChange": 4,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": -2,
+          "momentum": 6,
+          "metrics": {
+            "onchain-users": {
+              "score": 1005,
+              "rank": 1,
+              "momentum": 6
+            },
+            "tx-fees": {
+              "score": 105,
+              "rank": 2,
+              "momentum": 6
+            }
+          }
+        },
+        {
+          "createdAt": "1719606003467",
+          "isNew": false,
+          "overallScore": 1207,
+          "rank": 2,
+          "rankChange": 5,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": -2,
+          "momentum": 7,
+          "metrics": {
+            "onchain-users": {
+              "score": 1006,
+              "rank": 1,
+              "momentum": 7
+            },
+            "tx-fees": {
+              "score": 106,
+              "rank": 2,
+              "momentum": 7
+            }
+          }
+        },
+        {
+          "createdAt": "1719607003467",
+          "isNew": false,
+          "overallScore": 1208,
+          "rank": 2,
+          "rankChange": 6,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": -2,
+          "momentum": 8,
+          "metrics": {
+            "onchain-users": {
+              "score": 1007,
+              "rank": 1,
+              "momentum": 8
+            },
+            "tx-fees": {
+              "score": 107,
+              "rank": 2,
+              "momentum": 8
+            }
+          }
+        },
+        {
+          "createdAt": "1719608003467",
+          "isNew": false,
+          "overallScore": 1209,
+          "rank": 2,
+          "rankChange": 7,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": -3,
+          "momentum": 9,
+          "metrics": {
+            "onchain-users": {
+              "score": 1008,
+              "rank": 1,
+              "momentum": 9
+            },
+            "tx-fees": {
+              "score": 108,
+              "rank": 2,
+              "momentum": 9
+            }
+          }
+        },
+        {
+          "createdAt": "1719609003467",
+          "isNew": false,
+          "overallScore": 1210,
+          "rank": 2,
+          "rankChange": 8,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": -3,
+          "momentum": 10,
+          "metrics": {
+            "onchain-users": {
+              "score": 1009,
+              "rank": 1,
+              "momentum": 10
+            },
+            "tx-fees": {
+              "score": 109,
+              "rank": 2,
+              "momentum": 10
+            }
+          }
+        },
+        {
+          "createdAt": "1719610003467",
+          "isNew": false,
+          "overallScore": 1211,
+          "rank": 2,
+          "rankChange": 9,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": -4,
+          "momentum": 11,
+          "metrics": {
+            "onchain-users": {
+              "score": 1010,
+              "rank": 1,
+              "momentum": 11
+            },
+            "tx-fees": {
+              "score": 110,
+              "rank": 2,
+              "momentum": 11
+            }
+          }
+        },
+        {
+          "createdAt": "1719611003467",
+          "isNew": false,
+          "overallScore": 1212,
+          "rank": 2,
+          "rankChange": 10,
+          "rankChangeWeek": 1,
+          "rankChangeMonth": -4,
+          "momentum": 12,
+          "metrics": {
+            "onchain-users": {
+              "score": 1011,
+              "rank": 1,
+              "momentum": 12
+            },
+            "tx-fees": {
+              "score": 111,
+              "rank": 2,
+              "momentum": 12
+            }
+          }
         }
       ]
     }
   },
-
   "globalScore": {
     "20240101": {
       "createdAt": "20240101",
-      "projects": [
+      "metrics": [
         {
-          "id": "1323922809-927310647",
-          "name": "Ripae",
-          "isNew": false,
-          "overallScore": 1198,
-          "rank": 1,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 2
-        },
-        {
-          "id": "1830062170-764420871",
-          "name": "Backed",
-          "isNew": false,
-          "overallScore": 1145,
-          "rank": 2,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": -1,
-          "momentum": 2
-        },
-        {
-          "id": "4083351987-1702033703",
-          "name": "The Open X Project",
-          "isNew": false,
-          "overallScore": 1105,
-          "rank": 3,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 1
-        },
-        {
-          "id": "1691762837-4112324243",
-          "name": "Hats Protocol",
-          "isNew": false,
-          "overallScore": 980,
-          "rank": 4,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 2,
-          "momentum": 3
-        },
-        {
-          "id": "1926238170-1753155417",
-          "name": "Chainlink",
-          "isNew": false,
-          "overallScore": 950,
-          "rank": 5,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -2,
-          "momentum": 0
-        },
-        {
-          "id": "2140263693-2552031960",
-          "name": "HypoDrop",
-          "isNew": false,
-          "overallScore": 800,
-          "rank": 6,
-          "rankChange": 0,
-          "rankChangeWeek": 2,
-          "rankChangeMonth": 3,
-          "momentum": 4
-        },
-        {
-          "id": "1628309276-1842083236",
-          "name": "Hundred Finance",
-          "isNew": false,
-          "overallScore": 750,
-          "rank": 7,
-          "rankChange": 0,
-          "rankChangeWeek": -2,
-          "rankChangeMonth": -3,
-          "momentum": -1
-        },
-        {
-          "id": "1491021053-436793384",
-          "name": "Sound.xyz",
-          "isNew": false,
-          "overallScore": 600,
-          "rank": 8,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 0,
-          "momentum": 0
-        },
-        {
-          "id": "1260582434-366280841",
-          "name": "Iron Bank",
-          "isNew": false,
-          "overallScore": 450,
-          "rank": 9,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 1,
-          "momentum": 1
-        },
-        {
-          "id": "3600529157-1817686693",
-          "name": "Polynomial Protocol",
-          "isNew": false,
-          "overallScore": 350,
-          "rank": 10,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -1,
-          "momentum": 0
+          "name": "globalScore",
+          "value": "101"
         }
       ]
     },
     "20240102": {
       "createdAt": "20240102",
-      "projects": [
+      "metrics": [
         {
-          "id": "1323922809-927310647",
-          "name": "Ripae",
-          "isNew": false,
-          "overallScore": 1200,
-          "rank": 1,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 3
-        },
-        {
-          "id": "1830062170-764420871",
-          "name": "Backed",
-          "isNew": false,
-          "overallScore": 1130,
-          "rank": 2,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": -1,
-          "momentum": 1
-        },
-        {
-          "id": "4083351987-1702033703",
-          "name": "The Open X Project",
-          "isNew": false,
-          "overallScore": 1098,
-          "rank": 3,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 2
-        },
-        {
-          "id": "1691762837-4112324243",
-          "name": "Hats Protocol",
-          "isNew": false,
-          "overallScore": 970,
-          "rank": 4,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 2,
-          "momentum": 2
-        },
-        {
-          "id": "1926238170-1753155417",
-          "name": "Chainlink",
-          "isNew": false,
-          "overallScore": 940,
-          "rank": 5,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -2,
-          "momentum": 2
-        },
-        {
-          "id": "2140263693-2552031960",
-          "name": "HypoDrop",
-          "isNew": false,
-          "overallScore": 790,
-          "rank": 6,
-          "rankChange": 0,
-          "rankChangeWeek": 2,
-          "rankChangeMonth": 3,
-          "momentum": 2
-        },
-        {
-          "id": "1628309276-1842083236",
-          "name": "Hundred Finance",
-          "isNew": false,
-          "overallScore": 740,
-          "rank": 7,
-          "rankChange": 0,
-          "rankChangeWeek": -2,
-          "rankChangeMonth": -3,
-          "momentum": 1
-        },
-        {
-          "id": "1491021053-436793384",
-          "name": "Sound.xyz",
-          "isNew": false,
-          "overallScore": 590,
-          "rank": 8,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 0,
-          "momentum": 1
-        },
-        {
-          "id": "1260582434-366280841",
-          "name": "Iron Bank",
-          "isNew": false,
-          "overallScore": 460,
-          "rank": 9,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 1,
-          "momentum": 2
-        },
-        {
-          "id": "3600529157-1817686693",
-          "name": "Polynomial Protocol",
-          "isNew": false,
-          "overallScore": 340,
-          "rank": 10,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -1,
-          "momentum": -1
+          "name": "globalScore",
+          "value": "102"
         }
       ]
     },
     "20240103": {
       "createdAt": "20240103",
-      "projects": [
+      "metrics": [
         {
-          "id": "1323922809-927310647",
-          "name": "Ripae",
-          "isNew": false,
-          "overallScore": 1195,
-          "rank": 1,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 4
-        },
-        {
-          "id": "1830062170-764420871",
-          "name": "Backed",
-          "isNew": false,
-          "overallScore": 1120,
-          "rank": 2,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": -1,
-          "momentum": 0
-        },
-        {
-          "id": "4083351987-1702033703",
-          "name": "The Open X Project",
-          "isNew": false,
-          "overallScore": 1100,
-          "rank": 3,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 3
-        },
-        {
-          "id": "1691762837-4112324243",
-          "name": "Hats Protocol",
-          "isNew": false,
-          "overallScore": 960,
-          "rank": 4,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 2,
-          "momentum": 1
-        },
-        {
-          "id": "1926238170-1753155417",
-          "name": "Chainlink",
-          "isNew": false,
-          "overallScore": 930,
-          "rank": 5,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -2,
-          "momentum": 3
-        },
-        {
-          "id": "2140263693-2552031960",
-          "name": "HypoDrop",
-          "isNew": false,
-          "overallScore": 780,
-          "rank": 6,
-          "rankChange": 0,
-          "rankChangeWeek": 2,
-          "rankChangeMonth": 3,
-          "momentum": 3
-        },
-        {
-          "id": "1628309276-1842083236",
-          "name": "Hundred Finance",
-          "isNew": false,
-          "overallScore": 730,
-          "rank": 7,
-          "rankChange": 0,
-          "rankChangeWeek": -2,
-          "rankChangeMonth": -3,
-          "momentum": 2
-        },
-        {
-          "id": "1491021053-436793384",
-          "name": "Sound.xyz",
-          "isNew": false,
-          "overallScore": 580,
-          "rank": 8,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 0,
-          "momentum": 2
-        },
-        {
-          "id": "1260582434-366280841",
-          "name": "Iron Bank",
-          "isNew": false,
-          "overallScore": 470,
-          "rank": 9,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 1,
-          "momentum": 3
-        },
-        {
-          "id": "3600529157-1817686693",
-          "name": "Polynomial Protocol",
-          "isNew": false,
-          "overallScore": 330,
-          "rank": 10,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -1,
-          "momentum": 0
+          "name": "globalScore",
+          "value": "102"
         }
       ]
     },
     "20240104": {
       "createdAt": "20240104",
-      "projects": [
+      "metrics": [
         {
-          "id": "1323922809-927310647",
-          "name": "Ripae",
-          "isNew": false,
-          "overallScore": 1193,
-          "rank": 1,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 5
-        },
-        {
-          "id": "1830062170-764420871",
-          "name": "Backed",
-          "isNew": false,
-          "overallScore": 1115,
-          "rank": 2,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": -1,
-          "momentum": -1
-        },
-        {
-          "id": "4083351987-1702033703",
-          "name": "The Open X Project",
-          "isNew": false,
-          "overallScore": 1095,
-          "rank": 3,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 4
-        },
-        {
-          "id": "1691762837-4112324243",
-          "name": "Hats Protocol",
-          "isNew": false,
-          "overallScore": 950,
-          "rank": 4,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 2,
-          "momentum": 0
-        },
-        {
-          "id": "1926238170-1753155417",
-          "name": "Chainlink",
-          "isNew": false,
-          "overallScore": 920,
-          "rank": 5,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -2,
-          "momentum": 4
-        },
-        {
-          "id": "2140263693-2552031960",
-          "name": "HypoDrop",
-          "isNew": false,
-          "overallScore": 770,
-          "rank": 6,
-          "rankChange": 0,
-          "rankChangeWeek": 2,
-          "rankChangeMonth": 3,
-          "momentum": 1
-        },
-        {
-          "id": "1628309276-1842083236",
-          "name": "Hundred Finance",
-          "isNew": false,
-          "overallScore": 720,
-          "rank": 7,
-          "rankChange": 0,
-          "rankChangeWeek": -2,
-          "rankChangeMonth": -3,
-          "momentum": 3
-        },
-        {
-          "id": "1491021053-436793384",
-          "name": "Sound.xyz",
-          "isNew": false,
-          "overallScore": 570,
-          "rank": 8,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 0,
-          "momentum": 3
-        },
-        {
-          "id": "1260582434-366280841",
-          "name": "Iron Bank",
-          "isNew": false,
-          "overallScore": 480,
-          "rank": 9,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 1,
-          "momentum": 4
-        },
-        {
-          "id": "3600529157-1817686693",
-          "name": "Polynomial Protocol",
-          "isNew": false,
-          "overallScore": 320,
-          "rank": 10,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -1,
-          "momentum": 1
+          "name": "globalScore",
+          "value": "120"
         }
       ]
     },
     "20240105": {
       "createdAt": "20240105",
-      "projects": [
+      "metrics": [
         {
-          "id": "1323922809-927310647",
-          "name": "Ripae",
-          "isNew": false,
-          "overallScore": 1190,
-          "rank": 1,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 6
-        },
-        {
-          "id": "1830062170-764420871",
-          "name": "Backed",
-          "isNew": false,
-          "overallScore": 1105,
-          "rank": 2,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": -1,
-          "momentum": -2
-        },
-        {
-          "id": "4083351987-1702033703",
-          "name": "The Open X Project",
-          "isNew": false,
-          "overallScore": 1090,
-          "rank": 3,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 5
-        },
-        {
-          "id": "1691762837-4112324243",
-          "name": "Hats Protocol",
-          "isNew": false,
-          "overallScore": 940,
-          "rank": 4,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 2,
-          "momentum": -1
-        },
-        {
-          "id": "1926238170-1753155417",
-          "name": "Chainlink",
-          "isNew": false,
-          "overallScore": 910,
-          "rank": 5,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -2,
-          "momentum": 5
-        },
-        {
-          "id": "2140263693-2552031960",
-          "name": "HypoDrop",
-          "isNew": false,
-          "overallScore": 760,
-          "rank": 6,
-          "rankChange": 0,
-          "rankChangeWeek": 2,
-          "rankChangeMonth": 3,
-          "momentum": 0
-        },
-        {
-          "id": "1628309276-1842083236",
-          "name": "Hundred Finance",
-          "isNew": false,
-          "overallScore": 710,
-          "rank": 7,
-          "rankChange": 0,
-          "rankChangeWeek": -2,
-          "rankChangeMonth": -3,
-          "momentum": 4
-        },
-        {
-          "id": "1491021053-436793384",
-          "name": "Sound.xyz",
-          "isNew": false,
-          "overallScore": 560,
-          "rank": 8,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 0,
-          "momentum": 4
-        },
-        {
-          "id": "1260582434-366280841",
-          "name": "Iron Bank",
-          "isNew": false,
-          "overallScore": 490,
-          "rank": 9,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 1,
-          "momentum": 5
-        },
-        {
-          "id": "3600529157-1817686693",
-          "name": "Polynomial Protocol",
-          "isNew": false,
-          "overallScore": 310,
-          "rank": 10,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -1,
-          "momentum": 2
+          "name": "globalScore",
+          "value": "200"
         }
       ]
     },
     "20240106": {
       "createdAt": "20240106",
-      "projects": [
+      "metrics": [
         {
-          "id": "1323922809-927310647",
-          "name": "Ripae",
-          "isNew": false,
-          "overallScore": 1185,
-          "rank": 1,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 7
-        },
-        {
-          "id": "1830062170-764420871",
-          "name": "Backed",
-          "isNew": false,
-          "overallScore": 1095,
-          "rank": 2,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": -1,
-          "momentum": -3
-        },
-        {
-          "id": "4083351987-1702033703",
-          "name": "The Open X Project",
-          "isNew": false,
-          "overallScore": 1085,
-          "rank": 3,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 6
-        },
-        {
-          "id": "1691762837-4112324243",
-          "name": "Hats Protocol",
-          "isNew": false,
-          "overallScore": 930,
-          "rank": 4,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 2,
-          "momentum": -2
-        },
-        {
-          "id": "1926238170-1753155417",
-          "name": "Chainlink",
-          "isNew": false,
-          "overallScore": 900,
-          "rank": 5,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -2,
-          "momentum": 6
-        },
-        {
-          "id": "2140263693-2552031960",
-          "name": "HypoDrop",
-          "isNew": false,
-          "overallScore": 750,
-          "rank": 6,
-          "rankChange": 0,
-          "rankChangeWeek": 2,
-          "rankChangeMonth": 3,
-          "momentum": -1
-        },
-        {
-          "id": "1628309276-1842083236",
-          "name": "Hundred Finance",
-          "isNew": false,
-          "overallScore": 700,
-          "rank": 7,
-          "rankChange": 0,
-          "rankChangeWeek": -2,
-          "rankChangeMonth": -3,
-          "momentum": 5
-        },
-        {
-          "id": "1491021053-436793384",
-          "name": "Sound.xyz",
-          "isNew": false,
-          "overallScore": 550,
-          "rank": 8,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 0,
-          "momentum": 5
-        },
-        {
-          "id": "1260582434-366280841",
-          "name": "Iron Bank",
-          "isNew": false,
-          "overallScore": 500,
-          "rank": 9,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 1,
-          "momentum": 6
-        },
-        {
-          "id": "3600529157-1817686693",
-          "name": "Polynomial Protocol",
-          "isNew": false,
-          "overallScore": 300,
-          "rank": 10,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -1,
-          "momentum": 3
+          "name": "globalScore",
+          "value": "200"
         }
       ]
     },
     "20240107": {
       "createdAt": "20240107",
-      "projects": [
+      "metrics": [
         {
-          "id": "1323922809-927310647",
-          "name": "Ripae",
-          "isNew": false,
-          "overallScore": 1180,
-          "rank": 1,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 8
-        },
-        {
-          "id": "1830062170-764420871",
-          "name": "Backed",
-          "isNew": false,
-          "overallScore": 1085,
-          "rank": 2,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": -1,
-          "momentum": -4
-        },
-        {
-          "id": "4083351987-1702033703",
-          "name": "The Open X Project",
-          "isNew": false,
-          "overallScore": 1080,
-          "rank": 3,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 7
-        },
-        {
-          "id": "1691762837-4112324243",
-          "name": "Hats Protocol",
-          "isNew": false,
-          "overallScore": 920,
-          "rank": 4,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 2,
-          "momentum": -3
-        },
-        {
-          "id": "1926238170-1753155417",
-          "name": "Chainlink",
-          "isNew": false,
-          "overallScore": 890,
-          "rank": 5,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -2,
-          "momentum": 7
-        },
-        {
-          "id": "2140263693-2552031960",
-          "name": "HypoDrop",
-          "isNew": false,
-          "overallScore": 740,
-          "rank": 6,
-          "rankChange": 0,
-          "rankChangeWeek": 2,
-          "rankChangeMonth": 3,
-          "momentum": -2
-        },
-        {
-          "id": "1628309276-1842083236",
-          "name": "Hundred Finance",
-          "isNew": false,
-          "overallScore": 690,
-          "rank": 7,
-          "rankChange": 0,
-          "rankChangeWeek": -2,
-          "rankChangeMonth": -3,
-          "momentum": 6
-        },
-        {
-          "id": "1491021053-436793384",
-          "name": "Sound.xyz",
-          "isNew": false,
-          "overallScore": 540,
-          "rank": 8,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 0,
-          "momentum": 6
-        },
-        {
-          "id": "1260582434-366280841",
-          "name": "Iron Bank",
-          "isNew": false,
-          "overallScore": 510,
-          "rank": 9,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 1,
-          "momentum": 7
-        },
-        {
-          "id": "3600529157-1817686693",
-          "name": "Polynomial Protocol",
-          "isNew": false,
-          "overallScore": 290,
-          "rank": 10,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -1,
-          "momentum": 4
+          "name": "globalScore",
+          "value": "200"
         }
       ]
     },
     "20240108": {
       "createdAt": "20240108",
-      "projects": [
+      "metrics": [
         {
-          "id": "1323922809-927310647",
-          "name": "Ripae",
-          "isNew": false,
-          "overallScore": 1175,
-          "rank": 1,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 9
-        },
-        {
-          "id": "1830062170-764420871",
-          "name": "Backed",
-          "isNew": false,
-          "overallScore": 1075,
-          "rank": 2,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": -1,
-          "momentum": -5
-        },
-        {
-          "id": "4083351987-1702033703",
-          "name": "The Open X Project",
-          "isNew": false,
-          "overallScore": 1075,
-          "rank": 3,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 8
-        },
-        {
-          "id": "1691762837-4112324243",
-          "name": "Hats Protocol",
-          "isNew": false,
-          "overallScore": 910,
-          "rank": 4,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 2,
-          "momentum": -4
-        },
-        {
-          "id": "1926238170-1753155417",
-          "name": "Chainlink",
-          "isNew": false,
-          "overallScore": 880,
-          "rank": 5,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -2,
-          "momentum": 8
-        },
-        {
-          "id": "2140263693-2552031960",
-          "name": "HypoDrop",
-          "isNew": false,
-          "overallScore": 730,
-          "rank": 6,
-          "rankChange": 0,
-          "rankChangeWeek": 2,
-          "rankChangeMonth": 3,
-          "momentum": -3
-        },
-        {
-          "id": "1628309276-1842083236",
-          "name": "Hundred Finance",
-          "isNew": false,
-          "overallScore": 680,
-          "rank": 7,
-          "rankChange": 0,
-          "rankChangeWeek": -2,
-          "rankChangeMonth": -3,
-          "momentum": 7
-        },
-        {
-          "id": "1491021053-436793384",
-          "name": "Sound.xyz",
-          "isNew": false,
-          "overallScore": 530,
-          "rank": 8,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 0,
-          "momentum": 7
-        },
-        {
-          "id": "1260582434-366280841",
-          "name": "Iron Bank",
-          "isNew": false,
-          "overallScore": 520,
-          "rank": 9,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 1,
-          "momentum": 8
-        },
-        {
-          "id": "3600529157-1817686693",
-          "name": "Polynomial Protocol",
-          "isNew": false,
-          "overallScore": 280,
-          "rank": 10,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -1,
-          "momentum": 5
+          "name": "globalScore",
+          "value": "220"
         }
       ]
     },
     "20240109": {
       "createdAt": "20240109",
-      "projects": [
+      "metrics": [
         {
-          "id": "1323922809-927310647",
-          "name": "Ripae",
-          "isNew": false,
-          "overallScore": 1170,
-          "rank": 1,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 10
-        },
-        {
-          "id": "1830062170-764420871",
-          "name": "Backed",
-          "isNew": false,
-          "overallScore": 1065,
-          "rank": 2,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": -1,
-          "momentum": -6
-        },
-        {
-          "id": "4083351987-1702033703",
-          "name": "The Open X Project",
-          "isNew": false,
-          "overallScore": 1070,
-          "rank": 3,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 9
-        },
-        {
-          "id": "1691762837-4112324243",
-          "name": "Hats Protocol",
-          "isNew": false,
-          "overallScore": 900,
-          "rank": 4,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 2,
-          "momentum": -5
-        },
-        {
-          "id": "1926238170-1753155417",
-          "name": "Chainlink",
-          "isNew": false,
-          "overallScore": 870,
-          "rank": 5,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -2,
-          "momentum": 9
-        },
-        {
-          "id": "2140263693-2552031960",
-          "name": "HypoDrop",
-          "isNew": false,
-          "overallScore": 720,
-          "rank": 6,
-          "rankChange": 0,
-          "rankChangeWeek": 2,
-          "rankChangeMonth": 3,
-          "momentum": -4
-        },
-        {
-          "id": "1628309276-1842083236",
-          "name": "Hundred Finance",
-          "isNew": false,
-          "overallScore": 670,
-          "rank": 7,
-          "rankChange": 0,
-          "rankChangeWeek": -2,
-          "rankChangeMonth": -3,
-          "momentum": 8
-        },
-        {
-          "id": "1491021053-436793384",
-          "name": "Sound.xyz",
-          "isNew": false,
-          "overallScore": 520,
-          "rank": 8,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 0,
-          "momentum": 8
-        },
-        {
-          "id": "1260582434-366280841",
-          "name": "Iron Bank",
-          "isNew": false,
-          "overallScore": 530,
-          "rank": 9,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 1,
-          "momentum": 9
-        },
-        {
-          "id": "3600529157-1817686693",
-          "name": "Polynomial Protocol",
-          "isNew": false,
-          "overallScore": 270,
-          "rank": 10,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -1,
-          "momentum": 6
+          "name": "globalScore",
+          "value": "220"
         }
       ]
     },
     "20240110": {
       "createdAt": "20240110",
-      "projects": [
+      "metrics": [
         {
-          "id": "1323922809-927310647",
-          "name": "Ripae",
-          "isNew": false,
-          "overallScore": 1165,
-          "rank": 1,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 11
-        },
+          "name": "globalScore",
+          "value": "220"
+        }
+      ]
+    },
+    "20240111": {
+      "createdAt": "20240111",
+      "metrics": [
         {
-          "id": "1830062170-764420871",
-          "name": "Backed",
-          "isNew": false,
-          "overallScore": 1055,
-          "rank": 2,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": -1,
-          "momentum": -7
-        },
+          "name": "globalScore",
+          "value": "222"
+        }
+      ]
+    },
+    "20240112": {
+      "createdAt": "20240112",
+      "metrics": [
         {
-          "id": "4083351987-1702033703",
-          "name": "The Open X Project",
-          "isNew": false,
-          "overallScore": 1065,
-          "rank": 3,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 1,
-          "momentum": 10
-        },
+          "name": "globalScore",
+          "value": "226"
+        }
+      ]
+    },
+    "20240113": {
+      "createdAt": "20240113",
+      "metrics": [
         {
-          "id": "1691762837-4112324243",
-          "name": "Hats Protocol",
-          "isNew": false,
-          "overallScore": 890,
-          "rank": 4,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 2,
-          "momentum": -6
-        },
+          "name": "globalScore",
+          "value": "226"
+        }
+      ]
+    },
+    "20240114": {
+      "createdAt": "20240114",
+      "metrics": [
         {
-          "id": "1926238170-1753155417",
-          "name": "Chainlink",
-          "isNew": false,
-          "overallScore": 860,
-          "rank": 5,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -2,
-          "momentum": 10
-        },
+          "name": "globalScore",
+          "value": "226"
+        }
+      ]
+    },
+    "20240115": {
+      "createdAt": "20240115",
+      "metrics": [
         {
-          "id": "2140263693-2552031960",
-          "name": "HypoDrop",
-          "isNew": false,
-          "overallScore": 710,
-          "rank": 6,
-          "rankChange": 0,
-          "rankChangeWeek": 2,
-          "rankChangeMonth": 3,
-          "momentum": -5
-        },
+          "name": "globalScore",
+          "value": "226"
+        }
+      ]
+    },
+    "20240116": {
+      "createdAt": "20240116",
+      "metrics": [
         {
-          "id": "1628309276-1842083236",
-          "name": "Hundred Finance",
-          "isNew": false,
-          "overallScore": 660,
-          "rank": 7,
-          "rankChange": 0,
-          "rankChangeWeek": -2,
-          "rankChangeMonth": -3,
-          "momentum": 9
-        },
+          "name": "globalScore",
+          "value": "226"
+        }
+      ]
+    },
+    "20240117": {
+      "createdAt": "20240117",
+      "metrics": [
         {
-          "id": "1491021053-436793384",
-          "name": "Sound.xyz",
-          "isNew": false,
-          "overallScore": 510,
-          "rank": 8,
-          "rankChange": 0,
-          "rankChangeWeek": 0,
-          "rankChangeMonth": 0,
-          "momentum": 9
-        },
+          "name": "globalScore",
+          "value": "226"
+        }
+      ]
+    },
+    "20240118": {
+      "createdAt": "20240118",
+      "metrics": [
         {
-          "id": "1260582434-366280841",
-          "name": "Iron Bank",
-          "isNew": false,
-          "overallScore": 540,
-          "rank": 9,
-          "rankChange": 0,
-          "rankChangeWeek": 1,
-          "rankChangeMonth": 1,
-          "momentum": 10
-        },
+          "name": "globalScore",
+          "value": "230"
+        }
+      ]
+    },
+    "20240119": {
+      "createdAt": "20240119",
+      "metrics": [
         {
-          "id": "3600529157-1817686693",
-          "name": "Polynomial Protocol",
-          "isNew": false,
-          "overallScore": 260,
-          "rank": 10,
-          "rankChange": 0,
-          "rankChangeWeek": -1,
-          "rankChangeMonth": -1,
-          "momentum": 7
+          "name": "globalScore",
+          "value": "233"
+        }
+      ]
+    },
+    "20240120": {
+      "createdAt": "20240120",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "233"
+        }
+      ]
+    },
+    "20240121": {
+      "createdAt": "20240121",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "210"
+        }
+      ]
+    },
+    "20240122": {
+      "createdAt": "20240122",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "414"
+        }
+      ]
+    },
+    "20240123": {
+      "createdAt": "20240123",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "415"
+        }
+      ]
+    },
+    "20240124": {
+      "createdAt": "20240124",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "415"
+        }
+      ]
+    },
+    "20240125": {
+      "createdAt": "20240125",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "416"
+        }
+      ]
+    },
+    "20240126": {
+      "createdAt": "20240126",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "417"
+        }
+      ]
+    },
+    "20240127": {
+      "createdAt": "20240127",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "418"
+        }
+      ]
+    },
+    "20240128": {
+      "createdAt": "20240128",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "418"
+        }
+      ]
+    },
+    "20240129": {
+      "createdAt": "20240129",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "420"
+        }
+      ]
+    },
+    "20240130": {
+      "createdAt": "20240130",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "425"
+        }
+      ]
+    },
+    "20240131": {
+      "createdAt": "20240131",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "426"
+        }
+      ]
+    },
+    "20240201": {
+      "createdAt": "20240201",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "426"
+        }
+      ]
+    },
+    "20240202": {
+      "createdAt": "20240202",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "428"
+        }
+      ]
+    },
+    "20240203": {
+      "createdAt": "20240203",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "428"
+        }
+      ]
+    },
+    "20240204": {
+      "createdAt": "20240204",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "428"
+        }
+      ]
+    },
+    "20240205": {
+      "createdAt": "20240205",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "428"
+        }
+      ]
+    },
+    "20240206": {
+      "createdAt": "20240206",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "450"
+        }
+      ]
+    },
+    "20240207": {
+      "createdAt": "20240207",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "450"
+        }
+      ]
+    },
+    "20240208": {
+      "createdAt": "20240208",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "454"
+        }
+      ]
+    },
+    "20240209": {
+      "createdAt": "20240209",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "454"
+        }
+      ]
+    },
+    "20240210": {
+      "createdAt": "20240210",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "455"
+        }
+      ]
+    },
+    "20240211": {
+      "createdAt": "20240211",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "456"
+        }
+      ]
+    },
+    "20240212": {
+      "createdAt": "20240212",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "457"
+        }
+      ]
+    },
+    "20240213": {
+      "createdAt": "20240213",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "458"
+        }
+      ]
+    },
+    "20240214": {
+      "createdAt": "20240214",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "458"
+        }
+      ]
+    },
+    "20240215": {
+      "createdAt": "20240215",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "460"
+        }
+      ]
+    },
+    "20240216": {
+      "createdAt": "20240216",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "460"
+        }
+      ]
+    },
+    "20240217": {
+      "createdAt": "20240217",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "460"
+        }
+      ]
+    },
+    "20240218": {
+      "createdAt": "20240218",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "462"
+        }
+      ]
+    },
+    "20240219": {
+      "createdAt": "20240219",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "462"
+        }
+      ]
+    },
+    "20240220": {
+      "createdAt": "20240220",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "464"
+        }
+      ]
+    },
+    "20240221": {
+      "createdAt": "20240221",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "466"
+        }
+      ]
+    },
+    "20240222": {
+      "createdAt": "20240222",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "466"
+        }
+      ]
+    },
+    "20240223": {
+      "createdAt": "20240223",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "468"
+        }
+      ]
+    },
+    "20240224": {
+      "createdAt": "20240224",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "468"
+        }
+      ]
+    },
+    "20240225": {
+      "createdAt": "20240225",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "468"
+        }
+      ]
+    },
+    "20240226": {
+      "createdAt": "20240226",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "470"
+        }
+      ]
+    },
+    "20240227": {
+      "createdAt": "20240227",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "470"
+        }
+      ]
+    },
+    "20240228": {
+      "createdAt": "20240228",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "500"
+        }
+      ]
+    },
+    "20240229": {
+      "createdAt": "20240229",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "540"
+        }
+      ]
+    },
+    "20240301": {
+      "createdAt": "20240301",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "578"
+        }
+      ]
+    },
+    "20240302": {
+      "createdAt": "20240302",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "600"
+        }
+      ]
+    },
+    "20240303": {
+      "createdAt": "20240303",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "620"
+        }
+      ]
+    },
+    "20240304": {
+      "createdAt": "20240304",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "625"
+        }
+      ]
+    },
+    "20240305": {
+      "createdAt": "20240305",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "630"
+        }
+      ]
+    },
+    "20240306": {
+      "createdAt": "20240306",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "631"
+        }
+      ]
+    },
+    "20240307": {
+      "createdAt": "20240307",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "632"
+        }
+      ]
+    },
+    "20240308": {
+      "createdAt": "20240308",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "680"
+        }
+      ]
+    },
+    "20240309": {
+      "createdAt": "20240309",
+      "metrics": [
+        {
+          "name": "globalScore",
+          "value": "800"
         }
       ]
     }

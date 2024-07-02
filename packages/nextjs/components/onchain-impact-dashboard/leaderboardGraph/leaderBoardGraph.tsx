@@ -1,12 +1,10 @@
 "use client";
 
 import React from "react";
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
-import { GlobalScoreDTO } from "~~/pages/api/stub/globalScore";
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { GlobalScoreDTO } from "~~/pages/api/globalScore";
 
 export const LeaderBoardGraph = ({ scores }: { scores: GlobalScoreDTO[] }) => {
-  const keys = scores.length > 0 ? Object.keys(scores[0]) : [];
-
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -24,24 +22,13 @@ export const LeaderBoardGraph = ({ scores }: { scores: GlobalScoreDTO[] }) => {
   };
 
   return (
-    <ResponsiveContainer width="100%" height={"100%"}>
-      <LineChart data={scores} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-        {keys.map((key, i) => {
-          if (key == "date") {
-            return <></>;
-          }
-          return (
-            <Line
-              key={i}
-              type="monotone"
-              dataKey={key}
-              stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
-            />
-          );
-        })}
-        <XAxis hide={true} dataKey="date" />
+    <ResponsiveContainer width="100%" className={"absolute top-14"}>
+      <AreaChart data={scores} margin={{ top: 20, right: -16, bottom: 40, left: 0 }}>
+        <Area type="monotone" dataKey="globalScore" stroke="#ef4444" fill="#ef444485" />
+        <XAxis tick={false} fontSize={10} hide={false} dataKey="date" />
+        <YAxis fontSize={10} type={"category"} hide={false} orientation="right" />
         <Tooltip content={<CustomTooltip />} />
-      </LineChart>
+      </AreaChart>
     </ResponsiveContainer>
   );
 };

@@ -3,19 +3,12 @@ export interface GlobalScores {
 }
 export interface GlobalScoreDay {
   createdAt: string;
-  projects: GlobalScoreRecord[];
+  metrics: GlobalScoreRecord[];
 }
 
 export interface GlobalScoreRecord {
-  id: string;
   name: string;
-  isNew: boolean;
-  overallScore: number;
-  rank: number;
-  rankChange: number;
-  rankChangeWeek: number;
-  rankChangeMonth: number;
-  momentum: number;
+  value: string;
 }
 
 export interface Projects {
