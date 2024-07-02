@@ -6,6 +6,8 @@ import { LeaderBoardGraph } from "../leaderboardGraph/leaderBoardGraph";
 import { DatePicker } from "~~/components/impact-vector/inputs/datePicker";
 import { GlobalScoreDTO } from "~~/pages/api/stub/globalScore";
 import { Project } from "~~/services/database/schema";
+import { GlobalScoreService } from "~~/services/onchainImpactDashboardApi/globalScoreServices";
+import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
 
 export const LeaderBoardComponent = () => {
   const [scores, setScores] = useState<GlobalScoreDTO[]>([]);
@@ -13,11 +15,11 @@ export const LeaderBoardComponent = () => {
   const [filter, setFilter] = useState("1");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const { getPaginatedGlobalScores } = GlobalScoreService();
+  const { getPaginatedProjects } = ProjectService();
 
   const getProjects = async () => {
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/stub/projects?limit=100`;
-    const response = await fetch(url);
-    const { data }: { data: Project[] } = await response.json();
+    const data = await getPaginatedProjects();
     setProjects(data);
   };
   useEffect(() => {
@@ -40,10 +42,7 @@ export const LeaderBoardComponent = () => {
   }, [startDate, endDate]);
 
   const getScores = async (value?: string) => {
-    let url = `${process.env.NEXT_PUBLIC_API_URL}/stub/globalScore`;
-    url += `?filter=${value}`;
-    const response = await fetch(url);
-    const data: GlobalScoreDTO[] = await response.json();
+    const data: GlobalScoreDTO[] = await getPaginatedGlobalScores(value);
     setScores(data);
   };
 

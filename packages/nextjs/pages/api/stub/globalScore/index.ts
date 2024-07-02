@@ -49,7 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const scoresDto: GlobalScoreDTO[] = staticScores.map(item => toDTO(item));
 
   try {
-    res.status(200).json(scoresDto);
+    res.status(200).json({ data: scoresDto });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

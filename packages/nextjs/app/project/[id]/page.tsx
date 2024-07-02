@@ -2,19 +2,19 @@ import Image from "next/image";
 import type { NextPage } from "next";
 import { ShareIcon } from "~~/components/assets/ShareIcon";
 import CustomButton from "~~/components/onchain-impact-dashboard/CustomButton";
-import { Project } from "~~/services/database/schema";
+import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
 
 export async function generateStaticParams() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects?limit=100`);
-  const { data }: { data: Project[] } = await response.json();
+  const { getPaginatedProjects } = ProjectService();
+  const data = await getPaginatedProjects();
   return data.map(item => ({
     id: item.id,
   }));
 }
 
 const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects?id=${params.id}`);
-  const { data }: { data: Project } = await response.json();
+  const { getProjectById } = ProjectService();
+  const data = await getProjectById(params.id);
   return (
     <>
       <section className="px-4">
