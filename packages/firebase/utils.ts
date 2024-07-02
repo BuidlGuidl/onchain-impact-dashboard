@@ -5,7 +5,7 @@ type SeedData = {
   version: string;
   projects: Record<string, object>;
   metrics: Record<string, object>;
-  "metricRecords": Record<string, object>;
+  "project-totals": Record<string, object>;
   "globalScore": Record<string, object>;
   "etl-log": Record<string, object>;
 };
@@ -63,7 +63,7 @@ export const importSeed = async (database: Firestore) => {
   await Promise.all([
     importCollectionData(database, "projects", seedToImport.projects),
     importCollectionData(database, "metrics", seedToImport.metrics),
-    importCollectionData(database, "metricRecords", seedToImport["metricRecords"]),
+    importCollectionData(database, "project-totals", seedToImport["project-totals"]),
     importCollectionData(database, "globalScore", seedToImport["globalScore"]),
     importCollectionData(database, "etl-log", seedToImport["etl-log"]),
   ]);
