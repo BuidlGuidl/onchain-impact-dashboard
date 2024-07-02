@@ -5,10 +5,10 @@ import CustomButton from "~~/components/onchain-impact-dashboard/CustomButton";
 import { Project } from "~~/services/database/schema";
 
 export async function generateStaticParams() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/projects?limit=100`);
-  const { data }: { data: Project[] } = await response.json();
-  return data.map(item => ({
-    id: item.id,
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/project_ids`);
+  const data: string[] = await response.json();
+  return data.map(projectId => ({
+    id: projectId,
   }));
 }
 
