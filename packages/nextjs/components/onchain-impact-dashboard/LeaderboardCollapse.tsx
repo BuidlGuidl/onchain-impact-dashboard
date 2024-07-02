@@ -34,7 +34,11 @@ const LeaderboardCollapse: React.FC<
               customClassName="bg-red-600 mr-3 text-white hover:bg-red-500 border-transparent btn-md"
             />
           </Link>
-          <CustomButton text={"Share"} customClassName="border border-gray-200" onClick={() => shareProject()}>
+          <CustomButton
+            text={"Share"}
+            customClassName="border border-gray-200 bg-base-100"
+            onClick={() => shareProject()}
+          >
             <ShareIcon />
           </CustomButton>
         </div>

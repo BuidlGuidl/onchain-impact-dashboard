@@ -107,7 +107,9 @@ interface IFilterButton {
 const FilterButton = ({ filter, label, onClick, value }: IFilterButton) => {
   return (
     <button
-      className={`p-2 pl-4 pr-4 ${filter == value ? "bg-red-500 rounded-lg text-white" : ""}`}
+      className={`p-2 pl-4 pr-4 ${
+        filter == value ? "border border-gray-300 bg-customGray rounded-lg" : " border border-transparent"
+      }`}
       onClick={() => onClick(value)}
     >
       {label}

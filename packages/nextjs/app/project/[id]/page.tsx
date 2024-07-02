@@ -31,7 +31,7 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
           <div className="flex flex-col flex-1 ml-4 justify-center">
             <h1 className="text-lg m-0">#1 {data?.name}</h1>
           </div>
-          <CustomButton text={"Share"} customClassName="border bg-transparent border-gray-200">
+          <CustomButton text={"Share"} customClassName="border bg-transparent border-gray-200 bg-base-100">
             <ShareIcon />
           </CustomButton>
         </div>
@@ -47,6 +47,21 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
         </main>
         <h2 className="font-semibold mt-8 mb-4">Description</h2>
         <p>{data?.description}</p>
+        <h2 className="font-semibold mt-8 mb-4">Repositories</h2>
+        {[...data?.github, ...data?.packages].map((item, i) => (
+          <div key={i} className="flex items-center mb-2">
+            <a href={`${item}`} className="flex items-center" target="_blank" rel="noreferrer">
+              {item}
+              <Image
+                className="ml-2"
+                src="/assets/svg/icons/linkArrow.svg"
+                width={14}
+                height={14}
+                alt={`repository link`}
+              />
+            </a>
+          </div>
+        ))}
         {data?.socialLinks?.website && (
           <>
             <h2 className="font-semibold mt-8 mb-4">Web</h2>
