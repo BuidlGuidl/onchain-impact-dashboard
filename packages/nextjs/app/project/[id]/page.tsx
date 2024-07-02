@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { NextPage } from "next";
 import { ShareIcon } from "~~/components/assets/ShareIcon";
 import CustomButton from "~~/components/onchain-impact-dashboard/CustomButton";
+import { ProjectTotalsComponent } from "~~/components/onchain-impact-dashboard/projectTotalsComponent/projectTotalsComponent";
 import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
 
 export async function generateStaticParams() {
@@ -36,14 +37,7 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
           </CustomButton>
         </div>
         <main className="leaderboard-content lg:flex">
-          <div className="mb-3 border border-gray-300 rounded-lg p-4 grow lg:mr-4 lg:7/12 min-h-[300px]">
-            Graph goes here...
-          </div>
-          <div className="mb-3 border border-gray-300 rounded-lg pl-4 pt-4 pr-4 lg:basis-5/12">
-            <CheckboxItem name="check1" />
-            <CheckboxItem name="check2" />
-            <CheckboxItem name="check3" />
-          </div>
+          <ProjectTotalsComponent id={params.id} />
         </main>
         <h2 className="font-semibold mt-8 mb-4">Description</h2>
         <p>{data?.description}</p>
@@ -130,26 +124,6 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
         </div>
       </section>
     </>
-  );
-};
-interface ICheckboxItem {
-  name: string;
-}
-const CheckboxItem = ({ name }: ICheckboxItem) => {
-  return (
-    <div className="border border-gray-300 bg-base-200 rounded-lg p-4  mb-4">
-      <label className="flex justify-center gap-4" htmlFor={name}>
-        <div className="">
-          <input id={name} type="checkbox" className=" w-[18px] h-[18px]  accent-blue-600" />
-        </div>
-        <div>
-          <h3 className="">Title</h3>
-          <span className="">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
-          </span>
-        </div>
-      </label>
-    </div>
   );
 };
 

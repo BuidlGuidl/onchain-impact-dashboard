@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Leaderboard from "../Leaderboard";
+import { FilterButton } from "../filterButton/filterButton";
 import { LeaderBoardGraph } from "../leaderboardGraph/leaderBoardGraph";
 import { DatePicker } from "~~/components/impact-vector/inputs/datePicker";
 import { GlobalScoreDTO } from "~~/pages/api/globalScore";
@@ -10,9 +11,10 @@ import { GlobalScoreService } from "~~/services/onchainImpactDashboardApi/global
 import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
 
 export const LeaderBoardComponent = () => {
+  const DEFAULT_FILTER = "30";
   const [scores, setScores] = useState<GlobalScoreDTO[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [filter, setFilter] = useState("1");
+  const [filter, setFilter] = useState(DEFAULT_FILTER);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const { getPaginatedGlobalScores } = GlobalScoreService();
@@ -24,7 +26,7 @@ export const LeaderBoardComponent = () => {
   };
   useEffect(() => {
     getProjects();
-    getScores("1");
+    getScores(DEFAULT_FILTER);
   }, []);
   useEffect(() => {
     setEndDate("");
@@ -61,10 +63,10 @@ export const LeaderBoardComponent = () => {
           <div className="flex flex-col lg:flex-row mb-4">
             <div className="flex  flex-col xl:flex-row items-center bg-base-300 rounded-lg p-2 pr-2 w-full xl:w-auto">
               <div className="flex items-center">
-                <FilterButton filter={filter} value="1" label="24h" onClick={onFilter} />
-                <FilterButton filter={filter} value="7" label="7d" onClick={onFilter} />
                 <FilterButton filter={filter} value="30" label="1m" onClick={onFilter} />
-                <FilterButton filter={filter} value="365" label="1y" onClick={onFilter} />{" "}
+                <FilterButton filter={filter} value="90" label="3m" onClick={onFilter} />
+                <FilterButton filter={filter} value="270" label="6m" onClick={onFilter} />
+                <FilterButton filter={filter} value="365" label="1y" onClick={onFilter} />
                 <FilterButton filter={filter} value="range" label="Range" onClick={onFilter} />
               </div>
               {filter == "range" && (
@@ -95,24 +97,5 @@ export const LeaderBoardComponent = () => {
         </div>
       </div>
     </main>
-  );
-};
-
-interface IFilterButton {
-  filter: string;
-  value: string;
-  label: string;
-  onClick: (val: string) => void;
-}
-const FilterButton = ({ filter, label, onClick, value }: IFilterButton) => {
-  return (
-    <button
-      className={`p-2 pl-4 pr-4 ${
-        filter == value ? "border border-gray-300 bg-customGray rounded-lg" : " border border-transparent"
-      }`}
-      onClick={() => onClick(value)}
-    >
-      {label}
-    </button>
   );
 };

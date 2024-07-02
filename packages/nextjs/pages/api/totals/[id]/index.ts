@@ -1,3 +1,4 @@
+import { DocumentSnapshot } from "firebase-admin/firestore";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getProjectTotalsById } from "~~/services/database/projectTotals";
 import { ProjectTotalsRecord } from "~~/services/database/schema";
@@ -7,9 +8,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ message: "Method not allowed." });
   }
 
-  const id = req.query.id as string | undefined;
+  const id = req.query.id as string;
 
-  const querySnapshot = await getProjectTotalsById(id!);
+  const querySnapshot: DocumentSnapshot | null = await getProjectTotalsById(id);
 
   if (!querySnapshot) {
     return res.status(404).json({ message: "No data" });

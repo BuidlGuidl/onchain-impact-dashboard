@@ -1,16 +1,16 @@
-import { Project } from "../database/schema";
+import { ProjectTotalsRecord } from "../database/schema";
 
 export const ProjectTotalsService = () => {
   const baseURL = `${process.env.NEXT_PUBLIC_API_URL}/totals`;
   const getPaginatedProjectTotals = async () => {
     const response = await fetch(`${baseURL}?limit=100`);
     const data = await response.json();
-    return data.data as Project[];
+    return data.data as ProjectTotalsRecord[];
   };
 
   const getProjectTotalsById = async (id: string) => {
     const response = await fetch(`${baseURL}/${id}`);
-    const { data }: { data: Project } = await response.json();
+    const { data }: { data: ProjectTotalsRecord } = await response.json();
     return data;
   };
 
