@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ message: "Method not allowed." });
   }
 
-  const id = req.query.id as string;
+  const id = "0x000000000000007f2a005d9c88cc001b5b9ec4afb8b300023cb8abc11b946000";
 
   const querySnapshot: DocumentSnapshot | null = await getProjectTotalsById(id);
 
