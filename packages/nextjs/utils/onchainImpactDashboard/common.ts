@@ -8,3 +8,43 @@ export const abbreviateNumber = (num: number) => {
     return num.toString();
   }
 };
+
+export const getTargetDate = (date: Date, filter: string) => {
+  if (filter.includes(",")) {
+    return filter.split(",");
+  }
+  date.setDate(date.getDate() - parseInt(filter));
+  const month = date.getUTCMonth() + 1;
+  const stringMonth = month > 10 ? `${month}` : `0${month}`;
+  const day = date.getUTCDate();
+  const stringDay = day > 10 ? `${day}` : `0${day}`;
+  const year = date.getUTCFullYear();
+  return [`${year}${stringMonth}${stringDay}`];
+};
+
+export const formatDate = (dateString: string) => {
+  const year = dateString.slice(0, 4);
+  const month = dateString.slice(4, 6);
+  const day = dateString.slice(6, 8);
+  return `${year}/${month}/${day}`;
+};
+
+const hashString = (str: string) => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return hash;
+};
+
+const intToRGB = (i: number) => {
+  const c = (i & 0x00ffffff).toString(16).toUpperCase();
+
+  return "00000".substring(0, 6 - c.length) + c;
+};
+
+export const stringToColor = (str: string) => {
+  const hash = hashString(str);
+  const color = intToRGB(hash);
+  return `#${color}`;
+};

@@ -55,17 +55,23 @@ export interface Revenue {
   amount: string;
   details: string;
 }
-export interface TotalsByDate {
+export interface Totals {
   totalProjects: number;
   totalOverallScore: number;
-  metrics: TotalsByDateMetrics;
+  metrics: TotalsMetrics;
 }
 
-export interface TotalsByDateMetrics {
+export interface TotalsMetrics {
   [metric: string]: number;
 }
 
-export interface ProjectTotalsByDate {
+export interface ProjectTotalsRecord {
+  timeSeries: ProjectTotals[];
+  name: string;
+}
+
+export interface ProjectTotals {
+  createdAt: string;
   isNew: boolean;
   overallScore: number;
   rank: number;
@@ -73,14 +79,14 @@ export interface ProjectTotalsByDate {
   rankChangeWeek: number;
   rankChangeMonth: number;
   momentum: number;
-  metrics: ProjectTotalsByDateMetrics;
+  metrics: ProjectTotalsMetrics;
 }
 
-export interface ProjectTotalsByDateMetrics {
-  [metric: string]: ProjectTotalsByDateMetric;
+export interface ProjectTotalsMetrics {
+  [metric: string]: ProjectTotalsMetric;
 }
 
-export interface ProjectTotalsByDateMetric {
+export interface ProjectTotalsMetric {
   score: number;
   rank: number;
   momentum: number;
