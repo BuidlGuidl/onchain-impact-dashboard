@@ -3,7 +3,7 @@ import { Project } from "../database/schema";
 export const ProjectService = () => {
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-  const getPaginatedProjects = async () => {
+  const getAllProjects = async () => {
     const response = await fetch(`${baseURL}/projects`);
     const allProjects = await response.json();
     return allProjects as Project[];
@@ -22,7 +22,7 @@ export const ProjectService = () => {
   };
 
   return {
-    getPaginatedProjects,
+    getAllProjects,
     getProjectById,
     getProjectIds,
   };

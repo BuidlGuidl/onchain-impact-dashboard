@@ -18,10 +18,10 @@ export const LeaderBoardComponent = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const { getPaginatedGlobalScores } = GlobalScoreService();
-  const { getPaginatedProjects } = ProjectService();
+  const { getAllProjects } = ProjectService();
 
   const getProjects = async () => {
-    const data = await getPaginatedProjects();
+    const data = await getAllProjects();
     setProjects(data);
   };
   useEffect(() => {
