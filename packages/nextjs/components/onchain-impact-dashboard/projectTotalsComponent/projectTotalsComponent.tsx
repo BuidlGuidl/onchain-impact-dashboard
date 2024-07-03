@@ -11,11 +11,11 @@ export const ProjectTotalsComponent = ({ id }: { id: string }) => {
   const [selectedMetrics, setSelectedMetrics] = useState<string[]>([]);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const { getProjectTotalsById } = ProjectTotalsService();
+  const { getProjectTotalsByIdAndFilters } = ProjectTotalsService();
   const [totalsRecord, setTotalsRecord] = useState<any[]>([]);
 
   const getTotals = async () => {
-    const data = await getProjectTotalsById(id);
+    const data = await getProjectTotalsByIdAndFilters(id, filter);
     const graphData = data.timeSeries.map(item => {
       const val: any = { date: item.createdAt };
       Object.keys(item.metrics).forEach(key => {
@@ -23,7 +23,9 @@ export const ProjectTotalsComponent = ({ id }: { id: string }) => {
       });
       return val;
     });
-    setSelectedMetrics(["onchain-users"]);
+    if (selectedMetrics.length == 0) {
+      setSelectedMetrics(["onchain-users"]);
+    }
     setTotalsRecord(graphData);
   };
   useEffect(() => {
@@ -55,7 +57,7 @@ export const ProjectTotalsComponent = ({ id }: { id: string }) => {
           updateEndDate={val => setEndDate(val)}
         />
       </div>
-      <div className="mb-3 border border-gray-300 rounded-lg pl-4 pt-4 pr-4 lg:basis-5/12">
+      <div className="mb-3 border border-gray-300 rounded-lg pl-4 pt-4 pr-4 lg:basis-5/12 lg:max-h-[426px] overflow-auto">
         {keys.map(key => (
           <CheckboxItem
             key={key}

@@ -52,7 +52,7 @@ export const ProjectTotalsGraph = ({
   };
 
   return (
-    <div className="mb-3 border border-gray-300 w-full h-[50vh] rounded-lg p-2 grow min-h-[300px] lg:mr-4 lg:7/12 relative">
+    <div className="mb-3 w-full h-[50vh] rounded-lg grow min-h-[300px] lg:mr-4 lg:7/12 relative">
       <div className="flex flex-col lg:flex-row mb-4">
         <div className="flex  flex-col xl:flex-row items-center bg-base-300 rounded-lg p-2 pr-2 w-full xl:w-auto">
           <div className="flex items-center">
@@ -80,7 +80,7 @@ export const ProjectTotalsGraph = ({
         </div>
       </div>
       <ResponsiveContainer width="100%" className={"absolute top-14"}>
-        <AreaChart data={totalsRecord} margin={{ top: 20, right: -16, bottom: 40, left: 0 }}>
+        <AreaChart data={totalsRecord} margin={{ top: 20, right: -16, bottom: 45, left: 0 }}>
           {keys
             .filter(key => selectedMetrics.includes(key))
             .map(item => (

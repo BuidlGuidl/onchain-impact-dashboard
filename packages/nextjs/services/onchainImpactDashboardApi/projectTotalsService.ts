@@ -14,8 +14,17 @@ export const ProjectTotalsService = () => {
     return data;
   };
 
+  const getProjectTotalsByIdAndFilters = async (id: string, filter: string) => {
+    let url = `${baseURL}/${id}`;
+    url += `?filter=${filter}`;
+    const response = await fetch(url);
+    const { data }: { data: ProjectTotalsRecord } = await response.json();
+    return data;
+  };
+
   return {
     getPaginatedProjectTotals,
+    getProjectTotalsByIdAndFilters,
     getProjectTotalsById,
   };
 };
