@@ -17,7 +17,7 @@ export const CheckboxItem = ({ value, name, onChange }: ICheckboxItem) => {
           />
         </div>
         <div>
-          <h3 className="">{name}</h3>
+          <h3 className="font-bold">{name}</h3>
           <span className="">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
           </span>
