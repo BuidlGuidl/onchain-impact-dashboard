@@ -2,16 +2,17 @@ import { Project } from "../database/schema";
 
 export const ProjectService = () => {
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
   const getPaginatedProjects = async () => {
-    const response = await fetch(`${baseURL}/stub/projects?limit=100`);
-    const data = await response.json();
-    return data.data as Project[];
+    const response = await fetch(`${baseURL}/projects`);
+    const allProjects = await response.json();
+    return allProjects as Project[];
   };
 
   const getProjectById = async (id: string) => {
-    const response = await fetch(`${baseURL}/stub/projects?id=${id}`);
-    const { data }: { data: Project } = await response.json();
-    return data;
+    const response = await fetch(`${baseURL}/projects/detail/${id}`);
+    const project: Project = await response.json();
+    return project;
   };
 
   const getProjectIds = async () => {
