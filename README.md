@@ -79,7 +79,7 @@ To get all:
 
 To get one by id:
 ```
-    http://localhost:3000/api/stub/projects?id=1323922809-927310647
+    http://localhost:3000/api/stub/projects?id=0x000123456789101112131415...
 ```
 
 #### Time Series Data (OSO)
@@ -101,7 +101,7 @@ To get all:
     http://localhost:3000/api/stub/mapping
 ```
 
-To get OSO id by Agora id:
+To search by Agora id or OSO project_name:
 ```
-    http://localhost:3000/api/stub/mapping?id=1323922809-927310647
+    http://localhost:3000/api/stub/mapping?id=0x000123456... OR project_name
 ```
