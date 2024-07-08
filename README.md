@@ -43,22 +43,18 @@ __Raising awareness of RF is the goal so we will be taking every opportunity to 
 2. Set up your environment variables (and optionally, a local Firebase instance):
    Make a copy of the `packages/nextjs/.env.example` file and name it `packages/nextjs/.env.local` and fill in the required environment variables.
 
-    (Optional) Start the firebase emulators (vs set up a live Firebase instance). You will need to install the [firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli) `npm i -g firebase-tools` and run the following command:
+    Add a connection string for a MongoDB instance. This could be running locally or in the [cloud](https://cloud.mongodb.com).
+
+3. Seed data to your database:
 
     ```bash
-    # You might need to add a real "--project <projectId>" (run firebase projects:list)
-    firebase emulators:start
+    MONGODB_URI="Fill in with your MongoDB connection string" yarn seed
     ```
-
-3. Seed data in your local Firebase instance:
-
-    Copy the `packages/firebase/seed.sample.json` to `packages/firebase/seed.json` and tweak the data as you see fit. Then run the following command:
-
+    Now make sure your FILL_DAYS environment variable is set and hit this api:
     ```bash
-    yarn seed
+    http://localhost:3000/api/etl
     ```
-
-    To seed it to empty _*live*_ firestore instance you can use `yarn seed --force-prod`. If there is data in the live instance, it will not seed it again to bypass it use `yarn seed --reset --force-prod`
+    It should return a success message immediately but it will take a couple minutes to populate your database.
 
 4. Start the application
 

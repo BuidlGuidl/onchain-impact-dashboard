@@ -1,38 +1,14 @@
 import weightingsJSON from "./weightings.json";
+import { startSession } from "mongoose";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { OnchainMetricsByProject } from "~~/app/types/OSO";
-import { getETLLogByDate, setETLLogDoc } from "~~/services/database/etlLog";
-
-type Metrics = {
-  active_contract_count_90_days: number;
-  address_count: number;
-  address_count_90_days: number;
-  days_since_first_transaction: number;
-  gas_fees_sum: number;
-  gas_fees_sum_6_months: number;
-  high_activity_address_count_90_days: number;
-  low_activity_address_count_90_days: number;
-  medium_activity_address_count_90_days: number;
-  multi_project_address_count_90_days: number;
-  new_address_count_90_days: number;
-  returning_address_count_90_days: number;
-  transaction_count: number;
-  transaction_count_6_months: number;
-};
-
-interface DataSet {
-  score: number;
-  rank: number;
-  data: { [key in keyof Metrics]: { normalized: number; actual: string | number | undefined } };
-  projectId: string;
-}
-
-interface LeaderboardGraphData {
-  // projects: DataSet[];
-  totalScore: number;
-  metricTotals: Metrics;
-  date: string;
-}
+import dbConnect from "~~/services/mongodb/dbConnect";
+import ETLLog from "~~/services/mongodb/models/etlLog";
+import GlobalScore from "~~/services/mongodb/models/globalScore";
+import Metric, { MetricNames, Metrics } from "~~/services/mongodb/models/metric";
+import Project from "~~/services/mongodb/models/project";
+import ProjectMetricSummary from "~~/services/mongodb/models/projectMetricSummary";
+import ProjectScore, { IProjectScore } from "~~/services/mongodb/models/projectScore";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
@@ -40,160 +16,172 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   const weightings = weightingsJSON as { [key in keyof Metrics]: number };
   try {
-    let missingDays: string[] = [];
+    await dbConnect();
+    // Log the ETL process
+    const existingLog = await ETLLog.findOne({ status: "pending" });
+    if (existingLog) {
+      return res.status(400).json({ message: `ETL Process already running as of ${existingLog.date}` });
+    }
+    const log = await ETLLog.create({ date: new Date(), status: "pending" });
+    res.status(200).json({ result: "ETL Process Started" });
+    // Start a session
+    const session = await startSession();
+
+    // Start a transaction
+    // session.startTransaction();
     try {
-      // Get missing days from database
-      missingDays = await getMissingDays();
-    } catch (err: any) {
-      return res.status(400).json({ message: err?.message || err.toString() });
-    }
-    for (const day of missingDays) {
-      // Set the ETLLog entry for that day to 'pending'
-      await setETLLogDoc(day, { complete: false, message: "Pending" });
-      // Run the ETL process for the missing days
-      const startDate = new Date(day);
-      const endDate = new Date(startDate.getDate() + 1);
-
-      // Get data from the stubbed API
-      const seriesResponse = await fetch(
-        `http://localhost:3000/api/stub/series?startDate=${startDate}&endDate=${endDate}`,
-      ).then(res => res.json());
-
-      if (!seriesResponse) {
-        return res.status(400).json(seriesResponse);
+      // Clear out the previous data
+      console.log("Clearing previous data");
+      await GlobalScore.deleteMany({}, { session });
+      await ProjectScore.deleteMany({}, { session });
+      await ProjectMetricSummary.deleteMany({}, { session });
+      // Update new data
+      // Get all the mapping data
+      const { mapping } = await fetch("http://localhost:3000/api/stub/mapping").then(res => res.json());
+      // Get metrics that are activated
+      const metrics = await Metric.findAllActivated();
+      if (!metrics) {
+        return res.status(404).json({ message: "No metrics found" });
       }
-      const series = seriesResponse.series as {
-        [key: string]: OnchainMetricsByProject[];
-      };
-      const dateResults = [] as LeaderboardGraphData[];
-      // Tally the totals in each metric for each day
-      for (const date in series) {
-        const data = series[date];
-        const metricTotals: Metrics = {
-          active_contract_count_90_days: 0,
-          address_count: 0,
-          address_count_90_days: 0,
-          days_since_first_transaction: 0,
-          gas_fees_sum: 0,
-          gas_fees_sum_6_months: 0,
-          high_activity_address_count_90_days: 0,
-          low_activity_address_count_90_days: 0,
-          medium_activity_address_count_90_days: 0,
-          multi_project_address_count_90_days: 0,
-          new_address_count_90_days: 0,
-          returning_address_count_90_days: 0,
-          transaction_count: 0,
-          transaction_count_6_months: 0,
-        };
-        const projectsData = scoreProjectsByMetricWeight({ allProjects: data, metricWeights: weightings });
-        // Get total score of all projects
-        const totalScore = projectsData.reduce((acc, project) => acc + project.score, 0);
-        for (const metric in metricTotals) {
-          metricTotals[metric as keyof Metrics] = data.reduce(
-            (acc, project) => acc + project[metric as keyof Metrics],
-            0,
-          );
+      const dates = getDatesToProcess();
+      const globalScoreData = Object.assign({}, MetricNames) as { [key in keyof Metrics]: number };
+      for (const day of dates) {
+        // Get data from the stubbed API (Should be replaced with call to OSO)
+        const seriesResponse = await fetch(
+          `http://localhost:3000/api/stub/series?date=${day.toISOString().split("T")[0]}`,
+        ).then(res => res.json());
+
+        if (!seriesResponse) {
+          return res.status(400).json(seriesResponse);
         }
-        const dateResult = {
-          // projects: projectsData,
-          totalScore,
-          metricTotals,
-          date,
-        };
-        // Add to array of date results
-        dateResults.push(dateResult);
+        const osoData = seriesResponse.data as OnchainMetricsByProject[];
+        console.log(`Processing OSO response for each project on ${day.toISOString().split("T")[0]}`);
+        for (const project of osoData) {
+          // Get the project id from mapping
+          const projectMapping = mapping.find((map: any) => map.oso_name === project.project_name);
+          if (!projectMapping) {
+            // Skip projects that we don't have a mapping for
+            console.error(`No mapping found for ${project.project_name}`);
+            continue;
+          }
+          const projectId = projectMapping.application_id;
+          // Create the project score
+          const impact_index = getImpactIndex(project as unknown as Metrics, weightings);
+          const projectMetrics = {} as { [key in keyof Metrics]: number };
+          for (const metric of metrics) {
+            const metricValue = project[metric.name as keyof OnchainMetricsByProject];
+            if (!isNaN(metricValue as number)) {
+              projectMetrics[metric.name as keyof Metrics] = parseInt(metricValue as string);
+            }
+          }
+          const projectScoreData = Object.assign(projectMetrics, {
+            date: day,
+            projectId,
+            impact_index,
+          }) as IProjectScore;
+          await ProjectScore.create([projectScoreData], { session });
+
+          // Add the project metrics to the global score
+          for (const metric of Object.keys(MetricNames) as (keyof Metrics)[]) {
+            if (projectMetrics[metric]) {
+              globalScoreData[metric] += projectMetrics[metric];
+            }
+          }
+        }
+        globalScoreData.impact_index = getImpactIndex(globalScoreData, weightings);
+        await GlobalScore.create([{ date: day, ...globalScoreData }], { session });
       }
+      // Build the project metric summary data
+      console.log("Building project metric summary data");
+      const today = dates[0];
+      const day7 = dates[7];
+      const day30 = dates[30];
+      const day90 = dates[90];
+      // Iterate over all projects
+      for await (const project of Project.find({}).cursor()) {
+        const projectScoreToday = await ProjectScore.find({ date: today, projectId: project.id }).session(session);
+        const projectScoreDay7 = await ProjectScore.find({ date: day7, projectId: project.id }).session(session);
+        const projectScoreDay30 = await ProjectScore.find({ date: day30, projectId: project.id }).session(session);
+        const projectScoreDay90 = await ProjectScore.find({ date: day90, projectId: project.id }).session(session);
+        for (const metric of Object.keys(MetricNames) as (keyof Metrics)[]) {
+          const scoreToday = projectScoreToday[0][metric as keyof IProjectScore] as number;
+          const scoreDay7 = projectScoreDay7[0] ? (projectScoreDay7[0][metric as keyof IProjectScore] as number) : 0;
+          const scoreDay30 = projectScoreDay30[0] ? (projectScoreDay30[0][metric as keyof IProjectScore] as number) : 0;
+          const scoreDay90 = projectScoreDay90[0] ? (projectScoreDay90[0][metric as keyof IProjectScore] as number) : 0;
+          const metricSummary = {
+            date: today,
+            projectId: project.id,
+            metricName: metric,
+            7: getMovement(scoreToday, scoreDay7),
+            30: getMovement(scoreToday, scoreDay30),
+            90: getMovement(scoreToday, scoreDay90),
+          };
+          await ProjectMetricSummary.create([metricSummary], { session });
+        }
+      }
+      // await session.commitTransaction();
+      session.endSession();
+      console.log("ETL Process Completed");
+    } catch (err) {
+      console.error(err);
+      // console.log("aborting transaction");
+      // await session.abortTransaction();
+      session.endSession();
+      await ETLLog.updateOne({ _id: log._id }, { status: "error", message: err });
+      throw new Error(err as string);
     }
-    // Calculate the growth percentage overall for each project - Maybe do this in another method?
-    // res.status(200).json({ result: dateResults });
+    // Log the ETL process
+    await ETLLog.updateOne({ _id: log._id }, { status: "completed" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
-const scoreProjectsByMetricWeight = ({
-  allProjects,
-  metricWeights,
-}: {
-  allProjects: OnchainMetricsByProject[];
-  metricWeights: Metrics;
-}) => {
-  const allMetrics = Object.keys(metricWeights) as (keyof Metrics)[];
-
-  // Find the largest value for each metric and find multiple to make it 100
-  const normalizers: { [key in keyof Metrics]: number } = {} as { [key in keyof Metrics]: number };
-  for (const metric of allMetrics) {
-    const weight = metricWeights[metric];
-    if (!weight) {
-      throw new Error(`Vector ${metric} not found`);
-    }
-    const max = Math.max(...allProjects.map(project => project[metric]));
-    normalizers[metric] = max !== 0 ? 100 / max : 0;
+const getMovement = (current: number, comparison: number) => {
+  // This shortcuts the calculation if the values are the same and handles the case where one of the nums is 0
+  if (current === comparison || isNaN(current) || isNaN(comparison) || current === 0 || comparison === 0) {
+    return 0;
   }
+  const max = Math.max(current, comparison);
+  const min = Math.min(current, comparison);
+  let diff = Math.round((max / min - 1) * 100);
 
-  const projectsData = [] as DataSet[];
-  // Apply that multiple to each value in the metric and apply the weight
-  for (const data of allProjects) {
-    const relevant: DataSet = {
-      data: {} as { [key in keyof Metrics]: { normalized: number; actual: string | number | undefined } },
-      score: 0,
-      rank: 0,
-      projectId: data["project_id"],
-    };
-    for (const metric of allMetrics) {
-      const weight = metricWeights[metric];
-      if (!weight) {
-        throw new Error(`Vector ${metric} not found`);
-      }
-      const actualValue = data[metric];
-      const currentValue = data[metric];
-      const normalizer = normalizers[metric];
-
-      // Apply the normalizer to equalize the metrics
-      const scaledValue = currentValue && normalizer ? currentValue * normalizer : 0;
-      // Apply the weight
-      relevant.data[metric] = {
-        normalized: scaledValue && weight ? scaledValue * weight : 0,
-        actual: actualValue,
-      };
-      // Add to the score
-      relevant.score += relevant.data[metric]?.normalized || 0;
-    }
-    projectsData.push(relevant);
+  if (current < comparison) {
+    diff = -diff;
   }
-  // Sort by score
-  projectsData.sort((a, b) => b.score - a.score);
-  // Add the rank
-  for (let i = 0; i < projectsData.length; i++) {
-    projectsData[i].rank = i + 1;
-  }
-
-  return projectsData;
+  return diff;
 };
 
-const getMissingDays = async (): Promise<string[]> => {
-  // Get missing days from database
-  const missingDays = [] as string[];
-  const currentUTCDate = new Date(new Date().toUTCString());
-  const lookBackDays = parseInt(process.env.CHECK_DAYS || "0") || 10;
-  for (let i = 0; i < lookBackDays; i++) {
-    const date = new Date(currentUTCDate);
-    date.setDate(date.getDate() - i);
-    const dateString = date.toISOString().split("T")[0];
-    const etlLog = await getETLLogByDate(dateString);
-    if (!etlLog.exists || etlLog.data()?.status !== "success") {
-      missingDays.push(dateString);
+const getImpactIndex = (project: Metrics, weights: Metrics): number => {
+  let impact_index = 0;
+  const metricKeys = Object.keys(weights) as (keyof Metrics)[];
+  let weightSum = 0;
+  for (const metric of metricKeys) {
+    weightSum += weights[metric];
+  }
+  // If the weights don't add up to 100 then we expect they are each a 0-100 percentage and need to be adjusted
+  const indPct = Math.round(weightSum) !== 100;
+  for (const metric of metricKeys) {
+    const multiplier = indPct ? weights[metric] / weightSum : weights[metric];
+    // Normalize the weights to their percentage of the total
+    const projectMetric = project[metric as unknown as keyof Metrics];
+    if (projectMetric) {
+      impact_index += projectMetric * multiplier;
     }
   }
-  if (!missingDays.length) {
-    const earliestDate = new Date(currentUTCDate);
-    earliestDate.setDate(earliestDate.getDate() - lookBackDays);
-    throw new Error(
-      `No missing days found between ${earliestDate.toISOString().split("T")[0]} and ${
-        currentUTCDate.toISOString().split("T")[0]
-      }`,
-    );
+  return impact_index;
+};
+
+const getDatesToProcess = (): Date[] => {
+  // Get missing days from database
+  const dates = [] as Date[];
+  const currentUTCDate = new Date(new Date().toISOString().split("T")[0]);
+  const fillDays = parseInt(process.env.FILL_DAYS || "0") || 180;
+  for (let i = 0; i < fillDays; i++) {
+    const date = new Date(currentUTCDate);
+    date.setDate(date.getDate() - i);
+    dates.push(date);
   }
-  return missingDays.sort();
+  return dates;
 };
