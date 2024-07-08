@@ -5,23 +5,23 @@ import Leaderboard from "../Leaderboard";
 import { FilterButton } from "../filterButton/filterButton";
 import { LeaderBoardGraph } from "../leaderboardGraph/leaderBoardGraph";
 import { DatePicker } from "~~/components/impact-vector/inputs/datePicker";
-import { GlobalScoreDTO } from "~~/pages/api/globalScore";
-import { Project } from "~~/services/database/schema";
+import { IGlobalScore } from "~~/services/mongodb/models/globalScore";
+import { IProject } from "~~/services/mongodb/models/project";
 import { GlobalScoreService } from "~~/services/onchainImpactDashboardApi/globalScoreServices";
 import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
 
 export const LeaderBoardComponent = () => {
-  const DEFAULT_FILTER = "30";
-  const [scores, setScores] = useState<GlobalScoreDTO[]>([]);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const DEFAULT_FILTER = "230";
+  const [scores, setScores] = useState<IGlobalScore[]>([]);
+  const [projects, setProjects] = useState<IProject[]>([]);
   const [filter, setFilter] = useState(DEFAULT_FILTER);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const { getPaginatedGlobalScores } = GlobalScoreService();
-  const { getPaginatedProjects } = ProjectService();
+  const { getGlobalScores } = GlobalScoreService();
+  const { getProjects: getAllProjects } = ProjectService();
 
   const getProjects = async () => {
-    const data = await getPaginatedProjects();
+    const data = await getAllProjects();
     setProjects(data);
   };
   useEffect(() => {
@@ -44,7 +44,7 @@ export const LeaderBoardComponent = () => {
   }, [startDate, endDate]);
 
   const getScores = async (value?: string) => {
-    const data: GlobalScoreDTO[] = await getPaginatedGlobalScores(value);
+    const data: IGlobalScore[] = await getGlobalScores(value);
     setScores(data);
   };
 

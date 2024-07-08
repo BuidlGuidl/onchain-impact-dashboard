@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { ProjectTotalsGraph } from "../projectTotalsGraph/projectTotalsGraph";
 import { CheckboxItem } from "~~/components/checkbox/checkbox";
-import { ProjectTotalsService } from "~~/services/onchainImpactDashboardApi/projectTotalsService";
+import { ProjectScoreService } from "~~/services/onchainImpactDashboardApi/projectScoreService";
 
 export const ProjectTotalsComponent = ({ id }: { id: string }) => {
   const DEFAULT_FILTER = "30";
@@ -11,22 +11,15 @@ export const ProjectTotalsComponent = ({ id }: { id: string }) => {
   const [selectedMetrics, setSelectedMetrics] = useState<string[]>([]);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const { getProjectTotalsByIdAndFilters } = ProjectTotalsService();
+  const { getProjectScoreById } = ProjectScoreService();
   const [totalsRecord, setTotalsRecord] = useState<any[]>([]);
 
   const getTotals = async () => {
-    const data = await getProjectTotalsByIdAndFilters(id, filter);
-    const graphData = data.timeSeries.map(item => {
-      const val: any = { date: item.createdAt };
-      Object.keys(item.metrics).forEach(key => {
-        val[key] = item.metrics[key].score;
-      });
-      return val;
-    });
+    const data = await getProjectScoreById(id, filter);
     if (selectedMetrics.length == 0) {
       setSelectedMetrics(["onchain-users"]);
     }
-    setTotalsRecord(graphData);
+    setTotalsRecord(data as any);
   };
   useEffect(() => {
     getTotals();

@@ -1,13 +1,23 @@
-import { GlobalScoreDTO } from "~~/pages/api/globalScore";
+import { IGlobalScore } from "../mongodb/models/globalScore";
 
 export const GlobalScoreService = () => {
   const baseURL = `${process.env.NEXT_PUBLIC_API_URL}/globalScore`;
-  const getPaginatedGlobalScores = async (filter?: string) => {
+  const getGlobalScores = async (filter?: string) => {
     let url = `${baseURL}`;
-    url += `?filter=${filter}`;
+    if (filter) {
+      if (filter.includes(",")) {
+        const [start, end] = filter.split(",");
+        url += `?startDate=${start}&endDate=${end}`;
+      } else if (typeof parseInt(filter) === "number") {
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - parseInt(filter));
+        const endDate = new Date();
+        url += `?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`;
+      }
+    }
     const response = await fetch(url);
-    const { data }: { data: GlobalScoreDTO[] } = await response.json();
+    const { data }: { data: IGlobalScore[] } = await response.json();
     return data;
   };
-  return { getPaginatedGlobalScores };
+  return { getGlobalScores };
 };

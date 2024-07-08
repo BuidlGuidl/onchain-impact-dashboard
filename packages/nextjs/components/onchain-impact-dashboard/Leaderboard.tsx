@@ -4,9 +4,9 @@ import { useState } from "react";
 import OnchainInfoModal from "../OnchainInfoModal";
 import LeaderboardCollapse from "./LeaderboardCollapse";
 import { SearchBar } from "./SearchBar";
-import { Project } from "~~/services/database/schema";
+import { IProject } from "~~/services/mongodb/models/project";
 
-const Leaderboard = ({ projects }: { projects: Project[] }) => {
+const Leaderboard = ({ projects }: { projects: IProject[] }) => {
   const rating = 10;
   const [selectedProject, setSelectedProject] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,7 +27,7 @@ const Leaderboard = ({ projects }: { projects: Project[] }) => {
         <div className="projects-container ">
           {projects
             .filter((it: any) => it.name.toLowerCase().includes(searchValue.toLowerCase()))
-            .map((item: Project) => (
+            .map((item: IProject) => (
               <LeaderboardCollapse
                 isActive={item.id == selectedProject}
                 setSelectedProject={() => changeSelectedProject(item.id)}

@@ -1,16 +1,12 @@
 import mappingsJSON from "./staticMapping.json";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { Mapping } from "~~/types";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed." });
   }
-  const mapping = mappingsJSON as {
-    application_id: string;
-    oso_name: string;
-    project_name: string;
-    is_approved: string;
-  }[];
+  const mapping = mappingsJSON as Mapping[];
   // check if id param is present
   const { id } = req.query;
   try {
