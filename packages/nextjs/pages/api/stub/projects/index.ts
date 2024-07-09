@@ -1,12 +1,12 @@
 import projectsJSON from "./projects.json";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Project } from "~~/services/database/schema";
+import { IProject } from "~~/services/mongodb/models/project";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed." });
   }
-  const projects = projectsJSON as Project[];
+  const projects = projectsJSON as IProject[];
   // check if id param is present
   const { limit = "10", offset = "0", id } = req.query;
   const parseLimit: number = parseInt(limit as string);

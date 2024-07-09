@@ -1,42 +1,48 @@
-import { QuerySnapshot } from "firebase-admin/firestore";
+import mongoose from "mongoose";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getGlobalScoreFiltered, getGlobalScoreFilteredDate } from "~~/services/database/globalScore";
-import { GlobalScoreDay } from "~~/services/database/schema";
-import { getTargetDate } from "~~/utils/onchainImpactDashboard/common";
-
-export interface GlobalScoreDTO {
-  date: string;
-  globalScore: string;
-}
-const toDTO = (entity: GlobalScoreDay): GlobalScoreDTO => {
-  return {
-    date: entity.createdAt,
-    globalScore: entity.metrics[0].value,
-  };
-};
+import dbConnect from "~~/services/mongodb/dbConnect";
+import GlobalScore, { IGlobalScore } from "~~/services/mongodb/models/globalScore";
+import { MetricNames } from "~~/services/mongodb/models/metric";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await dbConnect();
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed." });
   }
-  let limit = ["20240309"];
-  const filter = req.query.filter as string | undefined;
-  let querySnapshot: QuerySnapshot | null = null;
-  if (!!filter) {
-    limit = getTargetDate(new Date("2024-03-09"), filter);
+  const projection = req.query.projection as string | undefined;
+  // Get the start and end date from query params
+  const startDate = req.query.startDate as string | undefined;
+  const endDate = req.query.endDate as string | undefined;
+  // Defaults to 90 days
+  let start = new Date();
+  start.setDate(start.getDate() - 90);
+  let end = new Date();
+  if (startDate) {
+    if (isNaN(new Date(startDate).getTime())) {
+      return res.status(400).json({ message: "Invalid start date." });
+    }
+    start = new Date(startDate);
   }
 
-  querySnapshot =
-    limit.length > 1 ? await getGlobalScoreFiltered([limit[0], limit[1]]) : await getGlobalScoreFilteredDate(limit[0]);
+  if (endDate) {
+    if (isNaN(new Date(endDate).getTime())) {
+      return res.status(400).json({ message: "Invalid end date." });
+    }
+    end = new Date(endDate);
+  }
+  const projectionObj: mongoose.ProjectionType<IGlobalScore> = { date: 1 };
+  const props = projection ? projection.split(",") : Object.keys(MetricNames); // "index_impact,gas_fees" >> ["index_impact", "gas_fees"]
+  for (const prop of props) {
+    projectionObj[prop as keyof IGlobalScore] = 1;
+  }
+  const entries = await GlobalScore.findBetweenDates(start, end, projectionObj);
 
-  if (!querySnapshot) {
+  if (!entries) {
     return res.status(404).json({ message: "No data" });
   }
-  const staticScores = querySnapshot.docs.map(doc => doc.data()) as GlobalScoreDay[];
-  const scoresDto: GlobalScoreDTO[] = staticScores.map(item => toDTO(item));
 
   try {
-    res.status(200).json({ data: scoresDto });
+    res.status(200).json({ data: entries });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

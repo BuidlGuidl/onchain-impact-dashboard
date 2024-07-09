@@ -4,8 +4,7 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "packages/nextjs",
-      "packages/firebase"
+      "packages/nextjs"
     ]
   },
   "scripts": {
@@ -17,7 +16,7 @@
     "precommit": "lint-staged",
     "vercel": "yarn workspace @se-2/nextjs vercel",
     "vercel:yolo": "yarn workspace @se-2/nextjs vercel:yolo",
-    "seed": "yarn workspace firebase seed"
+    "seed": "yarn workspace @se-2/nextjs seed"
   },
   "packageManager": "yarn@3.2.3",
   "devDependencies": {

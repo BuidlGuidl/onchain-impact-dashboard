@@ -5,13 +5,11 @@ import CustomButton from "~~/components/onchain-impact-dashboard/CustomButton";
 import { ProjectTotalsComponent } from "~~/components/onchain-impact-dashboard/projectTotalsComponent/projectTotalsComponent";
 import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
 
-export async function generateStaticParams() {
-  const { getPaginatedProjects } = ProjectService();
-  const data = await getPaginatedProjects();
-  return data.map(item => ({
-    id: item.id,
-  }));
-}
+// export async function generateStaticParams() {
+//   const { getProjectIds } = ProjectService();
+//   const projectIds = await getProjectIds();
+//   return projectIds.map(id => ({ id }));
+// }
 
 const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) => {
   const { getProjectById } = ProjectService();
