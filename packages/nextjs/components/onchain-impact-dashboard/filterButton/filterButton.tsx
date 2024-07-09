@@ -7,9 +7,7 @@ interface IFilterButton {
 export const FilterButton = ({ filter, label, onClick, value }: IFilterButton) => {
   return (
     <button
-      className={`p-2 pl-4 pr-4 ${
-        filter == value ? "border border-gray-300 bg-customGray rounded-lg" : " border border-transparent"
-      }`}
+      className={`p-2 pl-4 pr-4 ${filter == value ? "bg-customGray rounded-lg shadow" : ""}`}
       onClick={() => onClick(value)}
     >
       {label}
