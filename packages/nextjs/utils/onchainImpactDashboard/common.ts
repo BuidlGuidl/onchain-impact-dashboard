@@ -46,3 +46,30 @@ export const stringToColor = (str: string) => {
   const color = intToRGB(hash);
   return `#${color}`;
 };
+
+export const METRICS = [
+  {
+    label: "Impact Index",
+    value: "impact_index",
+  },
+  {
+    label: "Trusted users",
+    value: "high_activity_address_count_90_days",
+  },
+  {
+    label: "Gas Fees",
+    value: "gas_fees_sum",
+  },
+  {
+    label: "Users Onboarded",
+    value: "new_address_count_90_days",
+  },
+  {
+    label: "Recurrent Users",
+    value: "returning_address_count_90_days",
+  },
+  {
+    label: "Transactions",
+    value: "transaction_count",
+  },
+];

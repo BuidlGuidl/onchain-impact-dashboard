@@ -5,7 +5,7 @@ const CustomButton: React.FC<ICustomButton> = ({ text, customClassName, children
   return (
     <button
       onClick={onClick}
-      className={` grid grid-flow-col items-center justify-center btn px-6 shadow-none ${customClassName}`}
+      className={` grid grid-flow-col items-center justify-center btn px-4 shadow-none ${customClassName}`}
       disabled={disabled}
     >
       {children}
