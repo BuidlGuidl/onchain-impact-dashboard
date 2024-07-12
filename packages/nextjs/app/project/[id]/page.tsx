@@ -18,9 +18,9 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
   const data = await getProjectById(params.id);
   return (
     <>
-      <section className="px-[5%] mt-6">
-        <Link href="/" passHref>
-          <ArrowLeftIcon className="mb-4 h-5 w-5 cursor-pointer" />
+      <section className="px-[5%] mt-6 relative">
+        <Link className="absolute bg-white/40 backdrop-blur-sm  rounded-lg py-2 px-4" href="/" passHref>
+          <ArrowLeftIcon className=" h-5 w-5 text-black  cursor-pointer" />
         </Link>
         <Image
           width={2000}
