@@ -23820,25 +23820,25 @@
     "name": "active_contract_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "address_count",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "days_since_first_transaction",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "gas_fees_sum",
@@ -23850,7 +23850,7 @@
     "name": "gas_fees_sum_6_months",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "high_activity_address_count_90_days",
@@ -23862,19 +23862,19 @@
     "name": "low_activity_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "medium_activity_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "multi_project_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "new_address_count_90_days",
@@ -23898,7 +23898,7 @@
     "name": "transaction_count_6_months",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   }
   ]
 }

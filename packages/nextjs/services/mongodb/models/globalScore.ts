@@ -45,6 +45,10 @@ GlobalScoreSchema.statics.findBetweenDates = function (
   );
 };
 
+export const TempGlobalScore =
+  (mongoose.models.temp_GlobalScore as IGlobalScoreModel) ||
+  mongoose.model<IGlobalScore, IGlobalScoreModel>("temp_GlobalScore", GlobalScoreSchema);
+
 const GlobalScore =
   (mongoose.models.GlobalScore as IGlobalScoreModel) ||
   mongoose.model<IGlobalScore, IGlobalScoreModel>("GlobalScore", GlobalScoreSchema);
