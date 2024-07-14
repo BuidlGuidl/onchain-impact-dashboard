@@ -1,16 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { NextPage } from "next";
+import type { Metadata, NextPage } from "next";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { ShareIcon } from "~~/components/assets/ShareIcon";
 import CustomButton from "~~/components/onchain-impact-dashboard/CustomButton";
 import { ProjectTotalsComponent } from "~~/components/onchain-impact-dashboard/projectTotalsComponent/projectTotalsComponent";
 import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
 
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 export async function generateStaticParams() {
   const { getProjectIds } = ProjectService();
   const projectIds = await getProjectIds();
   return projectIds.map(id => ({ id }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const id = params.id;
+  const { getProjectById } = ProjectService();
+  const project = await getProjectById(id);
+
+  return {
+    title: project.name,
+    description: project.description,
+  };
 }
 
 const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) => {
