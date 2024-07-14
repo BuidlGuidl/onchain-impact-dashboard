@@ -4,6 +4,7 @@ import React from "react";
 import { FilterButton } from "../filterButton/filterButton";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { DatePicker } from "~~/components/impact-vector/inputs/datePicker";
+import { IMetric } from "~~/services/mongodb/models/metric";
 import { formatDate, stringToColor } from "~~/utils/onchainImpactDashboard/common";
 
 interface IProps {
@@ -11,12 +12,12 @@ interface IProps {
   filter: string;
   onFilter: (arg: string) => void;
   endDate: string;
-  selectedMetric: { label: string; value: string };
+  selectedMetric: number;
   startDate: string;
   updateStartDate: (arg: string) => void;
   updateEndDate: (arg: string) => void;
-  metrics: { label: string; value: string }[];
-  setSelectedMetric: (arg: { label: string; value: string }) => void;
+  metrics: IMetric[];
+  setSelectedMetric: (arg: number) => void;
 }
 export const ProjectTotalsGraph = ({
   updateStartDate,
@@ -47,11 +48,13 @@ export const ProjectTotalsGraph = ({
     }
     return null;
   };
-
+  if (metrics.length == 0) {
+    return <></>;
+  }
   return (
     <>
       <div className="flex flex-col lg:w-[40%]">
-        <h2 className="font-bold text-xl">{selectedMetric.label}</h2>
+        <h2 className="font-bold text-xl">{metrics[selectedMetric].label ?? ""}</h2>
         <p className="font-light text-neutral-content pr-2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis
           tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum. Maecenas eget
@@ -61,15 +64,15 @@ export const ProjectTotalsGraph = ({
       </div>
       <div className="flex flex-col w-full mt-10 lg:mt-0">
         <div className="flex gap-6 flex-wrap mb-4">
-          {metrics.map(item => (
+          {metrics.map((item, i) => (
             <span
-              key={item.value}
+              key={item.name}
               className={`${
-                selectedMetric.value == item.value ? "font-bold text-secondary-content" : "font-medium"
+                selectedMetric == i ? "font-bold text-secondary-content" : "font-medium"
               } cursor-pointer text-neutral-content`}
-              onClick={() => setSelectedMetric(item)}
+              onClick={() => setSelectedMetric(i)}
             >
-              {item.label}
+              {item.label || ""}
             </span>
           ))}
         </div>
@@ -105,25 +108,23 @@ export const ProjectTotalsGraph = ({
               )}
             </div>
           </div>
-          <ResponsiveContainer width="100%" className={"absolute top-14"}>
-            <AreaChart data={totalsRecord} margin={{ top: 20, right: -16, bottom: 45, left: 0 }}>
-              {metrics
-                .filter(key => selectedMetric == key)
-                .map(item => (
-                  <Area
-                    key={item.value}
-                    type="monotone"
-                    dataKey={item.value}
-                    stroke={stringToColor(item.value)}
-                    fill={stringToColor(item.value)}
-                  />
-                ))}
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis tick={false} fontSize={10} hide={false} dataKey="date" />
-              <YAxis fontSize={10} type={"category"} hide={false} orientation="right" />
-              <Tooltip content={<CustomTooltip />} />
-            </AreaChart>
-          </ResponsiveContainer>
+          {metrics.length > 0 && (
+            <ResponsiveContainer width="100%" className={"absolute top-14"}>
+              <AreaChart data={totalsRecord} margin={{ top: 20, right: -16, bottom: 45, left: 0 }}>
+                <Area
+                  key={metrics[selectedMetric].name}
+                  type="monotone"
+                  dataKey={metrics[selectedMetric].name}
+                  stroke={stringToColor(metrics[selectedMetric].label ?? "")}
+                  fill={stringToColor(metrics[selectedMetric].label ?? "")}
+                />
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis tick={false} fontSize={10} hide={false} dataKey="date" />
+                <YAxis fontSize={10} type={"category"} hide={false} orientation="right" />
+                <Tooltip content={<CustomTooltip />} />
+              </AreaChart>
+            </ResponsiveContainer>
+          )}
         </div>
       </div>
     </>

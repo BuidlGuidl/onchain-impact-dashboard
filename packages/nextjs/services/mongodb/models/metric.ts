@@ -21,6 +21,7 @@ export const MetricNames = {
 export type Metrics = typeof MetricNames;
 
 export interface IMetric {
+  label?: string;
   name: keyof Metrics;
   description: string;
   weight: number;
@@ -38,6 +39,9 @@ const MetricSchema = new Schema<IMetric, IMetricModel>({
     unique: true,
   },
   description: {
+    type: String,
+  },
+  label: {
     type: String,
   },
   weight: {
