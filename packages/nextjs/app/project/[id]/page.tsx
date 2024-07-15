@@ -18,7 +18,7 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
   const data = await getProjectById(params.id);
   return (
     <>
-      <section className="px-[5%] mt-6 relative">
+      <section className="p-1 xs:px-[5%] relative">
         <Link className="absolute bg-white/40 backdrop-blur-sm  rounded-lg py-2 px-4" href="/" passHref>
           <ArrowLeftIcon className=" h-5 w-5 text-black  cursor-pointer" />
         </Link>
@@ -30,17 +30,19 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
           alt="Avatar"
         />
 
-        <div className="flex w-full justify-between mb-4 mt-10 items-center">
-          <Image width={54} height={54} className="mr-0" src={data.profileAvatarUrl} alt="Avatar" />
-          <div className="flex flex-row flex-1 ml-4  gap-3">
-            <h1 className="text-lg m-0">#1 {data?.name}</h1>
-            <span className="bg-base-300 p-1 pl-4 pr-4 rounded-xl text-xs" style={{ paddingTop: "6px" }}>
-              {data.category}
-            </span>
+        <div className="flex w-full gap-3  flex-col xs:flex-row mb-4 mt-10 xs:items-center">
+          <div className="max-w-[54px] rounded-lg overflow-hidden">
+            <Image width={54} height={54} className="mr-0 w-full" src={data.profileAvatarUrl} alt="Avatar" />
           </div>
-          <CustomButton text={"Share"} customClassName="border bg-transparent border-gray-200 bg-base-100">
-            <ShareIcon />
-          </CustomButton>
+          <div className="flex w-full flex-row  items-center justify-between gap-3">
+            <div className="flex gap-3">
+              <h1 className="text-lg m-0">#1 {data?.name}</h1>
+              <span className="bg-base-300 p-2 text-center rounded-lg text-xs">{data.category}</span>
+            </div>
+            <CustomButton text={"Share"} customClassName="border bg-transparent border-gray-200 bg-base-100">
+              <ShareIcon />
+            </CustomButton>
+          </div>
         </div>
         <div className="leaderboard-content lg:flex">
           <ProjectTotalsComponent id={params.id} />
