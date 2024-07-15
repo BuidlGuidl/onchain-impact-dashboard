@@ -60,6 +60,10 @@ ProjectScoreSchema.methods.getScore = function (metric: string) {
   return record ? record.value : "0";
 };
 
+export const TempProjectScore =
+  (mongoose.models.temp_ProjectScore as IProjectScoreModel) ||
+  mongoose.model<IProjectScore, IProjectScoreModel>("temp_ProjectScore", ProjectScoreSchema);
+
 const ProjectScore =
   (mongoose.models.ProjectScore as IProjectScoreModel) ||
   mongoose.model<IProjectScore, IProjectScoreModel>("ProjectScore", ProjectScoreSchema);

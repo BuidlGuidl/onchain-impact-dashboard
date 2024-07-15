@@ -57,6 +57,13 @@ ProjectMetricSummarySchema.statics.findBetweenDates = function (
   );
 };
 
+export const TempProjectMetricSummary =
+  (mongoose.models.temp_ProjectMetricSummary as IProjectMetricSummaryModel) ||
+  mongoose.model<IProjectMetricSummary, IProjectMetricSummaryModel>(
+    "temp_ProjectMetricSummary",
+    ProjectMetricSummarySchema,
+  );
+
 const ProjectMetricSummary =
   (mongoose.models.ProjectMetricSummary as IProjectMetricSummaryModel) ||
   mongoose.model<IProjectMetricSummary, IProjectMetricSummaryModel>("ProjectMetricSummary", ProjectMetricSummarySchema);

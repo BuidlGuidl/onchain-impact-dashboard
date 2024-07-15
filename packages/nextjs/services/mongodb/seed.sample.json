@@ -23817,42 +23817,52 @@
   ],
   "metric": [
   {
-    "name": "active_contract_count_90_days",
+    "label": "Impact Index",
+    "name": "impact_index",
     "description": "string",
     "weight": 1,
     "activated": true
+  },
+  {
+    "name": "active_contract_count_90_days",
+    "description": "string",
+    "weight": 1,
+    "activated": false
   },
   {
     "name": "address_count",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "days_since_first_transaction",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
+    "label": "Gas Fees",
     "name": "gas_fees_sum",
     "description": "string",
     "weight": 1,
     "activated": true
   },
   {
+    
     "name": "gas_fees_sum_6_months",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
+    "label": "Trusted users",
     "name": "high_activity_address_count_90_days",
     "description": "string",
     "weight": 1,
@@ -23862,33 +23872,36 @@
     "name": "low_activity_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "medium_activity_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
     "name": "multi_project_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   },
   {
+    "label": "Users Onboarded",
     "name": "new_address_count_90_days",
     "description": "string",
     "weight": 1,
     "activated": true
   },
   {
+    "label": "Recurrent Users",
     "name": "returning_address_count_90_days",
     "description": "string",
     "weight": 1,
     "activated": true
   },
   {
+    "label": "Transactions",
     "name": "transaction_count",
     "description": "string",
     "weight": 1,
@@ -23898,7 +23911,7 @@
     "name": "transaction_count_6_months",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": false
   }
   ]
 }

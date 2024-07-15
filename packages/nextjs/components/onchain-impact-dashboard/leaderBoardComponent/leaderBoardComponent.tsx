@@ -4,28 +4,37 @@ import React, { useEffect, useState } from "react";
 import Leaderboard from "../Leaderboard";
 import { ProjectTotalsGraph } from "../projectTotalsGraph/projectTotalsGraph";
 import { IGlobalScore } from "~~/services/mongodb/models/globalScore";
+import { IMetric } from "~~/services/mongodb/models/metric";
 import { IProject } from "~~/services/mongodb/models/project";
 import { GlobalScoreService } from "~~/services/onchainImpactDashboardApi/globalScoreServices";
+import { MetricService } from "~~/services/onchainImpactDashboardApi/metricsService";
 import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
-import { METRICS } from "~~/utils/onchainImpactDashboard/common";
 
 export const LeaderBoardComponent = () => {
   const DEFAULT_FILTER = "30";
   const [scores, setScores] = useState<IGlobalScore[]>([]);
   const [projects, setProjects] = useState<IProject[]>([]);
+  const [metrics, setMetrics] = useState<IMetric[]>([]);
   const [filter, setFilter] = useState(DEFAULT_FILTER);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const { getGlobalScores } = GlobalScoreService();
   const { getProjects: getAllProjects } = ProjectService();
-  const [selectedMetric, setSelectedMetric] = useState<{ label: string; value: string }>(METRICS[0]);
+  const { getMetrics: getAllMetrics } = MetricService();
+  const [selectedMetric, setSelectedMetric] = useState<number>(0);
 
   const getProjects = async () => {
     const data = await getAllProjects();
     setProjects(data);
   };
+  const getMetrics = async () => {
+    const data = await getAllMetrics();
+    setMetrics(data);
+    setSelectedMetric(0);
+  };
   useEffect(() => {
     getProjects();
+    getMetrics();
     getScores(DEFAULT_FILTER);
   }, []);
   useEffect(() => {
@@ -60,8 +69,8 @@ export const LeaderBoardComponent = () => {
     <main className="flex flex-col w-full mt-14">
       <div className="flex flex-col lg:flex-row w-full">
         <ProjectTotalsGraph
-          setSelectedMetric={(item: { label: string; value: string }) => setSelectedMetric(item)}
-          metrics={METRICS}
+          setSelectedMetric={(i: number) => setSelectedMetric(i)}
+          metrics={metrics}
           totalsRecord={scores}
           selectedMetric={selectedMetric}
           filter={filter}

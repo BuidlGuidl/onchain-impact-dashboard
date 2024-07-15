@@ -2,24 +2,33 @@
 
 import React, { useEffect, useState } from "react";
 import { ProjectTotalsGraph } from "../projectTotalsGraph/projectTotalsGraph";
+import { IMetric } from "~~/services/mongodb/models/metric";
+import { MetricService } from "~~/services/onchainImpactDashboardApi/metricsService";
 import { ProjectScoreService } from "~~/services/onchainImpactDashboardApi/projectScoreService";
-import { METRICS } from "~~/utils/onchainImpactDashboard/common";
 
 export const ProjectTotalsComponent = ({ id }: { id: string }) => {
   const DEFAULT_FILTER = "30";
   const [filter, setFilter] = useState(DEFAULT_FILTER);
-  const [selectedMetric, setSelectedMetric] = useState<{ label: string; value: string }>(METRICS[0]);
+  const [metrics, setMetrics] = useState<IMetric[]>([]);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const { getProjectScoreById } = ProjectScoreService();
   const [totalsRecord, setTotalsRecord] = useState<any[]>([]);
+  const { getMetrics: getAllMetrics } = MetricService();
+  const [selectedMetric, setSelectedMetric] = useState<number>(0);
 
   const getTotals = async () => {
     const data = await getProjectScoreById(id, filter);
     setTotalsRecord(data as any);
   };
+  const getMetrics = async () => {
+    const data = await getAllMetrics();
+    setMetrics(data);
+    setSelectedMetric(0);
+  };
+
   useEffect(() => {
-    setSelectedMetric(METRICS[0]);
+    getMetrics();
     getTotals();
   }, []);
 
@@ -33,8 +42,8 @@ export const ProjectTotalsComponent = ({ id }: { id: string }) => {
   return (
     <main className="flex flex-col lg:flex-row w-full mt-14">
       <ProjectTotalsGraph
-        setSelectedMetric={(item: { label: string; value: string }) => setSelectedMetric(item)}
-        metrics={METRICS}
+        setSelectedMetric={(i: number) => setSelectedMetric(i)}
+        metrics={metrics}
         totalsRecord={totalsRecord}
         selectedMetric={selectedMetric}
         filter={filter}

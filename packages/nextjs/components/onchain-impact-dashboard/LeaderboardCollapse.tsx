@@ -23,7 +23,7 @@ const LeaderboardCollapse: React.FC<
       </div>
 
       <div className="collapse-content flex flex-col">
-        <div className="lg:max-w-[300px]">
+        <div>
           <span>{description}</span>
         </div>
 
