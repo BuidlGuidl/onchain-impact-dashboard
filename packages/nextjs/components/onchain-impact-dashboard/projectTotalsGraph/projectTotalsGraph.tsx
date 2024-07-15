@@ -59,7 +59,7 @@ export const ProjectTotalsGraph = ({
           nostra, per inceptos himenaeos.{" "}
         </p>
       </div>
-      <div className="flex flex-col w-full mt-10 lg:mt-0">
+      <div className="flex flex-col w-full mt-10 lg:mt-0 parent__metric-container">
         <div className="flex gap-6 flex-wrap mb-4">
           {metrics.map(item => (
             <span
@@ -75,7 +75,7 @@ export const ProjectTotalsGraph = ({
         </div>
 
         <div className="mb-3 w-full h-[50vh] rounded-lg grow min-h-[300px] lg:mr-4 lg:7/12 relative border p-1">
-          <div className="flex px-1 relative flex-col md:flex-row w-full rounded-t-md items-center bg-base-300 ">
+          <div className="flex px-1 relative  w-full rounded-t-md child__container bg-base-300 ">
             <div className="flex items-center p-1">
               <FilterButton filter={filter} value="30" label="1m" onClick={onFilter} />
               <FilterButton filter={filter} value="90" label="3m" onClick={onFilter} />
@@ -84,7 +84,7 @@ export const ProjectTotalsGraph = ({
               <FilterButton filter={filter} value="range" label="Range" onClick={onFilter} />
             </div>
             {filter == "range" && (
-              <div className="absolute md:relative top-14 md:top-0 right-10 md:right-0 bg-base-300 p-1 md:p-0 gap-1 rounded-lg  flex flex-col md:flex-row date-container">
+              <div className="bg-base-300 child__filter-data-picker  gap-1 rounded-lg  flex  date-container">
                 <div className="">
                   <DatePicker
                     value={startDate}

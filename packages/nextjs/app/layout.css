@@ -41,3 +41,30 @@
     width: 80%;
   }
 }
+
+.parent__metric-container {
+  container-name: parent-container;
+  container-type: inline-size;
+}
+
+.child__filter-data-picker {
+  flex-direction: row;
+  z-index: 1000;
+}
+.child__container {
+  align-items: center;
+}
+
+@container parent-container (max-width: 700px) {
+  .child__container {
+    align-items: center;
+    flex-direction: column;
+  }
+  .child__filter-data-picker {
+    flex-direction: column;
+    position: absolute;
+    top: 55px;
+    left: 160px;
+    padding: 4px;
+  }
+}

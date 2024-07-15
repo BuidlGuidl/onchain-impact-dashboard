@@ -9,7 +9,7 @@ export const ProjectService = () => {
   };
 
   const getProjectById = async (id: string) => {
-    const response = await fetch(`${baseURL}/${id}`);
+    const response = await fetch(`${baseURL}?id=${id}`);
     const { data }: { data: IProject } = await response.json();
     return data;
   };
