@@ -7,7 +7,7 @@ interface IFilterButton {
 export const FilterButton = ({ filter, label, onClick, value }: IFilterButton) => {
   return (
     <button
-      className={`p-2 pl-4 pr-4 ${filter == value ? "bg-customGray rounded-lg shadow" : ""}`}
+      className={`p-2  xs:pl-4 xs:pr-4 ${filter == value ? "bg-base-100 rounded-lg shadow" : ""}`}
       onClick={() => onClick(value)}
     >
       {label}

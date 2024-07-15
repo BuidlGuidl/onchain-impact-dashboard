@@ -74,7 +74,7 @@ export const ProjectTotalsGraph = ({
           </div>
         )}
       </div>
-      <div className="flex flex-col w-full mt-10 lg:mt-0">
+      <div className="flex flex-col w-full mt-10 lg:mt-0 parent__metric-container">
         {metrics.length == 0 ? (
           <div>
             <Skeleton height="h-8" />
@@ -96,37 +96,36 @@ export const ProjectTotalsGraph = ({
           ))}
         </div>
         {metrics.length > 0 ? (
-          <div className="mb-3 w-full h-[50vh] rounded-lg grow min-h-[300px] lg:mr-4 lg:7/12 relative border">
-            <div className="flex flex-col lg:flex-row mb-4">
-              <div className="flex  flex-col xl:flex-row items-center bg-base-300 rounded-lg p-2 pr-2 w-full xl:w-auto m-1">
-                <div className="flex items-center">
-                  <FilterButton filter={filter} value="30" label="1m" onClick={onFilter} />
-                  <FilterButton filter={filter} value="90" label="3m" onClick={onFilter} />
-                  <FilterButton filter={filter} value="270" label="6m" onClick={onFilter} />
-                  <FilterButton filter={filter} value="365" label="1y" onClick={onFilter} />
-                  <FilterButton filter={filter} value="range" label="Range" onClick={onFilter} />
-                </div>
-                {filter == "range" && (
-                  <div className="flex flex-col mt-2 xl:mt-0 lg:flex-row date-container">
-                    <div className="lg:ml-2 mt-2 lg:mt-0">
-                      <DatePicker
-                        value={startDate}
-                        onChange={(value: string) => updateStartDate(value)}
-                        name={"startDate"}
-                      />
-                    </div>
-                    <div className="lg:ml-2 mt-2 lg:mt-0">
-                      <DatePicker
-                        disabled={startDate == ""}
-                        value={endDate}
-                        onChange={(value: string) => updateEndDate(value)}
-                        name={"startDate"}
-                      />
-                    </div>
-                  </div>
-                )}
+          <div className="mb-3 w-full h-[50vh] rounded-lg grow min-h-[300px] lg:mr-4 lg:7/12 relative border p-1">
+            <div className="flex px-1 relative  w-full rounded-t-md child__container bg-base-300 ">
+              <div className="flex items-center p-1">
+                <FilterButton filter={filter} value="30" label="1m" onClick={onFilter} />
+                <FilterButton filter={filter} value="90" label="3m" onClick={onFilter} />
+                <FilterButton filter={filter} value="270" label="6m" onClick={onFilter} />
+                <FilterButton filter={filter} value="365" label="1y" onClick={onFilter} />
+                <FilterButton filter={filter} value="range" label="Range" onClick={onFilter} />
               </div>
+              {filter == "range" && (
+                <div className="bg-base-300 child__filter-data-picker  gap-1 rounded-lg  flex  date-container">
+                  <div className="">
+                    <DatePicker
+                      value={startDate}
+                      onChange={(value: string) => updateStartDate(value)}
+                      name={"startDate"}
+                    />
+                  </div>
+                  <div className="">
+                    <DatePicker
+                      disabled={startDate == ""}
+                      value={endDate}
+                      onChange={(value: string) => updateEndDate(value)}
+                      name={"startDate"}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
+
             <ResponsiveContainer width="100%" className={"absolute top-14"}>
               <AreaChart data={totalsRecord} margin={{ top: 20, right: -16, bottom: 45, left: 0 }}>
                 <Area
