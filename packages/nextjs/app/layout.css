@@ -64,7 +64,7 @@
     flex-direction: column;
     position: absolute;
     top: 55px;
-    left: 160px;
+    right: 70px;
     padding: 4px;
   }
 }
