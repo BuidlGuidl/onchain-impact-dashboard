@@ -20,17 +20,17 @@
   width: 95%;
   max-width: 1200px;
   min-height: calc(100vh - 270px);
-  margin: 120px auto;
+  margin: 3% auto;
   margin-bottom: 0;
   z-index: 800;
-  padding: 20px 0px;
+  padding: 2% 2% 0;
   display: flex;
   align-items: center;
   flex-direction: column;
   border: 1px solid transparent;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 760px) {
   .projects-container {
     max-height: 41vh;
     min-height: 41vh;
@@ -39,6 +39,8 @@
 
   .main-content {
     width: 80%;
+    margin: 120px auto;
+    padding: 5% 5% 0;
   }
 }
 
@@ -64,7 +66,7 @@
     flex-direction: column;
     position: absolute;
     top: 55px;
-    right: 70px;
+    right: 50px;
     padding: 4px;
   }
 }

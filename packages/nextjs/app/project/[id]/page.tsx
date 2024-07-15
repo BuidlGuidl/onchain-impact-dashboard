@@ -35,7 +35,7 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
   const data = await getProjectById(params.id);
   return (
     <>
-      <section className="p-1 xs:px-[5%] relative">
+      <section className=" relative">
         <Link className="absolute bg-white/40 backdrop-blur-sm  rounded-lg py-2 px-4" href="/" passHref>
           <ArrowLeftIcon className=" h-5 w-5 text-black  cursor-pointer" />
         </Link>
