@@ -32,6 +32,17 @@ export const ProjectTotalsGraph = ({
   totalsRecord,
   filter,
 }: IProps) => {
+  const formatNumber = (num: number, dec?: number) => {
+    const m = 1000000;
+    const k = 1000;
+    const text = num >= m ? "M" : num >= k ? "K" : "";
+    if (dec != undefined) {
+      const divisor = num >= m ? m : num >= k ? k : 1;
+      const value = new Intl.NumberFormat().format(parseFloat((num / divisor).toFixed(dec)));
+      return `${value}${text}`;
+    }
+    return new Intl.NumberFormat().format(num);
+  };
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -40,7 +51,7 @@ export const ProjectTotalsGraph = ({
           {payload.map((entry: any, index: any) => (
             <div key={`item-${index}`}>
               <p style={{ color: entry.color }} className="m-0 p-0 label">
-                {entry.value}
+                {formatNumber(entry.value)}
               </p>
             </div>
           ))}
@@ -51,6 +62,11 @@ export const ProjectTotalsGraph = ({
   };
 
   const metricToWork = metrics[selectedMetric];
+  const values = totalsRecord.map(d => d[metricToWork.name]);
+  let minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+  const buffer = maxValue * 0.4 + 5;
+  minValue = minValue - buffer > 0 ? minValue : minValue + buffer;
   return (
     <>
       <div className="flex flex-col lg:w-[40%]">
@@ -82,7 +98,7 @@ export const ProjectTotalsGraph = ({
         ) : (
           <></>
         )}
-        <div className="flex gap-6 flex-wrap mb-4">
+        <div className="flex gap-4 flex-wrap mb-4">
           {metrics.map((item, i) => (
             <span
               key={item.name}
@@ -127,7 +143,7 @@ export const ProjectTotalsGraph = ({
             </div>
 
             <ResponsiveContainer width="100%" className={"absolute top-14"}>
-              <AreaChart data={totalsRecord} margin={{ top: 20, right: -16, bottom: 45, left: 0 }}>
+              <AreaChart data={totalsRecord} margin={{ top: 20, right: -16, bottom: 45, left: 2 }}>
                 <Area
                   key={metricToWork.name}
                   type="monotone"
@@ -137,7 +153,15 @@ export const ProjectTotalsGraph = ({
                 />
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis tick={false} fontSize={10} hide={false} dataKey="date" />
-                <YAxis fontSize={10} type={"category"} hide={false} orientation="right" />
+                <YAxis
+                  fontSize={10}
+                  type={"number"}
+                  domain={[minValue - buffer, maxValue + buffer]}
+                  hide={false}
+                  allowDataOverflow={true}
+                  orientation="right"
+                  tickFormatter={v => formatNumber(v, 0)}
+                />
                 <Tooltip content={<CustomTooltip />} />
               </AreaChart>
             </ResponsiveContainer>
