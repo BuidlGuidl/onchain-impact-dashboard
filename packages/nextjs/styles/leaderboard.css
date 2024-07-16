@@ -1,0 +1,33 @@
+th {
+  background-color: #f2f3f8;
+  padding: 14px 24px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+  color: #404454;
+}
+
+th:hover {
+  cursor: pointer;
+}
+
+th:first-child {
+  border-top-left-radius: 8px;
+  /* width: 250px;
+  max-width: 250px; */
+}
+
+th:last-child {
+  border-top-right-radius: 8px;
+}
+
+td {
+  padding: 23px 24px;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+td:first-child {
+  width: 250px;
+  max-width: 250px;
+}

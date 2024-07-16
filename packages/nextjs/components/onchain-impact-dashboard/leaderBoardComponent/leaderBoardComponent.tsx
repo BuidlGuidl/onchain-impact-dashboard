@@ -1,31 +1,34 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Leaderboard from "../Leaderboard";
+import LeaderboardTable from "../LeaderboardTable";
 import { ProjectTotalsGraph } from "../projectTotalsGraph/projectTotalsGraph";
 import { IGlobalScore } from "~~/services/mongodb/models/globalScore";
 import { IMetric } from "~~/services/mongodb/models/metric";
-import { IProject } from "~~/services/mongodb/models/project";
+import { IProjectMovement } from "~~/services/mongodb/models/projectMovement";
 import { GlobalScoreService } from "~~/services/onchainImpactDashboardApi/globalScoreServices";
 import { MetricService } from "~~/services/onchainImpactDashboardApi/metricsService";
-import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
+import { ProjectMovementService } from "~~/services/onchainImpactDashboardApi/projectMovementService";
 
 export const LeaderBoardComponent = () => {
   const DEFAULT_FILTER = "30";
   const [scores, setScores] = useState<IGlobalScore[]>([]);
-  const [projects, setProjects] = useState<IProject[]>([]);
+  const [projects, setProjects] = useState<IProjectMovement[]>([]);
   const [metrics, setMetrics] = useState<IMetric[]>([]);
+  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState(DEFAULT_FILTER);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const { getGlobalScores } = GlobalScoreService();
-  const { getProjects: getAllProjects } = ProjectService();
+  const { getProjectMovements } = ProjectMovementService();
   const { getMetrics: getAllMetrics } = MetricService();
   const [selectedMetric, setSelectedMetric] = useState<number>(0);
 
   const getProjects = async () => {
-    const data = await getAllProjects();
-    setProjects(data);
+    setLoading(true);
+    const data = await getProjectMovements();
+    setLoading(false);
+    setProjects(data || []);
   };
   const getMetrics = async () => {
     const data = await getAllMetrics();
@@ -81,7 +84,7 @@ export const LeaderBoardComponent = () => {
           updateEndDate={val => setEndDate(val)}
         />
       </div>
-      <Leaderboard projects={projects} />
+      <LeaderboardTable projects={projects} loading={loading} selectedMetricName={metrics[selectedMetric]?.name} />
     </main>
   );
 };
