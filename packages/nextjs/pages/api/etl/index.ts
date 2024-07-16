@@ -1,5 +1,5 @@
 import weightingsJSON from "./weightings.json";
-import { startSession } from "mongoose";
+import { FlattenMaps, Types, startSession } from "mongoose";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { OnchainMetricsByProject } from "~~/app/types/OSO";
 import dbConnect from "~~/services/mongodb/dbConnect";
@@ -10,6 +10,7 @@ import Project from "~~/services/mongodb/models/project";
 import ProjectMetricSummary, { TempProjectMetricSummary } from "~~/services/mongodb/models/projectMetricSummary";
 import ProjectScore, { IProjectScore, TempProjectScore } from "~~/services/mongodb/models/projectScore";
 
+// Vercel uses these exported constants https://vercel.com/docs/functions/configuring-functions
 export const maxDuration = 300;
 export const runtime = "nodejs";
 
@@ -37,7 +38,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const weightings = weightingsJSON as { [key in keyof Metrics]: number };
 
     try {
-      // Update new data
+      // Clear out the temp collection data in case of failed run
+      console.log("Clearing temp collection data");
+      await TempGlobalScore.deleteMany({});
+      await TempProjectScore.deleteMany({});
+      await TempProjectMetricSummary.deleteMany({});
+
       // Get all the mapping data
       const { mapping } = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/mapping`).then(res => res.json());
       // Get metrics that are activated
@@ -50,82 +56,135 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return acc;
       }, {} as Partial<Metrics>);
       const dates = getDatesToProcess();
-      const globalScoreData = Object.assign({}, metricNamesObj) as { [key in keyof Metrics]: number };
-      for (const day of dates) {
-        // Get data from the stubbed API (Should be replaced with call to OSO)
-        const seriesResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/stub/series?date=${day.toISOString().split("T")[0]}`,
-        ).then(res => res.json());
+      // Process each day in parallel
+      await Promise.all(
+        dates.map(async day => {
+          // Fetch data for the day
+          const seriesResponse = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/stub/series?date=${day.toISOString().split("T")[0]}`,
+          ).then(res => res.json());
 
-        if (!seriesResponse) {
-          throw new Error("No OSO Data", seriesResponse);
-        }
-        const osoData = seriesResponse.data as OnchainMetricsByProject[];
-        console.log(`Processing OSO response for each project on ${day.toISOString().split("T")[0]}`);
-        for (const project of osoData) {
-          // Get the project id from mapping
-          const projectMapping = mapping.find((map: any) => map.oso_name === project.project_name);
-          if (!projectMapping) {
-            // Skip projects that we don't have a mapping for
-            console.error(`No mapping found for ${project.project_name}`);
-            continue;
+          if (!seriesResponse) {
+            throw new Error(`No OSO Data for ${day}`);
           }
-          const projectId = projectMapping.application_id;
-          // Create the project score
-          const impact_index = getImpactIndex(project as unknown as Metrics, weightings);
-          const projectMetrics = {} as { [key in keyof Metrics]: number };
-          for (const metric of metrics) {
-            const metricValue = project[metric.name as keyof OnchainMetricsByProject];
-            if (!isNaN(metricValue as number)) {
-              projectMetrics[metric.name as keyof Metrics] = parseInt(metricValue as string);
+          const osoData = seriesResponse.data as OnchainMetricsByProject[];
+          console.log(`Processing OSO response for each project on ${day.toISOString().split("T")[0]}`);
+
+          const globalScoreData = Object.assign({}, metricNamesObj) as { [key in keyof Metrics]: number };
+          const projectScoreOps = [];
+
+          for (const project of osoData) {
+            const projectMapping = mapping.find((map: any) => map.oso_name === project.project_name);
+            if (!projectMapping) {
+              console.error(`No mapping found for ${project.project_name}`);
+              continue;
+            }
+            const projectId = projectMapping.application_id;
+            const impact_index = getImpactIndex(project as unknown as Metrics, weightings);
+
+            const projectMetrics = {} as { [key in keyof Metrics]: number };
+            for (const metric of metrics) {
+              const metricValue = project[metric.name as keyof OnchainMetricsByProject];
+              if (!isNaN(metricValue as number)) {
+                projectMetrics[metric.name as keyof Metrics] = parseInt(metricValue as string);
+              }
+            }
+            const projectScoreData = Object.assign(projectMetrics, {
+              date: day,
+              projectId,
+              impact_index,
+            }) as IProjectScore;
+            projectScoreOps.push({
+              insertOne: {
+                document: projectScoreData,
+              },
+            });
+
+            for (const metric of Object.keys(metricNamesObj) as (keyof Metrics)[]) {
+              if (projectMetrics[metric]) {
+                globalScoreData[metric] += projectMetrics[metric];
+              }
             }
           }
-          const projectScoreData = Object.assign(projectMetrics, {
-            date: day,
-            projectId,
-            impact_index,
-          }) as IProjectScore;
-          await TempProjectScore.create(projectScoreData);
 
-          // Add the project metrics to the global score
-          for (const metric of Object.keys(metricNamesObj) as (keyof Metrics)[]) {
-            if (projectMetrics[metric]) {
-              globalScoreData[metric] += projectMetrics[metric];
-            }
+          globalScoreData.impact_index = getImpactIndex(globalScoreData, weightings);
+
+          // Batch insert project scores
+          if (projectScoreOps.length > 0) {
+            await TempProjectScore.bulkWrite(projectScoreOps);
           }
-        }
-        globalScoreData.impact_index = getImpactIndex(globalScoreData, weightings);
-        await TempGlobalScore.create({ date: day, ...globalScoreData });
-      }
+          await TempGlobalScore.create({ date: day, ...globalScoreData });
+        }),
+      );
+
       // Build the project metric summary data
-      console.log("Building project metric summary data");
       const today = dates[0];
       const day7 = dates[7];
       const day30 = dates[30];
       const day90 = dates[90];
-      // Iterate over all projects
-      for await (const project of Project.find({}).cursor()) {
+      const projectMetricSummaryOps: any[] = [];
+
+      // Fetch all required scores at once
+      const [projects, scoresToday, scoresDay7, scoresDay30, scoresDay90] = await Promise.all([
+        Project.find({}).lean(),
+        TempProjectScore.find({ date: today }).lean(),
+        TempProjectScore.find({ date: day7 }).lean(),
+        TempProjectScore.find({ date: day30 }).lean(),
+        TempProjectScore.find({ date: day90 }).lean(),
+      ]);
+
+      // Create a map for quick lookup
+      const createScoreMap = (
+        scores: (FlattenMaps<IProjectScore> & {
+          _id: Types.ObjectId;
+        })[],
+      ) => {
+        return scores.reduce((acc, score) => {
+          if (!acc[score.projectId]) {
+            acc[score.projectId] = {} as { [key: string]: any };
+          }
+          acc[score.projectId] = score;
+          return acc;
+        }, {} as { [key: string]: any });
+      };
+
+      const scoreMapToday = createScoreMap(scoresToday);
+      const scoreMapDay7 = createScoreMap(scoresDay7);
+      const scoreMapDay30 = createScoreMap(scoresDay30);
+      const scoreMapDay90 = createScoreMap(scoresDay90);
+
+      projects.forEach(project => {
         console.log(`Processing project ${project.name}`);
-        const projectScoreToday = await TempProjectScore.find({ date: today, projectId: project.id });
-        const projectScoreDay7 = await TempProjectScore.find({ date: day7, projectId: project.id });
-        const projectScoreDay30 = await TempProjectScore.find({ date: day30, projectId: project.id });
-        const projectScoreDay90 = await TempProjectScore.find({ date: day90, projectId: project.id });
+        const projectId = project.id;
+
         for (const metric of Object.keys(metricNamesObj) as (keyof Metrics)[]) {
-          const scoreToday = projectScoreToday[0][metric as keyof IProjectScore] as number;
-          const scoreDay7 = projectScoreDay7[0] ? (projectScoreDay7[0][metric as keyof IProjectScore] as number) : 0;
-          const scoreDay30 = projectScoreDay30[0] ? (projectScoreDay30[0][metric as keyof IProjectScore] as number) : 0;
-          const scoreDay90 = projectScoreDay90[0] ? (projectScoreDay90[0][metric as keyof IProjectScore] as number) : 0;
+          const scoreToday = scoreMapToday[projectId]?.[metric] || 0;
+          const scoreDay7 = scoreMapDay7[projectId]?.[metric] || 0;
+          const scoreDay30 = scoreMapDay30[projectId]?.[metric] || 0;
+          const scoreDay90 = scoreMapDay90[projectId]?.[metric] || 0;
+
           const metricSummary = {
             date: today,
-            projectId: project.id,
+            projectId,
             metricName: metric,
             7: getMovement(scoreToday, scoreDay7),
             30: getMovement(scoreToday, scoreDay30),
             90: getMovement(scoreToday, scoreDay90),
           };
-          await TempProjectMetricSummary.create(metricSummary);
+
+          projectMetricSummaryOps.push({
+            insertOne: {
+              document: metricSummary,
+            },
+          });
         }
+      });
+
+      // Batch insert project metric summaries
+      if (projectMetricSummaryOps.length > 0) {
+        await TempProjectMetricSummary.bulkWrite(projectMetricSummaryOps);
       }
+
       // Change collection names
       console.log("Swapping collection names");
       // Start a session
