@@ -160,6 +160,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const projectMovementData = {
           projectId,
           name: project.name,
+          category: project.category,
           profileAvatarUrl: project.profileAvatarUrl,
           movementByMetric: {},
         } as IProjectMovement;

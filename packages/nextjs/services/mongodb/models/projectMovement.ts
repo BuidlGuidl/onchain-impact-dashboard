@@ -11,6 +11,7 @@ interface IMovementByMetric {
 export interface IProjectMovement {
   projectId: string;
   name: string;
+  category: string;
   profileAvatarUrl: string;
   movementByMetric: IMovementByMetric;
 }
@@ -24,11 +25,12 @@ const MovementByMetricSchema = new Schema({
 const ProjectMovementSchema: Schema = new Schema({
   projectId: { type: String, required: true },
   name: { type: String, required: true },
+  category: { type: String, required: true },
   profileAvatarUrl: { type: String, required: true },
   movementByMetric: { type: Map, of: MovementByMetricSchema, required: true },
 });
 
-interface IProjectMovementModel extends Model<IProjectMovement, object> {}
+type IProjectMovementModel = Model<IProjectMovement, object>;
 
 export const TempProjectMovement =
   (mongoose.models.ProjectMovement as IProjectMovementModel) ||
