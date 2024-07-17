@@ -62,10 +62,10 @@ export const ProjectTotalsGraph = ({
   };
 
   const metricToWork = metrics[selectedMetric];
-  const values = totalsRecord.map(d => d[metricToWork.name]);
+  const values = totalsRecord.map(d => d[metricToWork?.name]);
   let minValue = Math.min(...values);
   const maxValue = Math.max(...values);
-  const buffer = maxValue * 0.4 + 5;
+  const buffer = minValue * 0.04 + 5;
   minValue = minValue - buffer > 0 ? minValue : minValue + buffer;
   return (
     <>
@@ -161,6 +161,7 @@ export const ProjectTotalsGraph = ({
                   allowDataOverflow={true}
                   orientation="right"
                   tickFormatter={v => formatNumber(v, 0)}
+                  ticks={[minValue - buffer, maxValue + buffer]}
                 />
                 <Tooltip content={<CustomTooltip />} />
               </AreaChart>
