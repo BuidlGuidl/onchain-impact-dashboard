@@ -35,7 +35,7 @@ const HEADERS = [
 
 const LeaderboardTable = ({ projects, loading, selectedMetricName = "impact_index" }: Props) => {
   const [searchValue, setSearchValue] = useState("");
-  const [sortValue, setSortValue] = useState<ColumnHeader>();
+  const [sortValue, setSortValue] = useState<string>();
   const [sortDesc, setSortDesc] = useState(false);
   const projectsMatchingSearch = projects.filter((it: any) =>
     it.name.toLowerCase().includes(searchValue.toLowerCase()),
@@ -62,7 +62,7 @@ const LeaderboardTable = ({ projects, loading, selectedMetricName = "impact_inde
     return 0;
   });
 
-  const getHeaderClickHandler = (value: ColumnHeader) => () => {
+  const getHeaderClickHandler = (value: string) => () => {
     if (sortValue === value) {
       setSortDesc(!sortDesc);
     } else {
