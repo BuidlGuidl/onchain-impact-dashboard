@@ -7,7 +7,7 @@ import ETLLog from "~~/services/mongodb/models/etlLog";
 import GlobalScore, { TempGlobalScore } from "~~/services/mongodb/models/globalScore";
 import Metric, { Metrics } from "~~/services/mongodb/models/metric";
 import Project from "~~/services/mongodb/models/project";
-import ProjectMetricSummary, { TempProjectMetricSummary } from "~~/services/mongodb/models/projectMetricSummary";
+import ProjectMovement, { IProjectMovement, TempProjectMovement } from "~~/services/mongodb/models/projectMovement";
 import ProjectScore, { IProjectScore, TempProjectScore } from "~~/services/mongodb/models/projectScore";
 
 // Vercel uses these exported constants https://vercel.com/docs/functions/configuring-functions
@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.log("Clearing temp collection data");
       await TempGlobalScore.deleteMany({});
       await TempProjectScore.deleteMany({});
-      await TempProjectMetricSummary.deleteMany({});
+      await TempProjectMovement.deleteMany({});
 
       // Get all the mapping data
       const { mapping } = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/mapping`).then(res => res.json());
@@ -122,9 +122,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const day7 = dates[7];
       const day30 = dates[30];
       const day90 = dates[90];
-      const projectMetricSummaryOps: any[] = [];
 
-      // Fetch all required scores at once
+      const projectMovementOps: any[] = [];
+
+      // Fetch all projects and required scores at once
       const [projects, scoresToday, scoresDay7, scoresDay30, scoresDay90] = await Promise.all([
         Project.find({}).lean(),
         TempProjectScore.find({ date: today }).lean(),
@@ -156,6 +157,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       projects.forEach(project => {
         console.log(`Processing project ${project.name}`);
         const projectId = project.id;
+        const projectMovementData = {
+          projectId,
+          name: project.name,
+          category: project.category,
+          profileAvatarUrl: project.profileAvatarUrl,
+          movementByMetric: {},
+        } as IProjectMovement;
 
         for (const metric of Object.keys(metricNamesObj) as (keyof Metrics)[]) {
           const scoreToday = scoreMapToday[projectId]?.[metric] || 0;
@@ -163,26 +171,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           const scoreDay30 = scoreMapDay30[projectId]?.[metric] || 0;
           const scoreDay90 = scoreMapDay90[projectId]?.[metric] || 0;
 
-          const metricSummary = {
-            date: today,
-            projectId,
-            metricName: metric,
+          projectMovementData.movementByMetric[metric] = {
             7: getMovement(scoreToday, scoreDay7),
             30: getMovement(scoreToday, scoreDay30),
             90: getMovement(scoreToday, scoreDay90),
           };
-
-          projectMetricSummaryOps.push({
-            insertOne: {
-              document: metricSummary,
-            },
-          });
         }
+
+        projectMovementOps.push({
+          insertOne: {
+            document: projectMovementData,
+          },
+        });
       });
 
-      // Batch insert project metric summaries
-      if (projectMetricSummaryOps.length > 0) {
-        await TempProjectMetricSummary.bulkWrite(projectMetricSummaryOps);
+      // Batch insert project movements
+      if (projectMovementOps.length > 0) {
+        await TempProjectMovement.bulkWrite(projectMovementOps);
       }
 
       // Change collection names
@@ -192,7 +197,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         // Start a transaction
         session.startTransaction();
-        const collections = [GlobalScore, ProjectScore, ProjectMetricSummary];
+        const collections = [GlobalScore, ProjectScore, ProjectMovement];
         for (const model of collections) {
           const name = model.collection.collectionName;
           // Rename current collection to old_collection
@@ -218,7 +223,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.log("Removing Temp Models");
       await mongooseConnection.deleteModel("temp_GlobalScore");
       await mongooseConnection.deleteModel("temp_ProjectScore");
-      await mongooseConnection.deleteModel("temp_ProjectMetricSummary");
+      await mongooseConnection.deleteModel("temp_ProjectMovement");
       console.log("ETL Process Completed");
     } catch (err) {
       console.error(err);
