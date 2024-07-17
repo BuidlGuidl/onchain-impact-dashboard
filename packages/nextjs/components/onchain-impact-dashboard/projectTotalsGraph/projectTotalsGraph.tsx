@@ -62,10 +62,10 @@ export const ProjectTotalsGraph = ({
   };
 
   const metricToWork = metrics[selectedMetric];
-  const values = totalsRecord.map(d => d[metricToWork.name]);
+  const values = totalsRecord.map(d => d[metricToWork?.name]);
   let minValue = Math.min(...values);
   const maxValue = Math.max(...values);
-  const buffer = maxValue * 0.4 + 5;
+  const buffer = minValue * 0.04 + 5;
   minValue = minValue - buffer > 0 ? minValue : minValue + buffer;
   return (
     <>
@@ -115,10 +115,10 @@ export const ProjectTotalsGraph = ({
           <div className="mb-3 w-full h-[50vh] rounded-lg grow min-h-[300px] lg:mr-4 lg:7/12 relative border p-1">
             <div className="flex px-1 relative  w-full rounded-t-md child__container bg-base-300 ">
               <div className="flex items-center p-1">
+                <FilterButton filter={filter} value="7" label="1w" onClick={onFilter} />
                 <FilterButton filter={filter} value="30" label="1m" onClick={onFilter} />
                 <FilterButton filter={filter} value="90" label="3m" onClick={onFilter} />
                 <FilterButton filter={filter} value="270" label="6m" onClick={onFilter} />
-                <FilterButton filter={filter} value="365" label="1y" onClick={onFilter} />
                 <FilterButton filter={filter} value="range" label="Range" onClick={onFilter} />
               </div>
               {filter == "range" && (
@@ -161,6 +161,7 @@ export const ProjectTotalsGraph = ({
                   allowDataOverflow={true}
                   orientation="right"
                   tickFormatter={v => formatNumber(v, 0)}
+                  ticks={[minValue - buffer, maxValue + buffer]}
                 />
                 <Tooltip content={<CustomTooltip />} />
               </AreaChart>
