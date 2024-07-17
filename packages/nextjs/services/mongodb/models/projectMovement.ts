@@ -33,7 +33,7 @@ const ProjectMovementSchema: Schema = new Schema({
 type IProjectMovementModel = Model<IProjectMovement, object>;
 
 export const TempProjectMovement =
-  (mongoose.models.ProjectMovement as IProjectMovementModel) ||
+  (mongoose.models.temp_ProjectMovement as IProjectMovementModel) ||
   mongoose.model<IProjectMovement, IProjectMovementModel>("temp_ProjectMovement", ProjectMovementSchema);
 
 const ProjectMovement =
