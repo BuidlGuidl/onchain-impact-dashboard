@@ -23,6 +23,9 @@ const SkeletonTable = () =>
       <td>
         <div className="h-2 w-7 bg-slate-300 rounded"></div>
       </td>
+      <td>
+        <div className="h-2 w-7 bg-slate-300 rounded"></div>
+      </td>
     </tr>
   ));
 

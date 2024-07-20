@@ -31,6 +31,7 @@ const HEADERS = [
   ["7", "7 days"],
   ["30", "30 days"],
   ["90", "90 days"],
+  ["180", "180 days"],
 ];
 
 const LeaderboardTable = ({ projects, loading, selectedMetricName = "impact_index" }: Props) => {
@@ -42,8 +43,8 @@ const LeaderboardTable = ({ projects, loading, selectedMetricName = "impact_inde
   );
   const sortedProjects = projectsMatchingSearch.sort((a, b) => {
     if (sortValue) {
-      if (["7", "30", "90"].includes(sortValue)) {
-        const range = sortValue as "7" | "30" | "90";
+      if (["7", "30", "90", "180"].includes(sortValue)) {
+        const range = sortValue as "7" | "30" | "90" | "180";
         const aMovement = a.movementByMetric[selectedMetricName][range];
         const bMovement = b.movementByMetric[selectedMetricName][range];
         if (sortDesc) {
@@ -102,7 +103,7 @@ const LeaderboardTable = ({ projects, loading, selectedMetricName = "impact_inde
                 <SkeletonTable />
               ) : !sortedProjects.length ? (
                 <tr>
-                  <td colSpan={5} className="text-center">
+                  <td colSpan={6} className="text-center">
                     No projects found
                   </td>
                 </tr>
@@ -127,6 +128,7 @@ const LeaderboardTable = ({ projects, loading, selectedMetricName = "impact_inde
                     <td>{formatMovement(item.movementByMetric[selectedMetricName]["7"])}</td>
                     <td>{formatMovement(item.movementByMetric[selectedMetricName]["30"])}</td>
                     <td>{formatMovement(item.movementByMetric[selectedMetricName]["90"])}</td>
+                    <td>{formatMovement(item.movementByMetric[selectedMetricName]["180"])}</td>
                   </tr>
                 ))
               )}
