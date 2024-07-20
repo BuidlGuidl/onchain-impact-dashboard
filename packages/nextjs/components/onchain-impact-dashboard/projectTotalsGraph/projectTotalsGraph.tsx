@@ -60,11 +60,11 @@ export const ProjectTotalsGraph = ({
     }
     return null;
   };
-
   const metricToWork = metrics[selectedMetric];
   const values = totalsRecord.map(d => d[metricToWork?.name]);
   let minValue = Math.min(...values);
   const maxValue = Math.max(...values);
+  const isEmpty = maxValue == 0 && minValue == 0;
   const buffer = minValue * 0.04 + 5;
   minValue = minValue - buffer > 0 ? minValue : minValue + buffer;
   return (
@@ -143,28 +143,34 @@ export const ProjectTotalsGraph = ({
             </div>
 
             <ResponsiveContainer width="100%" className={"absolute top-14"}>
-              <AreaChart data={totalsRecord} margin={{ top: 20, right: -16, bottom: 45, left: 2 }}>
-                <Area
-                  key={metricToWork.name}
-                  type="monotone"
-                  dataKey={metricToWork.name}
-                  stroke={stringToColor(metricToWork.label ?? "")}
-                  fill={stringToColor(metricToWork.label ?? "")}
-                />
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis tick={false} fontSize={10} hide={false} dataKey="date" />
-                <YAxis
-                  fontSize={10}
-                  type={"number"}
-                  domain={[minValue - buffer, maxValue + buffer]}
-                  hide={false}
-                  allowDataOverflow={true}
-                  orientation="right"
-                  tickFormatter={v => formatNumber(v, 0)}
-                  ticks={[minValue - buffer, maxValue + buffer]}
-                />
-                <Tooltip content={<CustomTooltip />} />
-              </AreaChart>
+              {isEmpty ? (
+                <div className="flex justify-center items-center w-full h-[300px] text-neutral-content">
+                  No data found yet
+                </div>
+              ) : (
+                <AreaChart data={totalsRecord} margin={{ top: 20, right: -16, bottom: 45, left: 2 }}>
+                  <Area
+                    key={metricToWork.name}
+                    type="monotone"
+                    dataKey={metricToWork.name}
+                    stroke={stringToColor(metricToWork.label ?? "")}
+                    fill={stringToColor(metricToWork.label ?? "")}
+                  />
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis tick={false} fontSize={10} hide={false} dataKey="date" />
+                  <YAxis
+                    fontSize={10}
+                    type={"number"}
+                    domain={[minValue - buffer, maxValue + buffer]}
+                    hide={false}
+                    allowDataOverflow={true}
+                    orientation="right"
+                    tickFormatter={v => formatNumber(v, 0)}
+                    ticks={[minValue - buffer, maxValue + buffer]}
+                  />
+                  <Tooltip content={<CustomTooltip />} />
+                </AreaChart>
+              )}
             </ResponsiveContainer>
           </div>
         ) : (
