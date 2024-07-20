@@ -15,9 +15,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (!entries || entries.length === 0) {
     return res.status(404).json({ message: "No scores located with that project id" });
   }
-
   try {
-    res.status(200).json({ data: entries });
+    res.status(200).json({ data: entries.sort((a, b) => a.date.getTime() - b.date.getTime()) });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
