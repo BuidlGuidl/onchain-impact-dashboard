@@ -6,7 +6,6 @@ import { Toaster } from "react-hot-toast";
 import { WagmiConfig } from "wagmi";
 import { Footer } from "~~/components/Footer";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
-import { ProgressBar } from "~~/components/scaffold-eth/ProgressBar";
 import { useNativeCurrencyPrice } from "~~/hooks/scaffold-eth";
 import { useDarkMode } from "~~/hooks/scaffold-eth/useDarkMode";
 import { useGlobalState } from "~~/services/store/store";
@@ -41,7 +40,6 @@ const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
 export const ScaffoldEthProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <ProgressBar />
       <RainbowKitProvider chains={appChains.chains} avatar={BlockieAvatar} theme={lightTheme()}>
         <ScaffoldEthApp>{children}</ScaffoldEthApp>
       </RainbowKitProvider>
