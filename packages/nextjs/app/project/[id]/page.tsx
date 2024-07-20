@@ -2,9 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata, NextPage } from "next";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { ShareIcon } from "~~/components/assets/ShareIcon";
-import CustomButton from "~~/components/onchain-impact-dashboard/CustomButton";
 import { ProjectTotalsComponent } from "~~/components/onchain-impact-dashboard/projectTotalsComponent/projectTotalsComponent";
+import { ShareButton } from "~~/components/shareButton/ShareButton";
 import { ProjectService } from "~~/services/onchainImpactDashboardApi/projectService";
 
 type Props = {
@@ -54,11 +53,9 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
           <div className="flex w-full flex-row  items-center justify-between gap-3">
             <div className="flex gap-3">
               <h1 className="text-lg m-0">#1 {data?.name}</h1>
-              <span className="bg-base-300 p-2 text-center rounded-lg text-xs">{data.category}</span>
+              <span className="bg-base-300 pt-[6px] px-4 text-center rounded-lg text-xs">{data.category}</span>
             </div>
-            <CustomButton text={"Share"} customClassName="border bg-transparent border-gray-200 bg-base-100">
-              <ShareIcon />
-            </CustomButton>
+            <ShareButton project={data} />
           </div>
         </div>
         <div className="leaderboard-content lg:flex">
@@ -83,27 +80,32 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
             </div>
           ))}
         </div>
-        {data?.socialLinks?.website && (
+        {data?.socialLinks?.website.length > 0 && (
           <>
             <h2 className="font-semibold mt-8 mb-4">Web</h2>
-            <div className="flex items-center mb-2">
-              <a href={`${data.socialLinks.website}`} className="flex items-center" target="_blank" rel="noreferrer">
-                {data.socialLinks.website}
-                <Image
-                  className="ml-2"
-                  src="/assets/svg/icons/linkArrow.svg"
-                  width={14}
-                  height={14}
-                  alt={`${data.name} website`}
-                />
-              </a>
-            </div>
+            {data.socialLinks.website.map(it => {
+              return (
+                <div className="flex items-center mb-2" key={it}>
+                  <a href={`${it}`} className="flex items-center" target="_blank" rel="noreferrer">
+                    {it}
+                    <Image
+                      className="ml-2"
+                      src="/assets/svg/icons/linkArrow.svg"
+                      width={14}
+                      height={14}
+                      alt={`${data.name} website`}
+                    />
+                  </a>
+                </div>
+              );
+            })}
+            <div></div>
           </>
         )}
 
         <h2 className="font-semibold mt-8 mb-4">Social Media Links</h2>
         <div className="flex">
-          {data?.socialLinks?.farcaster && (
+          {data?.socialLinks?.farcaster.length > 0 && (
             <>
               <div className="flex items-center mb-2">
                 <a href={`${data.socialLinks.farcaster}`} target="_blank" rel="noreferrer">
@@ -124,9 +126,9 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
                 <a href={`${data.socialLinks.mirror}`} target="_blank" rel="noreferrer">
                   <Image
                     className="ml-2"
-                    src="/assets/svg/icons/twitter.svg"
-                    width={28}
-                    height={28}
+                    src="/assets/svg/icons/mirror.svg"
+                    width={24}
+                    height={24}
                     alt={`${data.name} mirror link`}
                   />
                 </a>
@@ -149,6 +151,7 @@ const ProjectDetail: NextPage<{ params: { id: string } }> = async ({ params }) =
             </>
           )}
         </div>
+        <pre></pre>
       </section>
     </>
   );
