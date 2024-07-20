@@ -5,6 +5,7 @@ interface IMovementByMetric {
     "7": number;
     "30": number;
     "90": number;
+    "180": number;
   };
 }
 
@@ -20,6 +21,7 @@ const MovementByMetricSchema = new Schema({
   7: { type: Number, required: true },
   30: { type: Number, required: true },
   90: { type: Number, required: true },
+  180: { type: Number, required: true },
 });
 
 const ProjectMovementSchema: Schema = new Schema({
