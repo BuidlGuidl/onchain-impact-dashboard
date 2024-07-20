@@ -5,7 +5,7 @@ import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useDarkMode } from "~~/hooks/scaffold-eth/useDarkMode";
 
 export const SwitchTheme = ({ className }: { className?: string }) => {
-  const { isDarkMode, toggle } = useDarkMode();
+  const { isDarkMode, toggle } = useDarkMode(false);
 
   useEffect(() => {
     const body = document.body;

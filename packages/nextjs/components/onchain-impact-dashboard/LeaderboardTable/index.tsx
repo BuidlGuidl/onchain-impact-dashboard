@@ -89,7 +89,7 @@ const LeaderboardTable = ({ projects, loading, selectedMetricName = "impact_inde
             <thead className="sticky top-0">
               <tr>
                 {HEADERS.map(([value, label]) => (
-                  <th key={value} onClick={getHeaderClickHandler(value)}>
+                  <th key={value} onClick={getHeaderClickHandler(value)} className="bg-base-300">
                     <div className="flex w-20">
                       {label} {getArrowIcon(value as ColumnHeader)}
                     </div>
