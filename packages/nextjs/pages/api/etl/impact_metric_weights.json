@@ -1,0 +1,21 @@
+{
+    "os_multiplier": 2.109259259259259,
+    "metrics": {
+        "trusted_daily_active_users": 2.74434214810808,
+        "trusted_monthly_active_users": 6.521382935849861,
+        "trusted_transaction_count": 3.7401642985740833,
+        "transaction_count": 5.067789294866286,
+        "log_gas_fees": 12.257330230255528,
+        "log_trusted_transaction_count": 2.311245550638371,
+        "gas_fees": 19.191654000740442,
+        "power_user_addresses": 2.9964685840384355,
+        "trusted_transaction_share": 3.182680116825909,
+        "trusted_users_onboarded": 12.492690182244031,
+        "daily_active_addresses": 2.0584484851820957,
+        "monthly_active_addresses": 5.108951018870128,
+        "recurring_addresses": 5.163663192473145,
+        "openrank_trusted_users_count": 4.054655175020334,
+        "trusted_recurring_users": 8.666799294102633,
+        "log_transaction_count": 4.441688461052498
+    }
+}
