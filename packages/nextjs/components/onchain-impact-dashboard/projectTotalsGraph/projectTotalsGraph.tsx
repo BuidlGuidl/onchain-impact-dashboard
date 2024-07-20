@@ -145,7 +145,7 @@ export const ProjectTotalsGraph = ({
             <ResponsiveContainer width="100%" className={"absolute top-14"}>
               {isEmpty ? (
                 <div className="flex justify-center items-center w-full h-[300px] text-neutral-content">
-                  No data found yet
+                  No data found
                 </div>
               ) : (
                 <AreaChart data={totalsRecord} margin={{ top: 20, right: -16, bottom: 45, left: 2 }}>
