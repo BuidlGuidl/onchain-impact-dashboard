@@ -26,6 +26,7 @@ export interface IMetric {
   description: string;
   weight: number;
   activated: boolean;
+  order: number;
 }
 
 interface IMetricModel extends Model<IMetric, object> {
@@ -51,6 +52,10 @@ const MetricSchema = new Schema<IMetric, IMetricModel>({
   activated: {
     type: Boolean,
     default: false,
+  },
+  order: {
+    type: Number,
+    required: true,
   },
 });
 

@@ -99,17 +99,19 @@ export const ProjectTotalsGraph = ({
           <></>
         )}
         <div className="flex gap-4 flex-wrap mb-4">
-          {metrics.map((item, i) => (
-            <span
-              key={item.name}
-              className={`${
-                selectedMetric == i ? "font-bold text-secondary-content" : "font-medium"
-              } cursor-pointer text-neutral-content`}
-              onClick={() => setSelectedMetric(i)}
-            >
-              {item.label || ""}
-            </span>
-          ))}
+          {metrics
+            .sort((a, b) => a.order - b.order)
+            .map((item, i) => (
+              <span
+                key={item.name}
+                className={`${
+                  selectedMetric == i ? "font-bold text-secondary-content" : "font-medium"
+                } cursor-pointer text-neutral-content`}
+                onClick={() => setSelectedMetric(i)}
+              >
+                {item.label || ""}
+              </span>
+            ))}
         </div>
         {metrics.length > 0 ? (
           <div className="mb-3 w-full h-[50vh] rounded-lg grow min-h-[300px] lg:mr-4 lg:7/12 relative border p-1">

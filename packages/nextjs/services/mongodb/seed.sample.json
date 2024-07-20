@@ -23821,97 +23821,112 @@
     "name": "impact_index",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": true,
+    "order":1
   },
   {
     "name": "active_contract_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": false
+    "activated": false,
+    "order":7
   },
   {
     "name": "address_count",
     "description": "string",
     "weight": 1,
-    "activated": false
+    "activated": false,
+    "order":8
   },
   {
     "name": "address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": false
+    "activated": false,
+    "order":9
   },
   {
     "name": "days_since_first_transaction",
     "description": "string",
     "weight": 1,
-    "activated": false
+    "activated": false,
+    "order":10
   },
   {
     "label": "Gas Fees",
     "name": "gas_fees_sum",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": true,
+    "order":2
   },
   {
     
     "name": "gas_fees_sum_6_months",
     "description": "string",
     "weight": 1,
-    "activated": false
+    "activated": false,
+    "order":11
   },
   {
     "label": "Trusted users",
     "name": "high_activity_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": true,
+    "order":3
   },
   {
     "name": "low_activity_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": false
+    "activated": false,
+    "order":12
   },
   {
     "name": "medium_activity_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": false
+    "activated": false,
+    "order":13
   },
   {
     "name": "multi_project_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": false
+    "activated": false,
+    "order":14
   },
   {
     "label": "Users Onboarded",
     "name": "new_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": true,
+    "order":4
   },
   {
     "label": "Recurrent Users",
     "name": "returning_address_count_90_days",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": true,
+    "order":5
   },
   {
     "label": "Transactions",
     "name": "transaction_count",
     "description": "string",
     "weight": 1,
-    "activated": true
+    "activated": true,
+    "order":6
   },
   {
     "name": "transaction_count_6_months",
     "description": "string",
     "weight": 1,
-    "activated": false
+    "activated": false,
+    "order":15
   }
   ]
 }
