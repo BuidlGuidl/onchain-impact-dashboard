@@ -32,7 +32,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const log = await ETLLog.create({ date: new Date(), status: "pending" });
-    res.status(200).json({ result: "ETL Process Started" });
 
     // Get weights from JSON file
     const weightings = weightingsJSON as { [key in keyof Metrics]: number };
@@ -237,10 +236,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     // Log the ETL process
     await ETLLog.updateOne({ _id: log._id }, { status: "success" });
+    res.status(200).json({ message: "ETL Process Completed", success: true });
   } catch (error) {
     console.error(error);
     if (!res.headersSent) {
-      res.status(500).json({ message: "Internal Server Error" });
+      res.status(500).json({ message: "ETL Process Encountered An Error:", error, success: false });
     }
   }
 }
