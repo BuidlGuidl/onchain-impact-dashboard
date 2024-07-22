@@ -10,10 +10,6 @@ import Project from "~~/services/mongodb/models/project";
 import ProjectMovement, { IProjectMovement, TempProjectMovement } from "~~/services/mongodb/models/projectMovement";
 import ProjectScore, { IProjectScore, TempProjectScore } from "~~/services/mongodb/models/projectScore";
 
-// Vercel uses these exported constants https://vercel.com/docs/functions/configuring-functions
-export const maxDuration = 300;
-export const runtime = "nodejs";
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed." });
