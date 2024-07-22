@@ -10,6 +10,7 @@ import Project from "~~/services/mongodb/models/project";
 import ProjectMovement, { IProjectMovement, TempProjectMovement } from "~~/services/mongodb/models/projectMovement";
 import ProjectScore, { IProjectScore, TempProjectScore } from "~~/services/mongodb/models/projectScore";
 
+// Vercel Serverless Function Config
 export const config = {
   maxDuration: 60, // seconds
 };
