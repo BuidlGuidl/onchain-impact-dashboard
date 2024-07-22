@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "app/pages/api/etl/*": {
-      "maxDuration": 300
-    }
-  },
   "crons": [
     {
       "path": "/api/etl",
