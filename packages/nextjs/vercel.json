@@ -1,6 +1,6 @@
 {
   "functions": {
-    "app/pages/api/etl/*": {
+    "api/etl/*": {
       "maxDuration": 300
     }
   },
