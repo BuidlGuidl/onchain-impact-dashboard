@@ -122,16 +122,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const day7 = dates[7];
       const day30 = dates[30];
       const day90 = dates[90];
+      const day180 = dates[180];
 
       const projectMovementOps: any[] = [];
 
       // Fetch all projects and required scores at once
-      const [projects, scoresToday, scoresDay7, scoresDay30, scoresDay90] = await Promise.all([
+      const [projects, scoresToday, scoresDay7, scoresDay30, scoresDay90, scoresDay180] = await Promise.all([
         Project.find({}).lean(),
         TempProjectScore.find({ date: today }).lean(),
         TempProjectScore.find({ date: day7 }).lean(),
         TempProjectScore.find({ date: day30 }).lean(),
         TempProjectScore.find({ date: day90 }).lean(),
+        TempProjectScore.find({ date: day180 }).lean(),
       ]);
 
       // Create a map for quick lookup
@@ -153,6 +155,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const scoreMapDay7 = createScoreMap(scoresDay7);
       const scoreMapDay30 = createScoreMap(scoresDay30);
       const scoreMapDay90 = createScoreMap(scoresDay90);
+      const scoreMapDay180 = createScoreMap(scoresDay180);
 
       projects.forEach(project => {
         console.log(`Processing project ${project.name}`);
@@ -170,11 +173,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           const scoreDay7 = scoreMapDay7[projectId]?.[metric] || 0;
           const scoreDay30 = scoreMapDay30[projectId]?.[metric] || 0;
           const scoreDay90 = scoreMapDay90[projectId]?.[metric] || 0;
+          const scoreDay180 = scoreMapDay180[projectId]?.[metric] || 0;
 
           projectMovementData.movementByMetric[metric] = {
             7: getMovement(scoreToday, scoreDay7),
             30: getMovement(scoreToday, scoreDay30),
             90: getMovement(scoreToday, scoreDay90),
+            180: getMovement(scoreToday, scoreDay180),
           };
         }
 
