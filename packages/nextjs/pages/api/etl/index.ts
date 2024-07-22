@@ -17,10 +17,10 @@ export const config = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
-    return res.status(405).json({ message: "Method not allowed." });
+    return res.status(405).json({ message: "Method not allowed" });
   }
   if (process.env.CRON_SECRET && req.headers?.authorization !== `Bearer ${process.env.CRON_SECRET}`) {
-    return res.status(401).end("Unauthorized");
+    return res.status(401).json({ message: "Unauthorized" });
   }
   try {
     const mongooseConnection = await dbConnect();
@@ -244,7 +244,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   } catch (error) {
     console.error(error);
     if (!res.headersSent) {
-      res.status(500).json({ message: "ETL Process Encountered An Error:", error, success: false });
+      res.status(500).json({ message: "ETL Process Encountered An Error", success: false });
     }
   }
 }
