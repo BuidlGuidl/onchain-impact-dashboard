@@ -14,6 +14,7 @@ interface Props {
 const OnchainInfoModal: React.FC<Props> = ({ isModalOpen, closeModal, project }) => {
   const [plainURL, setPlainURL] = useState("");
   const [text, setText] = useState("");
+  const [showCopied, setShowCopied] = useState(false);
   const BASE_COPY = `Check out this amazing project on the Retro Funding Leaderboard from Optimism! ${project?.name} is doing great. Support and follow their progress!\n #OPleaderboard #${project?.name}`;
   const encodedText = encodeURIComponent(plainURL);
 
@@ -47,6 +48,10 @@ const OnchainInfoModal: React.FC<Props> = ({ isModalOpen, closeModal, project })
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(plainURL);
+    setShowCopied(true);
+    setTimeout(() => {
+      setShowCopied(false);
+    }, 1500);
   };
   return (
     <>
@@ -91,8 +96,9 @@ const OnchainInfoModal: React.FC<Props> = ({ isModalOpen, closeModal, project })
                 onClick={() => copyToClipboard()}
                 className=" cursor-pointer py-1 max-w-[72px] w-full px-4 border  border-neutral-400/30 rounded-xl"
               >
-                <div className="ml-1">
+                <div className="ml-1 relative">
                   <LinkIcon className="" height={40} width={30} />
+                  {showCopied && <div className="absolute bottom-14 px-3 py-2 rounded bg-slate-200">Copied!</div>}
                 </div>
               </div>
             </div>
