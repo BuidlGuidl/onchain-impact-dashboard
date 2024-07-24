@@ -26,6 +26,8 @@
     "d3-scale": "^4.0.2",
     "daisyui": "^4.4.19",
     "fs": "^0.0.1-security",
+    "highcharts": "^11.4.6",
+    "highcharts-react-official": "^3.2.1",
     "lodash": "^4.17.21",
     "mongodb": "^6.8.0",
     "next": "^14.0.4",
