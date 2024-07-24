@@ -170,8 +170,18 @@ export const ProjectTotalsGraph = ({
                     },
                     tooltip: {
                       xDateFormat: "%b %e, %Y",
-                      pointFormat:
-                        '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br/>',
+                      pointFormatter: function (this: Highcharts.TooltipFormatterContextObject) {
+                        const formattedNumber = Highcharts.numberFormat(this.y as number, 0, "", ",");
+                        return (
+                          '<span style="color:' +
+                          this.color +
+                          '">\u25CF</span> ' +
+                          this.series.name +
+                          ": <b>" +
+                          formattedNumber +
+                          "</b><br/>"
+                        );
+                      },
                     },
 
                     series: [
