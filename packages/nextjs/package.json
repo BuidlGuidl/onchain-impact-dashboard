@@ -26,6 +26,8 @@
     "d3-scale": "^4.0.2",
     "daisyui": "^4.4.19",
     "fs": "^0.0.1-security",
+    "highcharts": "^11.4.6",
+    "highcharts-react-official": "^3.2.1",
     "lodash": "^4.17.21",
     "mongodb": "^6.8.0",
     "next": "^14.0.4",
@@ -42,9 +44,7 @@
     "usehooks-ts": "^2.7.2",
     "viem": "1.19.9",
     "wagmi": "1.4.12",
-    "zustand": "^4.1.2",
-    "highcharts": "^11.4.6",
-    "highcharts-react-official": "^3.2.1"
+    "zustand": "^4.1.2"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",

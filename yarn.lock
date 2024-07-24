@@ -1253,6 +1253,8 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
     fs: ^0.0.1-security
+    highcharts: ^11.4.6
+    highcharts-react-official: ^3.2.1
     lodash: ^4.17.21
     mongodb: ^6.8.0
     mongoose: ^8.4.5
@@ -5947,6 +5949,23 @@ __metadata:
   version: 1.0.8
   resolution: "hey-listen@npm:1.0.8"
   checksum: 6bad60b367688f5348e25e7ca3276a74b59ac5a09b0455e6ff8ab7d4a9e38cd2116c708a7dcd8a954d27253ce1d8717ec891d175723ea739885b828cf44e4072
+  languageName: node
+  linkType: hard
+
+"highcharts-react-official@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "highcharts-react-official@npm:3.2.1"
+  peerDependencies:
+    highcharts: ">=6.0.0"
+    react: ">=16.8.0"
+  checksum: 615f1a352eb95f0e78189506e7d551071438fc11eabff78c55aeb6cc63658f4c284f4920f9e9c85113b319661bf5745c668ef22b71920c1a9f24749e49584aaf
+  languageName: node
+  linkType: hard
+
+"highcharts@npm:^11.4.6":
+  version: 11.4.6
+  resolution: "highcharts@npm:11.4.6"
+  checksum: 7aa3871d19892c20a95b36754cc8c0234af0dd310e1fbe9a87cf489c315d55ac99497d1dba87f0bea8356b9e5886231bbb25f6de0b1dba92b31456aeee481cab
   languageName: node
   linkType: hard
 
