@@ -168,6 +168,12 @@ export const ProjectTotalsGraph = ({
                       min: minValue - buffer,
                       max: maxValue + buffer,
                     },
+                    tooltip: {
+                      xDateFormat: "%b %e, %Y",
+                      pointFormat:
+                        '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br/>',
+                    },
+
                     series: [
                       {
                         name: metricToWork.label,
