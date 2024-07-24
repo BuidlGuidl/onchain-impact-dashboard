@@ -51,7 +51,7 @@ export const LeaderBoardComponent = () => {
       return;
     }
     if (val != "" && valEnd != "") {
-      getScores(`${val},${valEnd}`);
+      getScores(`${startDate},${endDate}`);
     }
   }, [startDate, endDate]);
 
