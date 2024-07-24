@@ -112,7 +112,7 @@ const LeaderboardTable = ({ projects, loading, selectedMetricName = "impact_inde
                   <tr key={item.projectId}>
                     <td>
                       <Link href={`/project/${item.projectId}`}>
-                        <div className="flex items-center font-semibold truncate">
+                        <div className="flex items-center font-semibold truncate text-accent">
                           <Image
                             width={24}
                             height={24}
