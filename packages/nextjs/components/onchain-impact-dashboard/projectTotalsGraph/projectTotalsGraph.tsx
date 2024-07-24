@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { FilterButton } from "../filterButton/filterButton";
 import { Skeleton } from "../skeleton/skeleton";
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import * as Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 import { DatePicker } from "~~/components/impact-vector/inputs/datePicker";
 import { IMetric } from "~~/services/mongodb/models/metric";
-import { formatDate, stringToColor } from "~~/utils/onchainImpactDashboard/common";
+import { stringToColor } from "~~/utils/onchainImpactDashboard/common";
 
 interface IProps {
   totalsRecord: any[];
@@ -32,41 +33,48 @@ export const ProjectTotalsGraph = ({
   totalsRecord,
   filter,
 }: IProps) => {
-  const formatNumber = (num: number, dec?: number) => {
-    const m = 1000000;
-    const k = 1000;
-    const text = num >= m ? "M" : num >= k ? "K" : "";
-    if (dec != undefined) {
-      const divisor = num >= m ? m : num >= k ? k : 1;
-      const value = new Intl.NumberFormat().format(parseFloat((num / divisor).toFixed(dec)));
-      return `${value}${text}`;
-    }
-    return new Intl.NumberFormat().format(num);
+  const options = {
+    chart: {
+      type: "line",
+      height: 360,
+    },
+    title: {
+      text: "",
+    },
+    subtitle: {
+      text: "",
+    },
+    credits: {
+      enabled: false,
+    },
+    xAxis: {
+      type: "datetime",
+      title: {
+        text: "",
+      },
+      dateTimeLabelFormats: {
+        day: "%e %b",
+      },
+    },
+    legend: {
+      enabled: false,
+    },
   };
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-base-300 p-4 rounded-lg shadow">
-          <p className="m-0 p-0 label font-bold">{formatDate(label)}</p>
-          {payload.map((entry: any, index: any) => (
-            <div key={`item-${index}`}>
-              <p style={{ color: entry.color }} className="m-0 p-0 label">
-                {formatNumber(entry.value)}
-              </p>
-            </div>
-          ))}
-        </div>
-      );
-    }
-    return null;
-  };
+
+  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
   const metricToWork = metrics[selectedMetric];
   const values = totalsRecord.map(d => d[metricToWork?.name]);
+  const newValues = totalsRecord.map(d => {
+    const date = new Date(d["date"]);
+    return [Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()), d[metricToWork?.name]];
+  });
+
   let minValue = Math.min(...values);
   const maxValue = Math.max(...values);
   const isEmpty = maxValue == 0 && minValue == 0;
-  const buffer = minValue * 0.04 + 5;
+  const buffer = minValue * 0.03 + 5;
   minValue = minValue - buffer > 0 ? minValue : minValue + buffer;
+
   return (
     <>
       <div className="flex flex-col lg:w-[40%]">
@@ -143,37 +151,35 @@ export const ProjectTotalsGraph = ({
                 </div>
               )}
             </div>
-
-            <ResponsiveContainer width="100%" className={"absolute top-14"}>
+            <div>
               {isEmpty ? (
                 <div className="flex justify-center items-center w-full h-[300px] text-neutral-content">
                   No data found
                 </div>
               ) : (
-                <AreaChart data={totalsRecord} margin={{ top: 20, right: -16, bottom: 45, left: 2 }}>
-                  <Area
-                    key={metricToWork.name}
-                    type="monotone"
-                    dataKey={metricToWork.name}
-                    stroke={stringToColor(metricToWork.label ?? "")}
-                    fill={stringToColor(metricToWork.label ?? "")}
-                  />
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis tick={false} fontSize={10} hide={false} dataKey="date" />
-                  <YAxis
-                    fontSize={10}
-                    type={"number"}
-                    domain={[minValue - buffer, maxValue + buffer]}
-                    hide={false}
-                    allowDataOverflow={true}
-                    orientation="right"
-                    tickFormatter={v => formatNumber(v, 0)}
-                    ticks={[minValue - buffer, maxValue + buffer]}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                </AreaChart>
+                <HighchartsReact
+                  highcharts={Highcharts}
+                  options={{
+                    ...options,
+                    yAxis: {
+                      title: {
+                        text: null,
+                      },
+                      min: minValue - buffer,
+                      max: maxValue + buffer,
+                    },
+                    series: [
+                      {
+                        name: metricToWork.label,
+                        data: newValues,
+                        color: stringToColor(metricToWork.label || ""),
+                      },
+                    ],
+                  }}
+                  ref={chartComponentRef}
+                />
               )}
-            </ResponsiveContainer>
+            </div>
           </div>
         ) : (
           <div className="mb-4">
