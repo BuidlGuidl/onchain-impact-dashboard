@@ -33,6 +33,8 @@ export const ProjectTotalsGraph = ({
   totalsRecord,
   filter,
 }: IProps) => {
+  const intFilter = parseInt(filter) >= 60 ? 30 : parseInt(filter) > 7 ? 7 : 1;
+  const tickInterval = 24 * 3600 * 1000;
   const options = {
     chart: {
       type: "line",
@@ -49,6 +51,7 @@ export const ProjectTotalsGraph = ({
     },
     xAxis: {
       type: "datetime",
+      tickInterval: intFilter * tickInterval,
       title: {
         text: "",
       },
