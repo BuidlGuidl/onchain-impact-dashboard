@@ -16,6 +16,7 @@
         "recurring_addresses": 5.163663192473145,
         "openrank_trusted_users_count": 4.054655175020334,
         "trusted_recurring_users": 8.666799294102633,
-        "log_transaction_count": 4.441688461052498
+        "log_transaction_count": 4.441688461052498,
+        "impact_index": 1.0
     }
 }
