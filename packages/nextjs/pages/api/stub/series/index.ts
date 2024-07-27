@@ -1,12 +1,12 @@
 import seriesJSON from "./series.json";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { OnchainMetricsByProject } from "~~/app/types/OSO";
+import { RF4ImpactMetricsByProject } from "~~/app/types/OSO";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed." });
   }
-  const series = seriesJSON as { [key: string]: OnchainMetricsByProject[] };
+  const series = seriesJSON as { [key: string]: RF4ImpactMetricsByProject[] };
   // check if date params are present
   let { date = new Date().toUTCString() } = req.query;
 
