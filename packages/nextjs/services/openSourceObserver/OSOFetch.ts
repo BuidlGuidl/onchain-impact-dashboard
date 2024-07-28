@@ -3,26 +3,24 @@ import { OSOResponse } from "~~/app/types/OSO";
 export const fetchOSOProjectData = async () => {
   const query = `{
       onchain_metrics_by_project_v1(where: {event_source: {_eq: "OPTIMISM"}}) {
-        active_contract_count_90_days
-        address_count
-        address_count_90_days
-        days_since_first_transaction
-        display_name
-        event_source
-        gas_fees_sum
-        gas_fees_sum_6_months
-        high_activity_address_count_90_days
-        low_activity_address_count_90_days
-        medium_activity_address_count_90_days
-        multi_project_address_count_90_days
-        new_address_count_90_days
-        project_id
-        project_name
-        project_namespace
-        project_source
-        returning_address_count_90_days
+        appplication_id
+        is_oss
+        gas_fees
         transaction_count
-        transaction_count_6_months
+        trusted_transaction_count
+        trusted_transaction_share
+        trusted_users_onboarded
+        daily_active_addresses
+        trusted_daily_active_users
+        monthly_active_addresses
+        trusted_monthly_active_users
+        recurring_addresses
+        trusted_recurring_users
+        power_user_addresses
+        openrank_trusted_users_count
+        log_gas_fees
+        log_transaction_count
+        log_trusted_transaction_count
       }
     }`;
 
