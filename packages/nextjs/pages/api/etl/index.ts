@@ -1,7 +1,7 @@
-import weightingsJSON from "./weightings.json";
+import weightData from "./impact_metric_weights.json";
 import { FlattenMaps, Types, startSession } from "mongoose";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { OnchainMetricsByProject } from "~~/app/types/OSO";
+import { RF4ImpactMetricsByProject } from "~~/app/types/OSO";
 import dbConnect from "~~/services/mongodb/dbConnect";
 import ETLLog from "~~/services/mongodb/models/etlLog";
 import GlobalScore, { TempGlobalScore } from "~~/services/mongodb/models/globalScore";
@@ -9,6 +9,8 @@ import Metric, { Metrics } from "~~/services/mongodb/models/metric";
 import Project from "~~/services/mongodb/models/project";
 import ProjectMovement, { IProjectMovement, TempProjectMovement } from "~~/services/mongodb/models/projectMovement";
 import ProjectScore, { IProjectScore, TempProjectScore } from "~~/services/mongodb/models/projectScore";
+
+const { metrics: weightingsJSON } = weightData;
 
 // Vercel Serverless Function Config
 export const config = {
@@ -47,8 +49,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       await TempProjectScore.deleteMany({});
       await TempProjectMovement.deleteMany({});
 
-      // Get all the mapping data
+      // Get mapping of OSO project names to Agora application IDs
       const { mapping } = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/mapping`).then(res => res.json());
+
       // Get metrics that are activated
       const metrics = await Metric.findAllActivated();
       if (!metrics) {
@@ -70,7 +73,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           if (!seriesResponse) {
             throw new Error(`No OSO Data for ${day}`);
           }
-          const osoData = seriesResponse.data as OnchainMetricsByProject[];
+          const osoData = seriesResponse.data as RF4ImpactMetricsByProject[];
           console.log(`Processing OSO response for each project on ${day.toISOString().split("T")[0]}`);
 
           const globalScoreData = Object.assign({}, metricNamesObj) as { [key in keyof Metrics]: number };
@@ -87,7 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             const projectMetrics = {} as { [key in keyof Metrics]: number };
             for (const metric of metrics) {
-              const metricValue = project[metric.name as keyof OnchainMetricsByProject];
+              const metricValue = project[metric.name as keyof RF4ImpactMetricsByProject];
               if (!isNaN(metricValue as number)) {
                 projectMetrics[metric.name as keyof Metrics] = parseInt(metricValue as string);
               }
