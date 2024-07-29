@@ -26,7 +26,6 @@ export interface IMetric {
   label?: string;
   name: keyof Metrics;
   description: string;
-  weight: number;
   activated: boolean;
   order: number;
 }
@@ -46,10 +45,6 @@ const MetricSchema = new Schema<IMetric, IMetricModel>({
   },
   label: {
     type: String,
-  },
-  weight: {
-    type: Number,
-    required: true,
   },
   activated: {
     type: Boolean,
