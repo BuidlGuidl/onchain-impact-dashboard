@@ -5,7 +5,7 @@ import { RF4ImpactMetricsByProject } from "~~/app/types/OSO";
 import dbConnect from "~~/services/mongodb/dbConnect";
 import ETLLog from "~~/services/mongodb/models/etlLog";
 import GlobalScore, { TempGlobalScore } from "~~/services/mongodb/models/globalScore";
-import Metric, { Metrics } from "~~/services/mongodb/models/metric";
+import Metric, { IMetric, Metrics } from "~~/services/mongodb/models/metric";
 import Project from "~~/services/mongodb/models/project";
 import ProjectMovement, { IProjectMovement, TempProjectMovement } from "~~/services/mongodb/models/projectMovement";
 import ProjectScore, { IProjectScore, TempProjectScore } from "~~/services/mongodb/models/projectScore";
@@ -54,6 +54,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       // Get metrics that are activated
       const metrics = await Metric.findAllActivated();
+      // Get all metrics that projects already have scores for
+      const allMetricsExceptImpactIndex = metrics.filter(metric => metric.name !== "impact_index");
       if (!metrics) {
         throw new Error("No metrics found");
       }
@@ -79,6 +81,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           const globalScoreData = Object.assign({}, metricNamesObj) as { [key in keyof Metrics]: number };
           const projectScoreOps = [];
 
+          const maxScoreByMetric = getMaxScoresFromOsoData(osoData, allMetricsExceptImpactIndex);
+
           for (const project of osoData) {
             const projectMapping = mapping.find((map: any) => map.oso_name === project.project_name);
             if (!projectMapping) {
@@ -86,7 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               continue;
             }
             const projectId = projectMapping.application_id;
-            const impact_index = getImpactIndex(project as unknown as Metrics, weightings);
+            const impact_index = getImpactIndex(project as unknown as Metrics, weightings, maxScoreByMetric);
 
             const projectMetrics = {} as { [key in keyof Metrics]: number };
             for (const metric of metrics) {
@@ -113,7 +117,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
           }
 
-          globalScoreData.impact_index = getImpactIndex(globalScoreData, weightings);
+          globalScoreData.impact_index = getImpactIndex(globalScoreData, weightings, maxScoreByMetric);
 
           // Batch insert project scores
           if (projectScoreOps.length > 0) {
@@ -267,21 +271,29 @@ const getMovement = (current: number, comparison: number) => {
   return diff;
 };
 
-const getImpactIndex = (project: Metrics, weights: Metrics): number => {
+const getImpactIndex = (
+  project: Metrics,
+  weights: Metrics,
+  maxScoreByMetric: { [key in keyof Metrics]: number },
+): number => {
   let impact_index = 0;
-  const metricKeys = Object.keys(weights) as (keyof Metrics)[];
+  const metrics = Object.keys(maxScoreByMetric) as (keyof Metrics)[];
   let weightSum = 0;
-  for (const metric of metricKeys) {
+  for (const metric of metrics) {
     weightSum += weights[metric];
   }
   // If the weights don't add up to 100 then we expect they are each a 0-100 percentage and need to be adjusted
   const indPct = Math.round(weightSum) !== 100;
-  for (const metric of metricKeys) {
+  for (const metric of metrics) {
     const multiplier = indPct ? weights[metric] / weightSum : weights[metric];
-    // Normalize the weights to their percentage of the total
-    const projectMetric = project[metric as unknown as keyof Metrics];
-    if (projectMetric) {
-      impact_index += projectMetric * multiplier;
+
+    // Normalize score
+    const max = maxScoreByMetric[metric] || 0;
+    const normalizer = max !== 0 ? 100 / max : 0;
+    const rawScoreForMetric = project[metric as unknown as keyof Metrics];
+    const normalizedScore = rawScoreForMetric * normalizer;
+    if (normalizedScore) {
+      impact_index += normalizedScore * multiplier;
     }
   }
   return impact_index;
@@ -304,3 +316,18 @@ const isTooEarly = (lastRunDate: Date): boolean => {
   const window = parseInt(process.env.ETL_WINDOW_MS || "0") || 85500000; // 23h 45m
   return lastRunDate > new Date(new Date().getTime() - window);
 };
+
+const getMaxScoresFromOsoData = (osoData: RF4ImpactMetricsByProject[], allMetricsExceptImpactIndex: IMetric[]) =>
+  osoData.reduce((acc, project) => {
+    for (const metric of allMetricsExceptImpactIndex) {
+      const scoreForMetric = project[metric.name as keyof RF4ImpactMetricsByProject] as number;
+      if (metric.name in acc && scoreForMetric) {
+        if (scoreForMetric > acc[metric.name as keyof Metrics]) {
+          acc[metric.name as keyof Metrics] = scoreForMetric;
+        }
+      } else {
+        acc[metric.name as keyof Metrics] = scoreForMetric || 0;
+      }
+    }
+    return acc;
+  }, {} as { [key in keyof Metrics]: number });
