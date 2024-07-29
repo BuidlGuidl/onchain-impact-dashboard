@@ -49,6 +49,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       await TempProjectScore.deleteMany({});
       await TempProjectMovement.deleteMany({});
 
+      // Get mapping of OSO project names to Agora application IDs
+      const { mapping } = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stub/mapping`).then(res => res.json());
+
       // Get metrics that are activated
       const metrics = await Metric.findAllActivated();
       if (!metrics) {
@@ -77,7 +80,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           const projectScoreOps = [];
 
           for (const project of osoData) {
-            const projectId = project.application_id;
+            const projectMapping = mapping.find((map: any) => map.oso_name === project.project_name);
+            if (!projectMapping) {
+              console.error(`No mapping found for ${project.project_name}`);
+              continue;
+            }
+            const projectId = projectMapping.application_id;
             const impact_index = getImpactIndex(project as unknown as Metrics, weightings);
 
             const projectMetrics = {} as { [key in keyof Metrics]: number };
