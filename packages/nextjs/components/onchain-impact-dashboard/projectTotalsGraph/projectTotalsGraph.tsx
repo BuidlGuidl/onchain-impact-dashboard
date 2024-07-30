@@ -6,8 +6,9 @@ import { Skeleton } from "../skeleton/skeleton";
 import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { DatePicker } from "~~/components/impact-vector/inputs/datePicker";
+import { useDarkMode } from "~~/hooks/scaffold-eth/useDarkMode";
 import { IMetric } from "~~/services/mongodb/models/metric";
-import { stringToColor } from "~~/utils/onchainImpactDashboard/common";
+import { stringToColor, stringToRGBA } from "~~/utils/onchainImpactDashboard/common";
 
 interface IProps {
   totalsRecord: any[];
@@ -35,10 +36,12 @@ export const ProjectTotalsGraph = ({
 }: IProps) => {
   const intFilter = parseInt(filter) >= 60 ? 30 : parseInt(filter) > 7 ? 7 : 1;
   const tickInterval = 24 * 3600 * 1000;
+  const { isDarkMode } = useDarkMode();
   const options = {
     chart: {
-      type: "line",
+      type: "area",
       height: 360,
+      backgroundColor: isDarkMode ? "#1a1e23" : "transparent",
     },
     title: {
       text: "",
@@ -49,9 +52,21 @@ export const ProjectTotalsGraph = ({
     credits: {
       enabled: false,
     },
+    tooltip: {
+      backgroundColor: isDarkMode ? "rgba(0, 0, 0, 0.85)" : "#FFF",
+      style: {
+        color: isDarkMode ? "#F0F0F0" : "#333333",
+      },
+    },
+
     xAxis: {
       type: "datetime",
       tickInterval: intFilter * tickInterval,
+      labels: {
+        style: {
+          color: isDarkMode ? "#E0E0E3" : "#333333",
+        },
+      },
       title: {
         text: "",
       },
@@ -89,12 +104,7 @@ export const ProjectTotalsGraph = ({
           )}
         </h2>
         {metricToWork?.label ? (
-          <p className="font-light text-neutral-content pr-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis
-            tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum. Maecenas
-            eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia
-            nostra, per inceptos himenaeos.{" "}
-          </p>
+          <p className="font-light text-neutral-content pr-2">{metricToWork.description}</p>
         ) : (
           <div className="font-light text-neutral-content mt-2 pr-4">
             <Skeleton height={"h-[200px]"} />
@@ -125,7 +135,7 @@ export const ProjectTotalsGraph = ({
             ))}
         </div>
         {metrics.length > 0 ? (
-          <div className="mb-3 w-full h-[50vh] rounded-lg grow min-h-[300px] lg:mr-4 lg:7/12 relative border p-1">
+          <div className="mb-3 w-full min-h-[50vh] rounded-lg grow min-h-[300px] lg:mr-4 lg:7/12 relative border p-1">
             <div className="flex px-1 relative  w-full rounded-t-md child__container bg-base-300 ">
               <div className="flex items-center p-1">
                 <FilterButton filter={filter} value="7" label="1w" onClick={onFilter} />
@@ -154,7 +164,7 @@ export const ProjectTotalsGraph = ({
                 </div>
               )}
             </div>
-            <div>
+            <div className="mt-2">
               {isEmpty ? (
                 <div className="flex justify-center items-center w-full h-[300px] text-neutral-content">
                   No data found
@@ -164,15 +174,51 @@ export const ProjectTotalsGraph = ({
                   highcharts={Highcharts}
                   options={{
                     ...options,
+                    plotOptions: {
+                      area: {
+                        fillColor: {
+                          linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1,
+                          },
+                          stops: [
+                            [0, stringToRGBA(metricToWork.label || "", 0.4)],
+                            [1, stringToRGBA(metricToWork.label || "", 0)],
+                          ],
+                        },
+                        marker: {
+                          enabled: false,
+                        },
+                        lineWidth: 3,
+                        states: {
+                          hover: {
+                            lineWidth: 3,
+                          },
+                        },
+                        threshold: null,
+                      },
+                    },
                     yAxis: {
                       title: {
                         text: null,
+                      },
+                      gridLineColor: isDarkMode ? "#696a6c" : "#333333",
+                      labels: {
+                        style: {
+                          color: isDarkMode ? "#d3d2d2" : "#333333",
+                        },
                       },
                       min: minValue - buffer,
                       max: maxValue + buffer,
                     },
                     tooltip: {
                       xDateFormat: "%b %e, %Y",
+                      backgroundColor: isDarkMode ? "#333333" : "#FFFFFF",
+                      style: {
+                        color: !isDarkMode ? "#333333" : "#FFFFFF",
+                      },
                       pointFormatter: function (this: Highcharts.TooltipFormatterContextObject) {
                         const formattedNumber = Highcharts.numberFormat(this.y as number, 0, "", ",");
                         return (

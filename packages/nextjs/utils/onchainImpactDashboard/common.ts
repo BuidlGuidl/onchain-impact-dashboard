@@ -46,3 +46,11 @@ export const stringToColor = (str: string) => {
   const color = intToRGB(hash);
   return `#${color}`;
 };
+
+export const stringToRGBA = (str: string, opacity: number) => {
+  const hash = hashString(str);
+  const r = (hash >> 16) & 0xff;
+  const g = (hash >> 8) & 0xff;
+  const b = hash & 0xff;
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+};
