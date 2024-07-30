@@ -30,7 +30,7 @@ export const formatDate = (dateString: string) => {
 const hashString = (str: string) => {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    hash = Math.abs(str.charCodeAt(i) + ((hash << 5) - hash));
   }
   return hash;
 };
@@ -41,16 +41,32 @@ const intToRGB = (i: number) => {
   return "00000".substring(0, 6 - c.length) + c;
 };
 
-export const stringToColor = (str: string) => {
+export const stringToColor = (str: string): string => {
   const hash = hashString(str);
   const color = intToRGB(hash);
+  if (!isColorWithinRange(color)) {
+    return stringToColor(str + "a");
+  }
+  console.log(`#${color}`);
   return `#${color}`;
 };
 
-export const stringToRGBA = (str: string, opacity: number) => {
-  const hash = hashString(str);
-  const r = (hash >> 16) & 0xff;
-  const g = (hash >> 8) & 0xff;
-  const b = hash & 0xff;
+export const hexStringToRGBA = (hex: string, opacity: number): string => {
+  const r = parseInt(hex.substring(1, 3), 16);
+  const g = parseInt(hex.substring(3, 5), 16);
+  const b = parseInt(hex.substring(5, 7), 16);
   return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+};
+
+const isColorWithinRange = (hexColor: string) => {
+  const r = parseInt(hexColor.substring(0, 2), 16);
+  const g = parseInt(hexColor.substring(2, 4), 16);
+  const b = parseInt(hexColor.substring(4, 6), 16);
+
+  for (const color of [r, g, b]) {
+    if (color < 31 || color > 223) {
+      return false;
+    }
+  }
+  return true;
 };

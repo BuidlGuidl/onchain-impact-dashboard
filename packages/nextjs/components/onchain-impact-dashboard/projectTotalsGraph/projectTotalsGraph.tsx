@@ -8,7 +8,7 @@ import HighchartsReact from "highcharts-react-official";
 import { DatePicker } from "~~/components/impact-vector/inputs/datePicker";
 import { useDarkMode } from "~~/hooks/scaffold-eth/useDarkMode";
 import { IMetric } from "~~/services/mongodb/models/metric";
-import { stringToColor, stringToRGBA } from "~~/utils/onchainImpactDashboard/common";
+import { hexStringToRGBA, stringToColor } from "~~/utils/onchainImpactDashboard/common";
 
 interface IProps {
   totalsRecord: any[];
@@ -184,8 +184,8 @@ export const ProjectTotalsGraph = ({
                             y2: 1,
                           },
                           stops: [
-                            [0, stringToRGBA(metricToWork.label || "", 0.4)],
-                            [1, stringToRGBA(metricToWork.label || "", 0)],
+                            [0, hexStringToRGBA(stringToColor(metricToWork.label || ""), 0.4)],
+                            [1, hexStringToRGBA(stringToColor(metricToWork.label || ""), 0)],
                           ],
                         },
                         marker: {
