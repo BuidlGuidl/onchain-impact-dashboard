@@ -282,10 +282,8 @@ const getImpactIndex = (
   for (const metric of metrics) {
     weightSum += weights[metric];
   }
-  // If the weights don't add up to 100 then we expect they are each a 0-100 percentage and need to be adjusted
-  const indPct = Math.round(weightSum) !== 100;
   for (const metric of metrics) {
-    const multiplier = indPct ? weights[metric] / weightSum : weights[metric];
+    const multiplier = weights[metric] / weightSum;
 
     // Normalize score
     const max = maxScoreByMetric[metric] || 0;
