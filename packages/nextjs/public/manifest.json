@@ -1,5 +1,5 @@
 {
-  "name": "Scaffold-ETH 2 DApp",
-  "description": "A DApp built with Scaffold-ETH",
-  "iconPath": "logo.svg"
+  "name": "Onchain Impact Dashboard",
+  "description": "See projects impact through the lens of R4 metrics",
+  "iconPath": "favicon.png"
 }

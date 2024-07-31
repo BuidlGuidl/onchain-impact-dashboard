@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description: "Onchain Impact Dashboard | Powered by BuidlGuidl",
   },
   icons: {
-    icon: [{ url: "/favicon.svg", sizes: "32x32", type: "image/svg" }],
+    icon: [{ url: "/favicon.png", sizes: "32x32", type: "image/svg" }],
   },
 };
 
