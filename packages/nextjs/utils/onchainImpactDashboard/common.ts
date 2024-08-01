@@ -70,3 +70,16 @@ const isColorWithinRange = (hexColor: string) => {
   }
   return true;
 };
+
+export const yAxisFormatter = function (this: { value: number }): string | number {
+  let formatted;
+  if (this.value >= 1000000) {
+    formatted = (this.value / 1000000).toFixed(2);
+    return formatted + "m";
+  } else if (this.value >= 1000) {
+    formatted = (this.value / 1000).toFixed(1);
+    return formatted.endsWith(".0") ? (this.value / 1000).toFixed(0) + "k" : formatted + "k";
+  } else {
+    return this.value;
+  }
+};
