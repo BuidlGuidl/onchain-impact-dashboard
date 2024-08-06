@@ -104,14 +104,16 @@ export const ProjectTotalsGraph = ({
           )}
         </h2>
         {metricToWork?.label ? (
-          <p className="font-light text-neutral-content pr-2">{metricToWork.description}</p>
+          <p className="font-light text-neutral-content pr-2 max-h-[405px] overflow-auto scrollbar-w-2 scrollbar scrollbar-thumb-slate-200 scrollbar-thumb-rounded-full pb-6">
+            {metricToWork.description}
+          </p>
         ) : (
           <div className="font-light text-neutral-content mt-2 pr-4">
             <Skeleton height={"h-[200px]"} />
           </div>
         )}
       </div>
-      <div className="flex flex-col w-full mt-10 lg:mt-0 parent__metric-container">
+      <div className="flex flex-col w-full mt-10 lg:mt-0 parent__metric-container ml-2">
         {metrics.length == 0 ? (
           <div>
             <Skeleton height="h-8" />
