@@ -97,7 +97,7 @@ export const ProjectTotalsGraph = ({
     <>
       <div className="flex flex-col lg:w-[40%]">
         <h2 className="font-bold text-xl">
-          {metricToWork?.label ?? (
+          {metricToWork?.longLabel ?? (
             <div className="w-[200px]">
               <Skeleton height="h-8" />
             </div>
