@@ -24,6 +24,7 @@ export type Metrics = typeof MetricNames;
 
 export interface IMetric {
   label?: string;
+  longLabel?: string;
   name: keyof Metrics;
   description: string;
   activated: boolean;
@@ -39,6 +40,9 @@ const MetricSchema = new Schema<IMetric, IMetricModel>({
     type: String,
     required: true,
     unique: true,
+  },
+  longLabel: {
+    type: String,
   },
   description: {
     type: String,
