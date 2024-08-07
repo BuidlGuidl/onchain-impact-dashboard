@@ -44,6 +44,13 @@ const OnchainInfoModal: React.FC<Props> = ({ isModalOpen, closeModal, project })
     }
     const url = `${window.location.toString()}`;
     setPlainURL(url);
+    const closeOnEscapePressed = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+    window.addEventListener("keydown", closeOnEscapePressed);
+    return () => window.removeEventListener("keydown", closeOnEscapePressed);
   }, [project]);
 
   const copyToClipboard = () => {
@@ -56,8 +63,8 @@ const OnchainInfoModal: React.FC<Props> = ({ isModalOpen, closeModal, project })
   return (
     <>
       {isModalOpen && (
-        <dialog id="my_modal_1" className="modal   bg-black/10 backdrop-blur-sm " open>
-          <div className="modal-box max-w-md w-full px-6 pt-11">
+        <dialog onClick={closeModal} id="my_modal_1" className="modal   bg-black/10 backdrop-blur-sm " open>
+          <div onClick={e => e.stopPropagation()} className="modal-box max-w-md w-full px-6 pt-11">
             <div className="text-center">
               <h3 className="font-bold  sm:text-lg m-0">{`Help ${project?.name} grow!`}</h3>
               <p className="m-0 text-sm sm:text-base text-center ">
