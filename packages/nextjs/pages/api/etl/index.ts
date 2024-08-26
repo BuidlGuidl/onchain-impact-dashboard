@@ -116,11 +116,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             globalScoreData.impact_index += impact_index;
           }
 
-          // Adjust to get the average impact_index for the day
-          if (globalScoreData.impact_index && osoData.length) {
-            globalScoreData.impact_index /= osoData.length;
-          }
-
           // Batch insert project scores
           if (projectScoreOps.length > 0) {
             await TempProjectScore.bulkWrite(projectScoreOps);
