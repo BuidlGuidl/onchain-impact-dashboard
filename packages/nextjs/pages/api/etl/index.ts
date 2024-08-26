@@ -78,10 +78,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           const osoData = seriesResponse.data as RF4ImpactMetricsByProject[];
           console.log(`Processing OSO response for each project on ${day.toISOString().split("T")[0]}`);
 
-          const globalScoreData = Object.assign({}, metricNamesObj) as { [key in keyof Metrics]: number };
           const projectScoreOps = [];
 
-          const maxScoreByMetric = getMaxScoresFromOsoData(osoData, allMetricsExceptImpactIndex);
+          const totalScoresByMetric = getTotalScoresFromOsoData(osoData, allMetricsExceptImpactIndex);
+          const globalScoreData = Object.assign({}, metricNamesObj, totalScoresByMetric) as {
+            [key in keyof Metrics]: number;
+          };
 
           for (const project of osoData) {
             const projectMapping = mapping.find((map: any) => map.oso_name === project.project_name);
@@ -90,7 +92,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               continue;
             }
             const projectId = projectMapping.application_id;
-            const impact_index = getImpactIndex(project as unknown as Metrics, weightings, maxScoreByMetric);
+            const impact_index = getImpactIndex(project as unknown as Metrics, weightings, totalScoresByMetric);
 
             const projectMetrics = {} as { [key in keyof Metrics]: number };
             for (const metric of metrics) {
@@ -110,14 +112,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               },
             });
 
-            for (const metric of Object.keys(metricNamesObj) as (keyof Metrics)[]) {
-              if (projectMetrics[metric]) {
-                globalScoreData[metric] += projectMetrics[metric];
-              }
-            }
+            // Add this projects impact_index score to the global score for the day
+            globalScoreData.impact_index += impact_index;
           }
 
-          globalScoreData.impact_index = getImpactIndex(globalScoreData, weightings, maxScoreByMetric);
+          // Adjust to get the average impact_index for the day
+          if (globalScoreData.impact_index && osoData.length) {
+            globalScoreData.impact_index /= osoData.length;
+          }
 
           // Batch insert project scores
           if (projectScoreOps.length > 0) {
@@ -274,10 +276,10 @@ const getMovement = (current: number, comparison: number) => {
 const getImpactIndex = (
   project: Metrics,
   weights: Metrics,
-  maxScoreByMetric: { [key in keyof Metrics]: number },
+  totalScoresByMetric: { [key in keyof Metrics]: number },
 ): number => {
   let impact_index = 0;
-  const metrics = Object.keys(maxScoreByMetric) as (keyof Metrics)[];
+  const metrics = Object.keys(totalScoresByMetric) as (keyof Metrics)[];
   let weightSum = 0;
   for (const metric of metrics) {
     weightSum += weights[metric];
@@ -285,14 +287,10 @@ const getImpactIndex = (
   for (const metric of metrics) {
     const multiplier = weights[metric] / weightSum;
 
-    // Normalize score
-    const max = maxScoreByMetric[metric] || 0;
-    const normalizer = max !== 0 ? 100 / max : 0;
     const rawScoreForMetric = project[metric as unknown as keyof Metrics];
-    const normalizedScore = rawScoreForMetric * normalizer;
-    if (normalizedScore) {
-      impact_index += normalizedScore * multiplier;
-    }
+
+    // Adjust the raw score by the weight multiplier to get the impact produced by this metric
+    impact_index += rawScoreForMetric * multiplier;
   }
   return impact_index;
 };
@@ -315,14 +313,12 @@ const isTooEarly = (lastRunDate: Date): boolean => {
   return lastRunDate > new Date(new Date().getTime() - window);
 };
 
-const getMaxScoresFromOsoData = (osoData: RF4ImpactMetricsByProject[], allMetricsExceptImpactIndex: IMetric[]) =>
+const getTotalScoresFromOsoData = (osoData: RF4ImpactMetricsByProject[], allMetricsExceptImpactIndex: IMetric[]) =>
   osoData.reduce((acc, project) => {
     for (const metric of allMetricsExceptImpactIndex) {
       const scoreForMetric = project[metric.name as keyof RF4ImpactMetricsByProject] as number;
       if (metric.name in acc && scoreForMetric) {
-        if (scoreForMetric > acc[metric.name as keyof Metrics]) {
-          acc[metric.name as keyof Metrics] = scoreForMetric;
-        }
+        acc[metric.name as keyof Metrics] += scoreForMetric;
       } else {
         acc[metric.name as keyof Metrics] = scoreForMetric || 0;
       }
