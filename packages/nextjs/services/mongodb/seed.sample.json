@@ -21842,7 +21842,7 @@
       "label": "Impact Index",
       "longLabel": "Impact Index",
       "name": "impact_index",
-      "description": "string",
+      "description": "The Impact Index is based on the results of RF4 in which the badgeholder's votes created an average weight for each metric used in that round. The top five metrics were Gas Fees (31.5% when including the logarithmic Gas Fee metric), Trusted Users Onboarded (12.5%), Transaction Count (9.5% when including the logarithmic Transaction Count metric), Trusted Recurring Users (8.7%), Trusted Monthly Active Users (6.5%). There was also additional rewards based on projects that qualified for a set of Open Source criteria that is not expressed in the Impact Index.",
       "activated": true,
       "order": 1
     },
