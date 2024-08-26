@@ -47,7 +47,6 @@ export const stringToColor = (str: string): string => {
   if (!isColorWithinRange(color)) {
     return stringToColor(str + "a");
   }
-  console.log(`#${color}`);
   return `#${color}`;
 };
 
